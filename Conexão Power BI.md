@@ -2,6 +2,7 @@
 # Como conectar dados pela web no Power BI
 
 * ### API metodo Get
+```m
 Json.Document(Web.Contents("https://api.vipdireto.com/api/integracao/v2/veiculos?u={usuario}&s={senha}&init=01/02/2019&end=31/08/2019"))u=usuario
 s=senha
 init= data inicio
@@ -17,10 +18,11 @@ Content = Text.ToBinary(body)
 ))
 in
 Source
+```
 
 * ### API metodo Post (com Header)
- <span style="color:red"> **!!!!!Ainda não foi validado**</span>
- '''html
+ **!!!!!Ainda não foi validado**
+```m
 let
 url = " https://api.vhsys.com/v2/contas-pagar",
 body = "{""data_pagamento"": ""2019-03-01,2019-03-31"",""lixeira"":""Nao"",""Liquidado"":""Sim"",""limit"":""1000""}",
@@ -36,9 +38,10 @@ Content = Text.ToBinary(body)
 ))
 in
 Source
-'''
+```
 * ### API Dinamica metodo GET
 
+```m
     Moeda = (CodMoeda as text) =>
  
 let
@@ -65,3 +68,4 @@ in
     #"Data Extraída" = Table.TransformColumns(#"Tipo Alterado",{{"dataHoraCotacao", DateTime.Date, type date}})
 in
     #"Data Extraída"
+```

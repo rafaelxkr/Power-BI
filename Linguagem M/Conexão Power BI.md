@@ -74,12 +74,11 @@ in
 
 ```m
 let
-url = "http://webapi5.provedor.space/api/viplote",
-Parametro =  "/300419V/10",
+url = "https://www.test.com",
+Metodo = "/api/cpf/68958685621",
+Token = "bearer iXYbULrRizrHLXrGx4mNf91ZjWXvRzivj70zUc48M-iNxDAmBMhhkEwcpLeJWVUX59bKX0JN9ctVPQzGyvnKO9oCKtVXgPcnM4PNbMIoKhtuba4Gr4ifhcvI7TaB3vSaCLrt_3-Ciktco_vY7aDUDwmhdI0bzqzYZ_cYYKKz_RlUr52NPoU6PrXZrer8FPWoRS_1Cg2IOiYj5aGWAXOncbxDMpuuANAu4A4aCh9pUqY",
+Content = "application/json",
 body = "{""""}",
-Source = Json.Document(Web.Contents(url&Parametro, [Headers=[#"Content-Type"="application/json", Authorization="bearer N-qMLj5QOmwKbQtuLl2nKssQPTD7030TxdgUCempZIlX7sPwLl0SHbesUX6M-6CdNWZQp96VZSP78Q9WGbYENsOoiX2uBURC-wRlCBfqxbcKEIU_F91S6JMdPbblvUME0PnhS056MylOMZ8qd-sycm0xnqKPCRu_1JHSpuvT4eMF3fyr8ydSG8zwjY5LbMFft7gbmAjogvflDcg6zqkB5aANBT0U6IUYxV-SizcJT4c"]])),
-    #"Convertido para Tabela" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-    #"Column1 Expandido" = Table.ExpandRecordColumn(#"Convertido para Tabela", "Column1", {"Leilao", "NumeroLote", "Modalidade", "DataLeilao", "TipoLeilao", "Exposto", "Filial", "StatusEstoque", "Comitente", "StatusFinanceiro", "StatusLote", "LanceMinimo", "CustasDeposito", "ValorMinimo"}, {"Column1.Leilao", "Column1.NumeroLote", "Column1.Modalidade", "Column1.DataLeilao", "Column1.TipoLeilao", "Column1.Exposto", "Column1.Filial", "Column1.StatusEstoque", "Column1.Comitente", "Column1.StatusFinanceiro", "Column1.StatusLote", "Column1.LanceMinimo", "Column1.CustasDeposito", "Column1.ValorMinimo"})
-in
-#"Column1 Expandido"
+
+Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```

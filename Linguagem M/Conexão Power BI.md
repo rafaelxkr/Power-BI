@@ -78,7 +78,6 @@ url = "https://www.test.com",
 Metodo = "/api/cpf/68958685621",
 Token = "xxxxxxxxxxxxxxxxxx",
 Content = "application/json",
-body = "{""""}",
 
 Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```

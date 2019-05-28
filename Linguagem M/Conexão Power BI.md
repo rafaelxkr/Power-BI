@@ -76,7 +76,7 @@ in
 let
 url = "https://www.test.com",
 Metodo = "/api/cpf/68958685621",
-Token = "bearer iXYbULrRizrHLXrGx4mNf91ZjWXvRzivj70zUc48M-iNxDAmBMhhkEwcpLeJWVUX59bKX0JN9ctVPQzGyvnKO9oCKtVXgPcnM4PNbMIoKhtuba4Gr4ifhcvI7TaB3vSaCLrt_3-Ciktco_vY7aDUDwmhdI0bzqzYZ_cYYKKz_RlUr52NPoU6PrXZrer8FPWoRS_1Cg2IOiYj5aGWAXOncbxDMpuuANAu4A4aCh9pUqY",
+Token = "xxxxxxxxxxxxxxxxxx",
 Content = "application/json",
 body = "{""""}",
 

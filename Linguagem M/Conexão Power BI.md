@@ -70,7 +70,7 @@ in
     #"Data Extraída"
 ```
 
-* ### API metodo GET com Header Atualiazando na Web
+* ### API metodo GET com Header Atualiazado na Web
 
 ```m
 let

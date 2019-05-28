@@ -7,7 +7,10 @@ Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/veiculos?u
 s=senha
 init= data inicio
 end= data fim
+```
 * ### API metodo Post (com Header)
+
+```m
 let
 url = " http://api.exemplo.com/api/integracao/getveiculolist",
 body = "{""Usuario"": ""usuario"",""Senha"":""senha"",""Chave"":""""}",

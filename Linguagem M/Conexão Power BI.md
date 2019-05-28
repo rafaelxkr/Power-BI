@@ -3,7 +3,8 @@
 
 * ### API metodo Get
 ```m
-Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/veiculos?u={usuario}&s={senha}&init=01/02/2019&end=31/08/2019"))u=usuario
+Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/veiculos?u={usuario}&s={senha}&init=01/02/2019&end=31/08/2019"))
+u=usuario
 s=senha
 init= data inicio
 end= data fim

@@ -1,6 +1,6 @@
 * ### Para daixar o relatório em página inteira no Servidor de Relatórios do Power BI
 
-Locoque o código ```?rs:embed=true``` no final da URL do relatótio exemplo
+Locoque o código ```?rs:embed=true``` no final da URL do relatótio como o exemplo abaixo:
 
 ```http://myserver/reports/powerbi/Sales?rs:embed=true```
 

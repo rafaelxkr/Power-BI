@@ -9,7 +9,7 @@ s=senha
 init= data inicio
 end= data fim
 ```
-* ### API metodo Post (com Header)
+* ### API metodo GET (com Header)
 
 ```m
 let
@@ -24,7 +24,7 @@ in
 Source
 ```
 
-* ### API metodo Post (com Header)
+* ### API metodo GET (com Header)
  **!!!!!Ainda não foi validado**
 ```m
 let

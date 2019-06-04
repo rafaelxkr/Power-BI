@@ -5,3 +5,10 @@
 "MDataNotificacaoMASP", each Date.AddDays(Date.FromText("1970-01-01"), 
 Number.RoundDown(Number.FromText(Text.Middle([Column1.DataNotificacaoMASP],6,13))/1000/86400)))
 ```
+
+# Substituir Valores da Coluna com Condicional
+
+```m
+= Table.ReplaceValue(#"Changed Type",each [statusVeiculo],
+each Status([statusVeiculo]),Replacer.ReplaceText,{"statusVeiculo"})
+```

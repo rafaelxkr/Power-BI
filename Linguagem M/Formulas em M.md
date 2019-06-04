@@ -25,8 +25,11 @@ in
   Query
   
 // use o codigo abaixo para substituir os valores conforme os listados na função
+// Status é o nome da coluna que será feita a substituição dos valores e Fuction
+// é a função feita acima
+
 = Table.ReplaceValue(#"Changed Type",each [Status],
-each Função([Status]),Replacer.ReplaceText,{"Status"})
+each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 ```
 
 # Substituir Valores da Coluna com Condicional

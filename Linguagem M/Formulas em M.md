@@ -1,4 +1,4 @@
-# Converter DataStamp em Data
+# Converter DataStamp (ms)em Data
 
 ```m
 #"Data Analisada Inserida" = Table.AddColumn(#"Column1.Avaliacoes Expandido1", 

@@ -38,3 +38,10 @@ each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 = Table.ReplaceValue(#"Changed Type",each [Status],
 each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 ```
+
+# Ultima data de Atualização
+
+´´´m
+= DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.LocalNow(),-3))
+// O -3 se refere ao Fuso Horário
+´´´

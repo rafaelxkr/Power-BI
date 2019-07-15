@@ -85,3 +85,22 @@ Content = "application/json",
 
 Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```
+* ### API metodo GET
+
+```m
+let
+  Fonte = Json.Document(Web.Contents(
+        "http://api.vipdireto.com/api/integracao/v2/produtos",
+         [ 
+              Query =
+              [
+                    u = "xxxxxxx",
+                    s = "xxxxxxxx",
+                    init = "12/07/2019",
+                    end = "31/12/2019"
+              ]
+        ]
+))
+in
+  Fonte
+```

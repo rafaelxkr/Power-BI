@@ -46,6 +46,7 @@ Source
 * ### API Dinamica metodo GET
 
 ```m
+let
     Moeda = (CodMoeda as text) =>
  
 let

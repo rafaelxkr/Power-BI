@@ -1,5 +1,6 @@
 ```m
 // usuario@dominio.onmicrosoft.com
+//Extraindo todas as planilhas da pasta Produtos/2019
 let
 Fonte = SharePoint.Files("https://dominio-my.sharepoint.com/personal/usuario_dominio_onmicrosoft_com", [ApiVersion = 15]), //Local da pasta com os arquivos XLS
 Navegacao = Fonte{0}[Content],

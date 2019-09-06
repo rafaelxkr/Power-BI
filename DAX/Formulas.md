@@ -13,7 +13,7 @@ IF (
 ``
 Sales (last n months) =
 CALCULATE (
-    SUM ( Sales[Sales] ),
-    DATESINPERIOD ( ‘Date'[Date], MAX ( ‘Date'[Date] ), – [N Value], MONTH )
+    SUM ( Sales[Sales] );
+    DATESINPERIOD ( Date[Date]; MAX ( Date[Date] ); – [N Value]; MONTH )//N Value = Quantos meses será retornado
 )
 ``

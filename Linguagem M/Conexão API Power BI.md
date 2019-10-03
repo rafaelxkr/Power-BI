@@ -1,7 +1,7 @@
 
 # Como conectar dados pela web no Power BI
 
-* ### API metodo Get
+* ### API metodo Get 1° Metodo
 ```m
 Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u={usuario}&s={senha}&init=01/02/2019&end=31/08/2019"))
 u=usuario
@@ -9,6 +9,27 @@ s=senha
 init= data inicio
 end= data fim
 ```
+
+* ### API metodo GET 2° Metodo
+
+```m
+let
+  Fonte = Json.Document(Web.Contents(
+        "http://api.vipdireto.com/api/integracao/v2/produtos",
+         [ 
+              Query =
+              [
+                    u = "xxxxxxx",
+                    s = "xxxxxxxx",
+                    init = "12/07/2019",
+                    end = "31/12/2019"
+              ]
+        ]
+))
+in
+  Fonte
+```
+
 * ### API metodo GET (com Header)
 
 ```m
@@ -86,22 +107,4 @@ Content = "application/json",
 
 Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```
-* ### API metodo GET
 
-```m
-let
-  Fonte = Json.Document(Web.Contents(
-        "http://api.vipdireto.com/api/integracao/v2/produtos",
-         [ 
-              Query =
-              [
-                    u = "xxxxxxx",
-                    s = "xxxxxxxx",
-                    init = "12/07/2019",
-                    end = "31/12/2019"
-              ]
-        ]
-))
-in
-  Fonte
-```

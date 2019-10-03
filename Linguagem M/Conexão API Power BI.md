@@ -3,7 +3,7 @@
 
 * ### API metodo Get 1° Metodo
 ```m
-Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u={usuario}&s={senha}&init=01/02/2019&end=31/08/2019"))
+Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"))
 u=usuario
 s=senha
 init= data inicio
@@ -15,7 +15,7 @@ end= data fim
 ```m
 let
   Fonte = Json.Document(Web.Contents(
-        "http://api.vipdireto.com/api/integracao/v2/produtos",
+        "http://api.exemplo.com/api/integracao/v2/produtos",
          [ 
               Query =
               [
@@ -34,7 +34,7 @@ in
 
 ```m
 let
-url = " http://api.exemplo.com/api/integracao/getveiculolist",
+url = " http://api.exemplo.com/api/integracao/list",
 body = "{""Usuario"": ""usuario"",""Senha"":""senha"",""Chave"":""""}",
 Source = Json.Document(Web.Contents(url,[ 
 Headers = [#"Content-Type"="application/json"],

@@ -1,0 +1,56 @@
+section FuncaoPersonalizada;
+shared Rafael.Calendario = 
+let
+    fnMeta = type function 
+                (
+                Coluna_Data as (type list 
+                    meta [
+                        Documentation.FieldCaption = "Coluna de Data",
+                        Documentation.FieldDescription = "Text to display",
+                        Documentation.SampleValues = {"Tabela[Coluna com Datas]"}
+                    ]),
+                optional Data_Inicial_Fixa as (type text 
+                    meta [
+                        Documentation.FieldCaption = "Data Inicial como texto",
+                        Documentation.FieldDescription = "Text to display",
+                        Documentation.SampleValues = {"31/03/2020 data inicial"}
+                    ])
+                ) as list meta 
+                    [
+                        Documentation.Name = "Cria uma tabela calendário",
+                        Documentation.Author = "Rafael Barbosa",
+                        Documentation.CreationDate = Date.FromText("02/08/2020"),
+                        Documentation.LongDescription = "Gerador de tabela calendario por Rafael Barbosa 08/02/2020 - https://www.linkedin.com/in/rafael-barbosa2",
+                        Documentation.Examples =
+                        {
+                            [
+                                Description = "Retona uma tabela calendario utilizando uma coluna de data selecionada",
+                                Code = "Rafael.Calendario(Tabela[Coluna com Datas])",
+                                Result = "#table({""Date"", ""Year"", ""Nome do Mes"", ""Mês"", ""Dia"", ""Semana"", ""Nome da Semana""},#(cr)#(lf)      {{01/02/2019,2019,Fev,2,1,1,Sabado },#(cr)#(lf)       {02/02/2019,2019,Fev,2,2,2,Domingo},#(cr)#(lf)       {03/02/2019,2019,Fev,2,3,2,Segunda},#(cr)#(lf)       {04/02/2019,2019,Fev,2,4,2,Terça  },#(cr)#(lf)       {05/02/2019,2019,Fev,2,5,2,Quarta }})"
+                            ],
+                            [
+                                Description = "Retona uma tabela calendario utilizando uma coluna de data selecionada, mas a data inicial é fixada pelo que você informou no segundo argumento como texto exemplo: ""01/01/2019""",
+                                Code = "Rafael.Calendario(Tabela[Coluna com Datas],""01/01/2019"")",
+                                Result = "#table({""Date"", ""Year"", ""Nome do Mes"", ""Mês"", ""Dia"", ""Semana"", ""Nome da Semana""},#(cr)#(lf)      {{01/01/2019,2019,Jan,1,1,1,Quarta },#(cr)#(lf)       {02/01/2019,2019,Jan,1,2,1,Quinta},#(cr)#(lf)       {03/01/2019,2019,Jan,1,3,1,Sexta},#(cr)#(lf)       {04/01/2019,2019,Jan,1,4,1,Sabado  },#(cr)#(lf)       {05/01/2019,2019,Jan,1,5,2,Domingo }})"
+                            ]
+                        }
+                    ],
+    fn = (Coluna_Data as list, optional Data_Inicial_Fixa as text)=>
+    let
+        DataInicial = if Data_Inicial_Fixa = null then List.Min(Coluna_Data) else Date.FromText(Data_Inicial_Fixa),
+        QtdeDias = Duration.Days(List.Max(Coluna_Data) - DataInicial) + 1,
+        Lista = List.Dates(DataInicial, QtdeDias, #duration(1,0,0,0)),
+        Tabela = #table(type table[Data=date, Ano=Int32.Type, Nome do Mês=text, Mês=Int32.Type, Dia = Int8.Type, Semana = Int8.Type, Nome da Semana = text], List.Transform(Lista, each {
+            _,
+            Date.Year(_),
+            Text.Proper(Text.Start(Date.MonthName(_), 3)),
+            Date.Month(_),
+            Date.Day(_),
+            Date.DayOfWeek(_),
+            Text.BeforeDelimiter(Date.DayOfWeekName(_),"-")
+            }))
+    in
+        Tabela,
+        Resultado = Value.ReplaceType(fn, fnMeta)
+in
+    Resultado;

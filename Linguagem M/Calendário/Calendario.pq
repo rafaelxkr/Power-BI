@@ -1,5 +1,5 @@
 let
-    Table.Calendario = (data as list) =>
+    Calendario = (data as list) =>
         let
             DataBuffer = List.Transform(List.Buffer(data),DateTime.Date),
             DataMin = List.Min(DataBuffer),
@@ -19,4 +19,4 @@ let
         in
             Tabela
 in
-    Table.Calendario
+    Calendario

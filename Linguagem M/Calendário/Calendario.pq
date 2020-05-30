@@ -1,6 +1,6 @@
 (data as list) =>
 let
-    DataBuffer = List.Buffer(Date.From(data)),
+    DataBuffer = List.Transform(List.Buffer(data),DateTime.Date),
     DataMin = List.Min(DataBuffer),
     Qtde_Dias = Duration.TotalDays(Date.EndOfMonth(List.Max(DataBuffer))-DataMin)+1,
     Fonte = List.Dates(DataMin,Qtde_Dias,#duration(1,0,0,0)),

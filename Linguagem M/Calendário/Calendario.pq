@@ -17,6 +17,22 @@ let
 
                 }))
         in
-            Tabela
+            Tabela,
+            DefineDocs = [
+            Documentation.Name =  " Table.Calendario",
+            Documentation.Description = " Cria uma tabela Calendário",
+            Documentation.LongDescription = " Cria uma tabela Calendário",
+            Documentation.Category = " Table.Transform",
+            Documentation.Source = " ",
+            Documentation.Author = " Rafael barbosa",
+            Documentation.Examples = 
+                {
+                    [
+                    Description =  "", 
+                    Code = " CalendarioContents("")", 
+                    Result = ""
+                    ]
+                }
+            ]
 in
     Calendario

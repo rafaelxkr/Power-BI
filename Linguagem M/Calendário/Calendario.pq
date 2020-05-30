@@ -1,5 +1,5 @@
 let
-    calendario = (data as list) =>
+    Table.Calendario = (data as list) =>
         let
             DataBuffer = List.Transform(List.Buffer(data),DateTime.Date),
             DataMin = List.Min(DataBuffer),
@@ -17,6 +17,22 @@ let
 
                 }))
         in
-            Tabela
+            Tabela,
+            DefineDocs = [
+            Documentation.Name =  " Table.Calendario",
+            Documentation.Description = " Cria uma tabela Calendário",
+            Documentation.LongDescription = " Cria uma tabela Calendário",
+            Documentation.Category = " Table.Transform",
+            Documentation.Source = " ",
+            Documentation.Author = " Rafael barbosa",
+            Documentation.Examples = 
+                {
+                    [
+                    Description =  "", 
+                    Code = " UnzipContents("")", 
+                    Result = ""
+                    ]
+                }
+            ] 
 in
     calendario

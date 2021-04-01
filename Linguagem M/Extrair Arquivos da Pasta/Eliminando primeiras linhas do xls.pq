@@ -1,8 +1,7 @@
 ## Código de Extração de Arquivos XLS em Unica Query
 
-Todos arquivos xls na pasta selecionada serão todos unidos
+##Todos arquivos xls na pasta selecionada serão todos unidos
 
-```m
 let
 Fonte = Folder.Files("C:\Users\Rafael\Desktop\Rafael\Freelancer\Projeto Educação\SIAFE"), //Local da pasta com os arquivos XLS
 Navegacao = Fonte{0}[Content],
@@ -20,4 +19,3 @@ Amostra = Navegacao meta [IsParameterQuery=true, BinaryIdentifier=Navegacao, Typ
     PromoverCabecalho = Table.TransformColumns(OutrasColunasRemovidas,{"Relatorio", Table.PromoteHeaders}) //Adiciona cabeçalho em cada tabela
 in
      PromoverCabecalho
-```

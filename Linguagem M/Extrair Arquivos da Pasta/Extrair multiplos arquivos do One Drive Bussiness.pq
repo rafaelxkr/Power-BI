@@ -1,4 +1,3 @@
-```m
 // usuario@dominio.onmicrosoft.com
 //Extraindo todas as planilhas da pasta Produtos/2019
 let
@@ -19,4 +18,3 @@ Amostra = Navegacao meta [IsParameterQuery=true, BinaryIdentifier=Navegacao, Typ
     OutrasColunasRemovidas = Table.SelectColumns(InvocarFunçãoPersonalizada,{"Relatorio"}), //Remove outras colunas deixando somente a coluna da tabela
 in
     OutrasColunasRemovidas
-```

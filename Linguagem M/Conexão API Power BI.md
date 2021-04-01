@@ -2,7 +2,7 @@
 # Como conectar dados pela web no Power BI
 
 * ### API metodo Get 1° Metodo
-```m
+```pq
 Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"))
 u=usuario
 s=senha
@@ -12,7 +12,7 @@ end= data fim
 
 * ### API metodo GET 2° Metodo
 
-```m
+```pq
 let
   Fonte = Json.Document(Web.Contents(
         "http://api.exemplo.com/api/integracao/v2/produtos",
@@ -32,7 +32,7 @@ in
 
 * ### API metodo GET (com Header)
 
-```m
+```pq
 let
 url = " http://api.exemplo.com/api/integracao/list",
 body = "{""Usuario"": ""usuario"",""Senha"":""senha"",""Chave"":""""}",
@@ -47,7 +47,7 @@ Source
 
 * ### API metodo GET (com Header)
  **!!!!!Ainda não foi validado**
-```m
+```pq
 let
 url = " https://api.vhsys.com/v2/contas-pagar",
 body = "{""data_pagamento"": ""2019-03-01,2019-03-31"",""lixeira"":""Nao"",""Liquidado"":""Sim"",""limit"":""1000""}",
@@ -66,7 +66,7 @@ Source
 ```
 * ### API Dinamica metodo GET
 
-```m
+```pq
 let
     Moeda = (CodMoeda as text) =>
  
@@ -98,7 +98,7 @@ in
 
 * ### API metodo GET com Header Atualiazado na Web
 
-```m
+```pq
 let
 url = "https://www.test.com",
 Metodo = "/api/cpf/68958685621",

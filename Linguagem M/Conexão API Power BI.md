@@ -107,31 +107,14 @@ Content = "application/json",
 
 Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```
-* ### Curl -u **usuario:senha http://api.somesite.com** V1
+
+* ### Curl -u **usuario:senha http://api.somesite.com**
 
 ```pq
 let
-url = "http://username:password@api.somesite.com/test",
-Relative_Path = "?something=123"
-Content = "application/json",
-Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content], RelativePath = Relative_Path] ))
-```
-
-* ### Curl -u **usuario:senha http://api.somesite.com** V2
-
-```pq
-let
-url = "http://api.somesite.com/test?something=123",
+url = "http://api.somesite.com/test",
+Relative_Path = "?something=123",
 Senha = Binary.ToText(Text.ToBinary("Basic username:password",BinaryEncoding.Base64))
-Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha], RelativePath = Relative_Path] ))
-```
-
-* ### Curl -u **usuario:senha http://api.somesite.com** V3
-
-```pq
-let
-url = "http://api.somesite.com/test?something=123",
-Senha = "(base64-encoded rafael.barbosa:938981)"
 Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha], RelativePath = Relative_Path] ))
 ```
 

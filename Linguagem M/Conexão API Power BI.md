@@ -117,6 +117,8 @@ Relative_Path = "?something=123",
 Usuario_Senha = "username:password"
 Senha_Encode = "Basic "& Binary.ToText(Text.ToBinary(Usuario_Senha,BinaryEncoding.Base64))
 Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha_Encode], RelativePath = Relative_Path] ))
+in
+Source
 ```
 
 ## Lista de Contents (Tipos de Conteúdo do Body da API)

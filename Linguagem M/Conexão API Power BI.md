@@ -114,8 +114,9 @@ Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Aut
 let
 url = "http://api.somesite.com/test",
 Relative_Path = "?something=123",
-Senha = Binary.ToText(Text.ToBinary("Basic username:password",BinaryEncoding.Base64))
-Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha], RelativePath = Relative_Path] ))
+Usuario_Senha = "username:password"
+Senha_Encode = "Basic "& Binary.ToText(Text.ToBinary(Usuario_Senha,BinaryEncoding.Base64))
+Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha_Encode], RelativePath = Relative_Path] ))
 ```
 
 ## Lista de Contents (Tipos de Conteúdo do Body da API)

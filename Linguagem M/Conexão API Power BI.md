@@ -1,7 +1,8 @@
 
 # Como conectar dados pela web no Power BI
 
-* ### API metodo Get 1° Metodo
+* ## API metodo Get 1° Metodo
+
 ```pq
 Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"))
 u=usuario
@@ -10,7 +11,7 @@ init= data inicio
 end= data fim
 ```
 
-* ### API metodo GET 2° Metodo
+* ## API metodo GET 2° Metodo
 
 ```pq
 let
@@ -30,7 +31,7 @@ in
   Fonte
 ```
 
-* ### API metodo GET (com Header)
+* ## API metodo GET (com Header)
 
 ```pq
 let
@@ -45,8 +46,8 @@ in
 Source
 ```
 
-* ### API metodo GET (com Header)
- **!!!!!Ainda não foi validado**
+* ## API metodo GET (com Header)
+**!!!!!Ainda não foi validado**
 ```pq
 let
 url = " https://api.vhsys.com/v2/contas-pagar",

@@ -17,7 +17,7 @@ Filtro AND
 
 * ### Operadores
 | operador 	| definição      	| cadeia de caracteres 	| número 	| Data 	| Exemplo                               	|
-|----------	|----------------	|----------------------	|--------	|------	|---------------------------------------	|
+|:--------:	|:--------------:	|:--------------------:	|:------:	|:----:	|:-------------------------------------:	|
 | and      	| e              	| sim                  	| sim    	| sim  	| product/price le 200 and price gt 3.5 	|
 | eq       	| igual a        	| sim                  	| sim    	| sim  	| Address/City eq 'Redmond'             	|
 | ne       	| diferente de   	| sim                  	| sim    	| sim  	| Address/City ne 'London'              	|
@@ -29,7 +29,7 @@ Filtro AND
 
 * ### Caracteres especiais em nomes de tabela e coluna
 | Identificador  	| Unicode               	| Codificação para o Power BI 	|
-|----------------	|-----------------------	|-----------------------------	|
+|:--------------:	|:---------------------:	|:---------------------------:	|
 | Table Name    	| O espaço é 0x20       	| Table_x0020_Name            	|
 | Column@Number  	| @ é 0x40              	| Column_x0040_Number         	|
 | [Column]       	| [ é 0x005B ] é 0x005D 	| x005B_Column_x005D          	|

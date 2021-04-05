@@ -19,13 +19,19 @@ CALCULATE (
 ``
 
 ## Preencher para baixo com condicional
-``PowerBI
+``
 IF (
     'Telemetria com Integracao'[Status] = BLANK ();
     CALCULATE (
-        LASTNONBLANK ( 'Telemetria com Integracao'[Status]; 'Telemetria com Integracao'[Status] );
-        FILTER ( ALLEXCEPT ( 'Telemetria com Integracao'; 'Telemetria com Integracao'[VIATURA] ); 'Telemetria com Integracao'[Data Leitura].[Date] = EARLIER ( 'Telemetria com Integracao'[Data Leitura].[Date] ) )
-    );
+        LASTNONBLANK ( 
+            'Telemetria com Integracao'[Status];
+            'Telemetria com Integracao'[Status]
+        );
+        FILTER (
+            ALLEXCEPT ('Telemetria com Integracao');
+            'Telemetria com Integracao'[VIATURA] );
+            'Telemetria com Integracao'[Data Leitura].[Date] = EARLIER ( 'Telemetria com Integracao'[Data Leitura].[Date] ) 
+        );
    'Telemetria com Integracao'[Status]
 )
 ``

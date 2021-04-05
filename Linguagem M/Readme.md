@@ -1,5 +1,12 @@
 # Formulas em Linguagem M
 
+## Selecionando Colunas
+
+```pq
+Lista  = Tabela[Coluna] //Formato de lista
+Tabela = Tabela[[Coluna]] //Formato de tabela
+```
+
 ## Converter DataStamp (ms)em Data
 
 ```pq

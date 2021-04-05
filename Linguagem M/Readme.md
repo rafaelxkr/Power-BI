@@ -1,4 +1,13 @@
-# Converter DataStamp (ms)em Data
+# Formulas em Linguagem M
+
+## Selecionando Colunas
+
+```pq
+Lista  = Tabela[Coluna] //Formato de lista
+Tabela = Tabela[[Coluna]] //Formato de tabela
+```
+
+## Converter DataStamp (ms)em Data
 
 ```pq
 #"Data Analisada Inserida" = Table.AddColumn(#"Column1.Avaliacoes Expandido1", 
@@ -6,7 +15,7 @@
 Number.RoundDown(Number.FromText(Text.Middle([Column1.DataNotificacaoMASP],6,13))/1000/86400)))
 ```
 
-# Substituir Valores da Coluna com uma Função
+## Substituir Valores da Coluna com uma Função
 
 ```pq
 //faça uma consulta nula com lista de todos os itens
@@ -32,16 +41,22 @@ in
 each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 ```
 
-# Substituir Valores da Coluna com Condicional
+## Substituir Valores da Coluna com Condicional
 
-```pq
+```powerquery
 = Table.ReplaceValue(#"Changed Type",each [Status],
 each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 ```
 
-# Ultima data de Atualização
+## Ultima data de Atualização
 
-```pq
+```m
 = DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.LocalNow(),-3))
 // O -3 se refere ao Fuso Horário
+```
+
+## Manter Somente Caracteres Selecionados
+
+```m
+= Table.TransformColumns(Etapa_Anterior,{ "Nome_da_Coluna",each Text.Select(_,{"a".."f"}),type text})
 ```

@@ -1,6 +1,6 @@
 # Power-BI
 
-* Documentação de Linguagem M e fórmulas DAX
++ Documentação de [Linguagem M](https://docs.microsoft.com/en-us/powerquery-m/power-query-m-function-reference) e [fórmulas DAX](https://dax.guide/)
 
 * ## Dica:
 

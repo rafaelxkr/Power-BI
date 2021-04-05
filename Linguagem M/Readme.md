@@ -45,3 +45,9 @@ each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 = DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.LocalNow(),-3))
 // O -3 se refere ao Fuso Horário
 ```
+
+# Manter Somente Caracteres Selecionados
+
+```m
+= Table.TransformColumns(Etapa_Anterior,{ "Nome_da_Coluna",each Text.Select(_,{"a".."f"}),type text})
+```

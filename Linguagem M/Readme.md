@@ -34,14 +34,14 @@ each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 
 # Substituir Valores da Coluna com Condicional
 
-```pq
+```powerquery
 = Table.ReplaceValue(#"Changed Type",each [Status],
 each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 ```
 
 # Ultima data de Atualização
 
-```pq
+```m
 = DateTime.From(DateTimeZone.SwitchZone(DateTimeZone.LocalNow(),-3))
 // O -3 se refere ao Fuso Horário
 ```

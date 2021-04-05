@@ -19,7 +19,7 @@ CALCULATE (
 ``
 
 ## Preencher para baixo com condicional
-``
+``PowerBI
 IF (
     'Telemetria com Integracao'[Status] = BLANK ();
     CALCULATE (

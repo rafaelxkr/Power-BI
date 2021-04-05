@@ -2,7 +2,7 @@
 
 + Documentação de [Linguagem M](https://docs.microsoft.com/en-us/powerquery-m/power-query-m-function-reference) e [fórmulas DAX](https://dax.guide/)
 
-* ## Dica:
+* **Dica:**
 
 Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 

@@ -2,14 +2,14 @@
 
 ## Selecionando Colunas
 
-```pq
+```m
 Lista  = Tabela[Coluna] //Formato de lista
 Tabela = Tabela[[Coluna]] //Formato de tabela
 ```
 
 ## Converter DataStamp (ms)em Data
 
-```pq
+```m
 #"Data Analisada Inserida" = Table.AddColumn(#"Column1.Avaliacoes Expandido1", 
 "MDataNotificacaoMASP", each Date.AddDays(Date.FromText("1970-01-01"), 
 Number.RoundDown(Number.FromText(Text.Middle([Column1.DataNotificacaoMASP],6,13))/1000/86400)))
@@ -17,7 +17,7 @@ Number.RoundDown(Number.FromText(Text.Middle([Column1.DataNotificacaoMASP],6,13)
 
 ## Substituir Valores da Coluna com uma Função
 
-```pq
+```m
 //faça uma consulta nula com lista de todos os itens
 let
   Query = (input) =>
@@ -43,7 +43,7 @@ each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 
 ## Substituir Valores da Coluna com Condicional
 
-```powerquery
+```m
 = Table.ReplaceValue(#"Changed Type",each [Status],
 each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 ```

@@ -43,6 +43,5 @@ Filtro AND
   Apos isso, é só selecionar no aplicativo a [opção de scaner](https://docs.microsoft.com/pt-br/power-bi/consumer/mobile/mobile-apps-scan-barcode-iphone#scan-a-barcode-with-the-power-bi-scanner)
 ![Passo2](https://docs.microsoft.com/pt-br/power-bi/consumer/mobile/media/mobile-apps-scan-barcode-iphone/power-bi-scanner.png)
 
-  Apontar para o produto
-
+  Apontar para o produto e pronto, o aplicativo irá abrir o relatório correspondente já filtrado
 ![Passo3](https://user-images.githubusercontent.com/31570331/113535981-4edd3c00-95ab-11eb-930e-36f2ac92693c.png)

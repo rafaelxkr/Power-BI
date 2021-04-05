@@ -6,6 +6,8 @@
 
 Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 
+# Filtrando relatórios pelo link
+
 Filtrar relatório pelo link:
 {link do relatório} ``?filter=Tabela/Coluna eq 'valor para filtrar'``
 

@@ -4,7 +4,7 @@
 
 **Dica:** Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 
-# Filtrando relatórios pelo link
+# [Filtrando relatórios pelo link](https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters "Documentação Power BI")
 
 Filtrar relatório pelo link:
 {link do relatório} ``?filter=Tabela/Coluna eq 'valor para filtrar'``

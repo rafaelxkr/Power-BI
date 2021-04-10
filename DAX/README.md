@@ -1,16 +1,22 @@
+# DAX
+
 ## Procv no Power BI
 
-```
+```DAX
 Procv = LOOKUPVALUE(OutraTabela[Coluna que eu quero];OutraTabela[Coluna Chave];TabelaAtual[Coluna Chave])
 ```
+
 ## Identificar Duplicata
-```
+
+```DAX
 Duplicate =
 IF (
     COUNTROWS ( FILTER ( Table1; Table1[GUEST] = EARLIER ( Table1[GUEST] ) ) )> 1;"YES";"NO")
 ```
+
 ## Mostrar Somente os Ultimos Meses Selecionados
-```
+
+```DAX
 Sales (last n months) =
 CALCULATE (
     SUM ( Sales[Sales] );
@@ -19,6 +25,7 @@ CALCULATE (
 ```
 
 ## Preencher para baixo com condicional
+
 ```Dax
 IF (
     'Telemetria com Integracao'[Status] = BLANK ();

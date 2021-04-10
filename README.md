@@ -4,7 +4,7 @@
 
 **Dica:** Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 
-# Filtrando relatórios pelo link
+# [Filtrando relatórios pelo link](https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters "Documentação Power BI")
 
 Filtrar relatório pelo link:
 {link do relatório} ``?filter=Tabela/Coluna eq 'valor para filtrar'``
@@ -35,3 +35,13 @@ Filtro AND
 | [Column]       	| [ é 0x005B ] é 0x005D 	| x005B_Column_x005D          	|
 | Column+Plus    	| + é 0x2B              	| Column_x002B_Plus           	|
 
+# [Codigo de Barras](https://docs.microsoft.com/pt-br/power-bi/transform-model/desktop-mobile-barcodes)
+  Para habilitar a opção de filtrar o relatório do Power BI no App do Android ou IOS,
+  basta categorizar a coluna que terá a informação de código de barras, como na imagem abaixo.
+![Passo1](https://docs.microsoft.com/pt-br/power-bi/transform-model/media/desktop-mobile-barcodes/power-bi-desktop-barcode.png)
+
+  Apos isso, é só selecionar no aplicativo a [opção de scaner](https://docs.microsoft.com/pt-br/power-bi/consumer/mobile/mobile-apps-scan-barcode-iphone#scan-a-barcode-with-the-power-bi-scanner)
+![Passo2](https://docs.microsoft.com/pt-br/power-bi/consumer/mobile/media/mobile-apps-scan-barcode-iphone/power-bi-scanner.png)
+
+  Apontar para o produto e pronto, o aplicativo irá abrir o relatório correspondente já filtrado
+![Passo3](https://user-images.githubusercontent.com/31570331/113535981-4edd3c00-95ab-11eb-930e-36f2ac92693c.png)

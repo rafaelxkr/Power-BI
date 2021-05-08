@@ -46,6 +46,13 @@ Adicione o pageName no final da URL:
 Adicionando filtros
 ![Filtrando_Pagina](https://user-images.githubusercontent.com/31570331/117540385-89d8f200-afe5-11eb-9810-a168c82211be.png)
 
+Fontes:
+Filtrar url no Power BI Service
+https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters
+
+Filtrar url no Power BI link público
+https://powerbi.microsoft.com/pt-br/blog/easily-embed-secure-power-bi-reports-in-your-internal-portals-or-websites/
+
 
 # [Codigo de Barras](https://docs.microsoft.com/pt-br/power-bi/transform-model/desktop-mobile-barcodes)
   Para habilitar a opção de filtrar o relatório do Power BI no App do Android ou IOS,

@@ -35,7 +35,7 @@ Filtro AND
 | [Column]       	| [ é 0x005B ] é 0x005D 	| x005B_Column_x005D          	|
 | Column+Plus    	| + é 0x2B              	| Column_x002B_Plus           	|
 
-## Filtrar o link de URL do Power BI embedado.
+## [Filtrar o link de URL do Power BI embedado](https://powerbi.microsoft.com/pt-br/blog/easily-embed-secure-power-bi-reports-in-your-internal-portals-or-websites/ "Documentação Power BI")
 
 Abra o relatório do serviço Power BI em seu navegador da web e copie o URL da barra de endereço.
 ![Link_PowerBI_Service](https://user-images.githubusercontent.com/31570331/117540290-f43d6280-afe4-11eb-87ab-6821a2a55938.png)
@@ -45,13 +45,6 @@ Adicione o pageName no final da URL:
 
 Adicionando filtros
 ![Filtrando_Pagina](https://user-images.githubusercontent.com/31570331/117540385-89d8f200-afe5-11eb-9810-a168c82211be.png)
-
-Fontes:
-Filtrar url no Power BI Service
-https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters
-
-Filtrar url no Power BI link público
-https://powerbi.microsoft.com/pt-br/blog/easily-embed-secure-power-bi-reports-in-your-internal-portals-or-websites/
 
 
 # [Codigo de Barras](https://docs.microsoft.com/pt-br/power-bi/transform-model/desktop-mobile-barcodes)

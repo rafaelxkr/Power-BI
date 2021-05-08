@@ -35,6 +35,18 @@ Filtro AND
 | [Column]       	| [ é 0x005B ] é 0x005D 	| x005B_Column_x005D          	|
 | Column+Plus    	| + é 0x2B              	| Column_x002B_Plus           	|
 
+## Filtrar o link de URL do Power BI embedado.
+
+Abra o relatório do serviço Power BI em seu navegador da web e copie o URL da barra de endereço.
+![Link_PowerBI_Service](https://user-images.githubusercontent.com/31570331/117540290-f43d6280-afe4-11eb-87ab-6821a2a55938.png)
+
+Adicione o pageName no final da URL:
+![Selecionar_Pagina](https://user-images.githubusercontent.com/31570331/117540324-28b11e80-afe5-11eb-8cdd-3a965b267575.png)
+
+Adicionando filtros
+![Filtrando_Pagina](https://user-images.githubusercontent.com/31570331/117540385-89d8f200-afe5-11eb-9810-a168c82211be.png)
+
+
 # [Codigo de Barras](https://docs.microsoft.com/pt-br/power-bi/transform-model/desktop-mobile-barcodes)
   Para habilitar a opção de filtrar o relatório do Power BI no App do Android ou IOS,
   basta categorizar a coluna que terá a informação de código de barras, como na imagem abaixo.

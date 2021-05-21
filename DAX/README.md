@@ -42,3 +42,7 @@ IF (
    'Telemetria com Integracao'[Status]
 )
 ```
+
+## Testando a performance do distinct query
+https://www.sqlbi.com/articles/analyzing-distinctcount-performance-in-dax/
+https://youtu.be/7SwD6953G6s

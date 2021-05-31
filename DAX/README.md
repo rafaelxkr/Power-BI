@@ -5,6 +5,7 @@ Sumario<br>
 **[Performance:](#Performance)**
 * [FirstNonBlank ou LastNonBlank](#FirstNonBlank-ou-LastNonBlank)
 * [Filter vs KeepFilters](#Filter-Vs-KeepFilters)
+* [Contar Valores](#Contar-Valores)
 
 **[Formulas:](#Formulas)**
 * [Procv no Power BI](#Procv-no-Power-BI)
@@ -74,6 +75,34 @@ CALCULATE(
 ```
 
 ![Filter vs KeepFilter](https://user-images.githubusercontent.com/31570331/120124305-31cb8080-c18a-11eb-95c9-bcdb4fed032c.png)
+
+### Contar Valores
+
+Contagem 1:
+```dax
+CALCULATE(
+    COUNTROWS(reclamacoes_contexto),
+    reclamacoes_contexto[CO_MUNICIPIO] <> BLANK()
+)
+```
+Contagem 2:
+```dax
+COUNT(reclamacoes_contexto[CO_MUNICIPIO])
+```
+Contagem 3:
+```dax
+COUNTa(reclamacoes_contexto[CO_MUNICIPIO])
+```
+
+Contagem 4:
+```dax
+COUNTX(
+    reclamacoes_contexto,
+    reclamacoes_contexto[CO_MUNICIPIO]
+)
+```
+
+![Contar valores](https://user-images.githubusercontent.com/31570331/120127428-bc65ad00-c195-11eb-8a21-3fd537e41b39.png)
 
 
 ## Formulas

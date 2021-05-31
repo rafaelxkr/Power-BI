@@ -1,5 +1,15 @@
 # DAX
 
+Sumario
+[Performance](#Performance)
+* [Performance](#FirstNonBlank-ou-LastNonBlank)
+* [Filter vs KeepFilters](#Filter-Vs-KeepFilters)
+[Formulas](#Formulas)
+* [Procv no Power BI](#Procv-no-Power-BI)
+* [Identificar Duplicata](#Identificar-Duplicata)
+* [Mostrar Somente os Ultimos Meses Selecionados](#Mostrar-Somente-os-Ultimos-Meses-Selecionados)
+* [Preencher para baixo com condicional](#Preencher-para-baixo-com-condicional)
+
 ## Performance
 
 ### FirstNonBlank ou LastNonBlank

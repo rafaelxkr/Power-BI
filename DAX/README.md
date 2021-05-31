@@ -6,6 +6,7 @@ Sumario<br>
 * [FirstNonBlank ou LastNonBlank](#FirstNonBlank-ou-LastNonBlank)
 * [Filter vs KeepFilters](#Filter-Vs-KeepFilters)
 * [Contar Valores](#Contar-Valores)
+* [SWITCH](#Switch)
 
 **[Formulas:](#Formulas)**
 * [Procv no Power BI](#Procv-no-Power-BI)
@@ -104,6 +105,38 @@ COUNTX(
 
 ![Contar valores](https://user-images.githubusercontent.com/31570331/120127428-bc65ad00-c195-11eb-8a21-3fd537e41b39.png)
 
+
+### Switch
+
+Condicional 1:
+```dax
+SWITCH(
+    TRUE(),
+    [Qtd de Reclamacoes]<50000,"CASO1",
+    [Qtd de Reclamacoes]<100000,"CASO2",
+    [Qtd de Reclamacoes]<200000,"CASO3",
+    [Qtd de Reclamacoes]<300000,"CASO4",
+    [Qtd de Reclamacoes]<400000,"CASO5",
+    [Qtd de Reclamacoes]<500000,"CASO6",
+    [Qtd de Reclamacoes]>=500000,"CASO7"
+)
+```
+Condicional 2:
+```dax
+VAR Quantidade = [Qtd de Reclamacoes]
+RETURN
+SWITCH(
+    TRUE(),
+    Quantidade<50000,"CASO1",
+    Quantidade<100000,"CASO2",
+    Quantidade<200000,"CASO3",
+    Quantidade<300000,"CASO4",
+    Quantidade<400000,"CASO5",
+    Quantidade<500000,"CASO6",
+    Quantidade>=500000,"CASO7"
+)
+```
+![SWITCH](https://user-images.githubusercontent.com/31570331/120129387-40219880-c19a-11eb-9ed3-e1c7b322ef63.png)
 
 ## Formulas
 

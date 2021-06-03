@@ -4,7 +4,7 @@ Para se conectar nas fotos dos usuários acesse a pasta
 
 ``https://[sharepointSiteName]-my.sharepoint.com/User%20Photos``
 
-Para saber o seu "Sharepoint site name" acesse o sharepoint ``https://Empresa.sharepoint.com/``
+Para saber o seu "Sharepoint site name" acesse o sharepoint ``https://Empresa.sharepoint.com/``<br>
 Neste exemplo o link seria ``https://Empresa-my.sharepoint.com/User%20Photos``
 
 ![image](https://user-images.githubusercontent.com/31570331/120718993-3b155f80-c4a0-11eb-8536-2f38fcc4da1b.png)
@@ -24,3 +24,5 @@ in
 ```
 
 A ultima etapa pegamos o primeiro link da coluna Imagem e trocamos o texto do link "MThumb.jpg" (Tamanho Médio de Imagem) por "LThumb.jpg" (Tamanho Grande da Imagem)
+
+Documentação Feed OData = https://docs.microsoft.com/en-us/previous-versions/dynamicscrm-2015/developers-guide/gg309461(v=crm.7)

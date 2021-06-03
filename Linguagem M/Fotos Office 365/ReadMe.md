@@ -2,7 +2,10 @@
 
 Para se conectar nas fotos dos usuários acesse a pasta
 
-``https://[sharepointsitename]-my.sharepoint.com/User%20Photos``
+``https://[sharepointSiteName]-my.sharepoint.com/User%20Photos``
+
+Para saber o seu "Sharepoint site name" acesse o sharepoint ``https://Empresa.sharepoint.com/``
+Neste exemplo o link seria ``https://Empresa-my.sharepoint.com/User%20Photos``
 
 ![image](https://user-images.githubusercontent.com/31570331/120718993-3b155f80-c4a0-11eb-8536-2f38fcc4da1b.png)
 

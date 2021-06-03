@@ -15,9 +15,9 @@ let
     Select = "$select=Nome,EmailDeTrabalho,Imagem,Cargo,Escritório&" // Seleciona as colunas selecionadas
     Filter = "$filter=Imagem ne null" // Remove as linhas em branco da coluna Imagem
     Source = OData.Feed( Link&Select&Filter ,null, [Implementation="2.0"]),
-    #"Extrair&Substituir" = Table.TransformColumns(Source, {{"Imagem", each Text.Replace(Text.BeforeDelimiter(_, ","),"MThumb.jpg","LThumb.jpg"), type text}})
+    ExtrairESubstituir = Table.TransformColumns(Source, {{"Imagem", each Text.Replace(Text.BeforeDelimiter(_, ","),"MThumb.jpg","LThumb.jpg"), type text}})
 in
-    #"Extrair&Substituir"
+    ExtrairESubstituir
 ```
 
 A ultima etapa pegamos o primeiro link da coluna Imagem e trocamos o texto do link "MThumb.jpg" (Tamanho Médio de Imagem) por "LThumb.jpg" (Tamanho Grande da Imagem)

@@ -63,11 +63,35 @@ each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 
 ## Validador de  CPF
 
-/*|FUNÇÃO CRIADA POR DAVI MARTINS     |
-  |Do Excel para Contabilidade        |
-  |Data: 04/06/2021                   |
-  |E-mail: evdaviicm3@gmail.com       |
-  -------------------------------------*/
+|FUNÇÃO CRIADA POR DAVI MARTINS     |
+|:---------------------------------:|
+|Do Excel para Contabilidade        |
+|Data: 04/06/2021                   |
+|E-mail: evdaviicm3@gmail.com       |
+-------------------------------------
+  
+Aplicação:
+
+Tipos de Inputs de CPFs aceitos:
+056.613.200-19
+05661320019
+5661320019
+
+Coloque o nome da função como fnValidacaoCpf (ou como desejar)
+
+fnValidacaoCpf([SuaColuna])
+
+Exemplo:
+fnValidacaoCpf("056.613.200-19")
+Resultado= Válido
+
+Exemplo2 com o segundo parametro opcional informado:
+fnValidacaoCpf("056.613.200-10", true)
+Resultado= Inválido| Possível: Inválido| Possível: 05661320019
+
+Sem o segundo parametro opcional informado:
+fnValidacaoCpf("056.613.200-10")
+Resultado= Inválido
 ```m
 (
     sCpf as any, 
@@ -114,27 +138,3 @@ if ValidacaoFinal = "Inválido" and sMostrar = true then
 else
     ValidacaoFinal
 ```
-----------------------------
-Aplicação:
-
-Tipos de Inputs de CPFs aceitos:
-056.613.200-19
-05661320019
-5661320019
-----------
-
-Coloque o nome da função como fnValidacaoCpf (ou como desejar)
-
-fnValidacaoCpf([SuaColuna])
-
-Exemplo:
-fnValidacaoCpf("056.613.200-19")
-Resultado= Válido
-
-Exemplo2 com o segundo parametro opcional informado:
-fnValidacaoCpf("056.613.200-10", true)
-Resultado= Inválido| Possível: Inválido| Possível: 05661320019
-
-Sem o segundo parametro opcional informado:
-fnValidacaoCpf("056.613.200-10")
-Resultado= Inválido

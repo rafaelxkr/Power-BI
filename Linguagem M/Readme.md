@@ -92,6 +92,8 @@ Resultado= Inválido| Possível: Inválido| Possível: 05661320019
 Sem o segundo parametro opcional informado:
 fnValidacaoCpf("056.613.200-10")
 Resultado= Inválido
+![image](https://user-images.githubusercontent.com/31570331/120860689-783f2780-c55c-11eb-8580-a35b41139118.png)
+
 ```m
 (
     sCpf as any, 

@@ -3,15 +3,14 @@
 
 * ## API metodo Get 1° Metodo
 
-```pq
-Json.Document(Web.Contents("https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"))
+```txt
+link = "https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"
+url = "https://api.exemplo.com/api/integracao/v2/test"
 u=usuario
 s=senha
 init= data inicio
 end= data fim
 ```
-
-* ## API metodo GET 2° Metodo
 
 ```pq
 let

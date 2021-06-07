@@ -1,5 +1,18 @@
 # Formulas em Linguagem M
 
+## Table.FromList
+
+Lista de Records
+```m
+Table.FromList(
+    Source, //Tabela
+    Record.FieldValues, //Separar lista pelos valores dos records
+    {"_id", "index", "guid", "isActive", "balance"}, //Seleciona as colunas desejadas
+    null, 
+    ExtraValues.Ignore //Ignora as colunas não desejadas
+  )
+```
+
 ## Selecionando Colunas
 
 ```m

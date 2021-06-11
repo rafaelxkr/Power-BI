@@ -2,6 +2,20 @@
 
 ## Automatizando Ações no Power BI
 
+### Identar todas medidas do modelo
+
+```c#
+Model.AllMeasures.FormatDax();
+```
+
+### Ocultar colunas em relacionamento
+
+```c#
+foreach (var r in Model.Relationships) {
+r.FromColumn.IsHidden = true;
+}
+```
+
 ### Criando uma medida de soma da coluna selecionada
 
 ```c#
@@ -49,3 +63,10 @@ foreach (var m in Selected.Measures)
     m.Description = m.Expression;
 }
 ```
+
+# Melhores Praticas
+
+No link abaixo segue o passo a passo de como adicionar as regras de melhores praticas do Power BI,
+para serem adicionadas ao Tabular Editor e facilitar na identificação para correção desses itens
+
+https://github.com/TabularEditor/BestPracticeRules

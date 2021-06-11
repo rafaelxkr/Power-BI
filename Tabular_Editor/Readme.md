@@ -1,6 +1,7 @@
 # Tabular Editor
 
 ## Automatizando Ações no Power BI
+Fonte: https://docs.tabulareditor.com/Useful-script-snippets.html#generating-documentation
 
 ### Identar todas medidas do modelo
 

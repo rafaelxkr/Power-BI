@@ -2,15 +2,20 @@
 
 ## Table.FromList
 
-Lista de Records
+Lista de Records (utilizado em API's em Json)
+
 ```m
-Table.FromList(
-    Source, //Tabela
-    Record.FieldValues, //Separar lista pelos valores dos records
-    {"_id", "index", "guid", "isActive", "balance"}, //Seleciona as colunas desejadas
+let
+  Source = Json.Document(File.Contents("C:\Users\rafae\Downloads\generated.json")),
+  Expandir = Table.FromList(
+    Source, 
+    Record.FieldValues, 
+    type table [_id  = text,index = Int32.Type,guid = text, isActive = logical,balance = text], 
     null, 
-    ExtraValues.Ignore //Ignora as colunas não desejadas
+    ExtraValues.Ignore
   )
+in
+  Expandir
 ```
 
 ## Selecionando Colunas

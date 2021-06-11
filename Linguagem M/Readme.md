@@ -3,6 +3,7 @@
 ## Table.FromList
 
 Lista de Records (utilizado em API's em Json)
+O 3º argumento da função Table.FromList seleciona as colunas e determina o tipo delas
 
 ```m
 let

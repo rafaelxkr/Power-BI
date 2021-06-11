@@ -18,4 +18,34 @@ foreach (var c in Selected.Columns)
 }
 ````
 
-### 
+### Contar a quantidade de linhas da tabela da coluna selecionada
+
+```c#
+foreach (var c in Selected.Columns)
+{
+    var NovaMedida = Model.Tables["_Medidas"].AddMeasure(
+    "COUNTROWS " + c.Table.Name.SplitCamelCase(),
+    "COUNTROWS(" + c.Table.DaxObjectFullName + ")",
+    "Tabular_Editor"
+    );
+    
+    NovaMedida.FormatString = "0";
+    NovaMedida.Description = NovaMedida.Expression;
+}
+```
+
+### Acumulado do Ano da medida selecionada
+
+```c#
+foreach (var m in Selected.Measures)
+{
+    m.Table.AddMeasure(
+    m.Name + " YTD",
+    "TOTALYTD(" + m.DaxObjectName + ", 'Date'[Date])",
+    "Tabular_Editor"
+    );
+    
+    m.FormatString = "0";
+    m.Description = m.Expression;
+}
+```

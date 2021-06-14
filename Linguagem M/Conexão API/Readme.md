@@ -1,7 +1,7 @@
 
 # Como conectar dados pela web no Power BI
 
-* ## API metodo GET 
+* ## API metodo GET `https://api.mercadolibre.com/sites/MLB/categories
 ```m
 let
     url = "https://api.mercadolibre.com/sites/MLB/categories",
@@ -27,13 +27,13 @@ end= data fim
 let
   url = "http://api.exemplo.com/api/integracao/v2/produtos",
   Parametros = 
-	[
-		u = "xxxxxxx",
-		s = "xxxxxxxx",
-		init = "12/07/2019",
-		end = "31/12/2019"
+  [
+	u = "xxxxxxx",
+	s = "xxxxxxxx",
+	init = "12/07/2019",
+	end = "31/12/2019"
   ],
-	Instrucoes = [ Query = Parametro ],
+  Instrucoes = [ Query = Parametro ],
   Fonte = Json.Document(Web.Contents(url,Instrucoes))
 in
   Fonte

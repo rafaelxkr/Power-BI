@@ -4,6 +4,7 @@
 
 Lista de Records (utilizado em API's em Json)
 O 3º argumento da função Table.FromList seleciona as colunas e determina o tipo delas
+* É necessário utilizar as colunas na mesma ordem, mas é possivel ignorar as ultimas colunas
 
 Um arquivo:
 ```m

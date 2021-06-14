@@ -5,18 +5,39 @@
 Lista de Records (utilizado em API's em Json)
 O 3º argumento da função Table.FromList seleciona as colunas e determina o tipo delas
 
+Um arquivo:
 ```m
 let
   Source = Json.Document(File.Contents("C:\Users\rafae\Downloads\generated.json")),
-  Expandir = Table.FromList(
-    Source, 
-    Record.FieldValues, 
-    type table [_id  = text,index = Int32.Type,guid = text, isActive = logical,balance = text], 
-    null, 
-    ExtraValues.Ignore
+  Expandir = Table.FromList(Source, 
+    Record.FieldValues, type table [_id  = text,index = Int32.Type,guid = text, isActive = logical,balance = text], 
+    null, ExtraValues.Ignore
   )
 in
   Expandir
+```
+
+Vários arquivos:
+```m
+let
+    Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),
+    Json = List.Transform(Source[Content], each Json.Document(_)),
+    Expandir = Table.FromList(List.Combine(Json), Record.FieldValues, type table[_id = text, index = Int32.Type, isActive = logical, balance = text], null, ExtraValues.Ignore)
+in
+    Expandir
+```
+
+Vários não otimizado:
+```m
+let
+    Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),
+    Json = List.Transform(Source[Content], each Json.Document(_)),
+    Tabela = Table.FromList(Json, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    Expandir1 = Table.ExpandListColumn(Tabela, "Column1"),
+    Expandir2 = Table.ExpandRecordColumn(Expandir1, "Column1", {"_id", "index", "isActive", "balance"}, {"_id", "index", "isActive", "balance"}),
+    Tipo = Table.TransformColumnTypes(Expandir2,{{"_id", type text}, {"index", Int64.Type}, {"isActive", type logical}, {"balance", type text}})
+in
+    Tipo
 ```
 
 ## Selecionando Colunas

@@ -1,7 +1,9 @@
 
 # Como conectar dados pela web no Power BI
 
-* ## API metodo GET `https://api.mercadolibre.com/sites/MLB/categories
+* ## API metodo GET 
+
+link: `https://api.mercadolibre.com/sites/MLB/categories`
 ```m
 let
     url = "https://api.mercadolibre.com/sites/MLB/categories",

@@ -1,6 +1,6 @@
 
 let
-    Fonte = SharePoint.Files("https://votorantimindustrial.sharepoint.com/sites/GestoPneu", [ApiVersion = 15]),
+    Fonte = SharePoint.Files("https://{Nome_do_Dominio}.sharepoint.com/sites/GestoPneu", [ApiVersion = 15]),
     Filtro = Table.SelectRows(Fonte, each Text.Contains([Folder Path], "/Exemplos/Abrir arquivo ZIP/")), //filtrar a pasta
     CSV = Table.TransformColumns(Filtro[[Content]],{"Content", each Csv.Document(_,[Delimiter=",", Encoding=1252, QuoteStyle=QuoteStyle.None])}), //Abre arquivo CSV
     Cabecalho = Table.TransformColumns(CSV,{"Content", Table.PromoteHeaders}),

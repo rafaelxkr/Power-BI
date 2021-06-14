@@ -32,7 +32,7 @@ in
 
 * ## API metodo GET (com Header)
 
-```pq
+```m
 let
 url = " http://api.exemplo.com/api/integracao/list",
 body = "{""Usuario"": ""usuario"",""Senha"":""senha"",""Chave"":""""}",
@@ -43,6 +43,47 @@ Content = Text.ToBinary(body)
 ))
 in
 Source
+```
+
+Exemplo 2:
+
+EndPoint: `"https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/"`
+
+GET: `"CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)"`
+```
+Parametros:
+@moeda = 'USD'
+@dataInicial" = '01-01-2000',
+@dataFinalCotacao= '12-31-9999',
+$top= 10000,
+$filter= not contains(tipoBoletim,'Inter'),
+$orderby= dataHoraCotacao desc,
+$format = json,
+$select= cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim"
+```
+
+```m
+let
+    url = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/",
+    Relative = "CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)",
+    Parametros = 
+    [
+        #"@moeda" = "'USD'",
+        #"@dataInicial" ="'01-01-2000'",
+        #"@dataFinalCotacao"="'12-31-9999'",
+        #"$top"= "10000",
+        #"$filter"= "not contains(tipoBoletim,'Inter')",
+        #"$orderby"= "dataHoraCotacao desc",
+        #"$format" = "json",
+        #"$select"= "cotacaoCompra,cotacaoVenda,dataHoraCotacao,tipoBoletim"
+    ],
+    Instrucoes = [RelativePath = Relative, Query = Parametros],
+    Source = Json.Document(Web.Contents(url,Instrucoes), 1252),
+    value = Source[value],
+    Expandir = Table.FromList(value, Record.FieldValues,type table [Compra = Currency.Type, Venda = Currency.Type, Data = datetime, Tipo = text ], null, ExtraValues.Error),
+    Tipo = Table.TransformColumnTypes(Expandir,{{"Data", type datetime}})
+in
+    Tipo
 ```
 
 * ## API metodo GET (com Header)

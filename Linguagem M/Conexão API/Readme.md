@@ -1,31 +1,40 @@
 
 # Como conectar dados pela web no Power BI
 
-* ## API metodo Get 1° Metodo
+* ## API metodo GET 
+```m
+let
+    url = "https://api.mercadolibre.com/sites/MLB/categories",
+    Source = Json.Document(Web.Contents(url), 65001),
+    Expandir = Table.FromList(Source,Record.FieldValues, type table [id=text,  name=text], null, ExtraValues.Ignore)
+in
+    Expandir
+```
+
+* ## API metodo Get 1° Metodo com parametros
 
 ```txt
 link = "https://api.exemplo.com/api/integracao/v2/test?u=usuario&s=senha&init=01/02/2019&end=31/08/2019"
 url = "https://api.exemplo.com/api/integracao/v2/test"
+
 u=usuario
 s=senha
 init= data inicio
 end= data fim
 ```
 
-```pq
+```m
 let
-  Fonte = Json.Document(Web.Contents(
-        "http://api.exemplo.com/api/integracao/v2/produtos",
-         [ 
-              Query =
-              [
-                    u = "xxxxxxx",
-                    s = "xxxxxxxx",
-                    init = "12/07/2019",
-                    end = "31/12/2019"
-              ]
-        ]
-))
+  url = "http://api.exemplo.com/api/integracao/v2/produtos",
+  Parametros = 
+	[
+		u = "xxxxxxx",
+		s = "xxxxxxxx",
+		init = "12/07/2019",
+		end = "31/12/2019"
+  ],
+	Instrucoes = [ Query = Parametro ],
+  Fonte = Json.Document(Web.Contents(url,Instrucoes))
 in
   Fonte
 ```
@@ -88,7 +97,7 @@ in
 
 * ## API metodo GET (com Header)
 **!!!!!Ainda não foi validado**
-```pq
+```m
 let
 url = " https://api.vhsys.com/v2/contas-pagar",
 body = "{""data_pagamento"": ""2019-03-01,2019-03-31"",""lixeira"":""Nao"",""Liquidado"":""Sim"",""limit"":""1000""}",
@@ -107,7 +116,7 @@ Source
 ```
 * ### API Dinamica metodo GET
 
-```pq
+```m
 let
     Moeda = (CodMoeda as text) =>
  
@@ -139,7 +148,7 @@ in
 
 * ### API metodo GET com Header Atualiazado na Web
 
-```pq
+```m
 let
 url = "https://www.test.com",
 Metodo = "/api/cpf/68958685621",
@@ -151,7 +160,7 @@ Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Aut
 
 * ### Curl -u **usuario:senha http://api.somesite.com**
 
-```pq
+```m
 let
 url = "http://api.somesite.com/test",
 Relative_Path = "?something=123",

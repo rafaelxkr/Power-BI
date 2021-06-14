@@ -28,15 +28,14 @@ in
     Expandir
 ```
 
-Vários não otimizado:
+Vários com opção de selecionar as colunas em qualquer ordem:
 ```m
 let
     Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),
     Json = List.Transform(Source[Content], each Json.Document(_)),
-    Tabela = Table.FromList(Json, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-    Expandir1 = Table.ExpandListColumn(Tabela, "Column1"),
-    Expandir2 = Table.ExpandRecordColumn(Expandir1, "Column1", {"_id", "index", "isActive", "balance"}, {"_id", "index", "isActive", "balance"}),
-    Tipo = Table.TransformColumnTypes(Expandir2,{{"_id", type text}, {"index", Int64.Type}, {"isActive", type logical}, {"balance", type text}})
+    Unir = Table.FromList(List.Combine(Json), Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+    Expandir = Table.ExpandRecordColumn(Unir, "Column1", {"_id", "balance"}, {"_id", "balance"}),
+    Tipo = Table.TransformColumnTypes(Expandir,{{"_id", type text}, {"balance", type text}})
 in
     Tipo
 ```

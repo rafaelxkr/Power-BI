@@ -91,6 +91,7 @@ w.DownloadFile(url, downloadLoc);
 # Exportar Alertas de melhores praticas
 
 ```c#
+//https://www.elegantbi.com/post/exportbparesults
 using TabularEditor.BestPracticeAnalyzer;
 
 var bpa = new Analyzer();

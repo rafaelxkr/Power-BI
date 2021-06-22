@@ -70,7 +70,7 @@ foreach (var m in Selected.Measures)
 1. Rode o Script
 2. Feche e abra Tabular Editor conectado no modelo.
 4. Selecione 'Tools' do File menu e select 'Best Practice Analyzer'.
-5. Clique no icone "Refresh"(in blue) no canto direito superior.
+5. Clique no icone "Refresh"(em azul) no canto direito superior.
 ```c#
 // // https://www.elegantbi.com
 System.Net.WebClient w = new System.Net.WebClient(); 
@@ -111,7 +111,7 @@ sb.Output();
 
 
 ```
-***Note: If you are using Tabular Editor 3, change the first line of the script above to the code shown below. This script works in Tabular Editor 3.0.6 or higher.
+***Nota: Se voc~e  estiver usando o Tabular Editor 3 , altere a primeira linha do script com o código abaixo. Esse script funciona no Tabular Editor 3.0.6 ou posterior.
 ```c#
 using TabularEditor.Shared.BPA;
 ```

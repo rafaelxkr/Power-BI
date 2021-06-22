@@ -67,6 +67,95 @@ foreach (var m in Selected.Measures)
 
 # Melhores Praticas
 
+1. Rode o Script
+2. Feche e abra Tabular Editor conectado no modelo.
+4. Selecione 'Tools' do File menu e select 'Best Practice Analyzer'.
+5. Clique no icone "Refresh"(in blue) no canto direito superior.
+```c#
+// // https://www.elegantbi.com
+System.Net.WebClient w = new System.Net.WebClient(); 
+
+string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+string url = "https://raw.githubusercontent.com/microsoft/Analysis-Services/master/BestPracticeRules/BPARules.json";
+string version = System.Windows.Forms.Application.ProductVersion.Substring(0,1);
+string downloadLoc = path+@"\TabularEditor\BPARules.json";
+
+if (version == "3")
+{
+    downloadLoc = path+@"\TabularEditor3\BPARules.json";
+}
+
+w.DownloadFile(url, downloadLoc);
+```
+
+# Exportar Alertas de melhores praticas
+
+```c#
+using TabularEditor.BestPracticeAnalyzer;
+
+var bpa = new Analyzer();
+bpa.SetModel(Model);
+
+var sb = new System.Text.StringBuilder();
+string newline = Environment.NewLine;
+
+sb.Append("RuleCategory" + '\t' + "RuleName" + '\t' + "ObjectName" + '\t' + "ObjectType" + '\t' + "RuleSeverity" + '\t' + "HasFixExpression" + newline);
+
+foreach (var a in bpa.AnalyzeAll().ToList())
+{
+    sb.Append(a.Rule.Category + '\t' + a.RuleName + '\t' + a.ObjectName + '\t' + a.ObjectType + '\t' + a.Rule.Severity + '\t' + a.CanFix + newline);
+}
+
+sb.Output();
+
+
+```
+***Note: If you are using Tabular Editor 3, change the first line of the script above to the code shown below. This script works in Tabular Editor 3.0.6 or higher.
+```c#
+using TabularEditor.Shared.BPA;
+```
+
+# Encontrar Relacionamentos que Retornam Linha em Branco no Filtro
+
+```c#
+// https://www.elegantbi.com/post/findblankrows
+
+var sb = new System.Text.StringBuilder();
+string newline = Environment.NewLine;
+
+sb.Append("FromTable" + '\t' + "ToTable" + '\t' + "BlankRowCount" + newline);
+
+foreach (var r in Model.Relationships.ToList())
+{
+    bool   act = r.IsActive;
+    string fromTable = r.FromTable.Name;
+    string toTable = r.ToTable.Name;
+    string fromTableFull = r.FromTable.DaxObjectFullName;    
+    string fromObject = r.FromColumn.DaxObjectFullName;
+    string toObject = r.ToColumn.DaxObjectFullName;
+    string dax;
+    
+    if (act)
+    {
+        dax = "SUMMARIZECOLUMNS(\"test\",CALCULATE(COUNTROWS("+fromTableFull+"),ISBLANK("+toObject+")))";
+    }
+    else
+    {
+        dax = "SUMMARIZECOLUMNS(\"test\",CALCULATE(COUNTROWS("+fromTableFull+"),USERELATIONSHIP("+fromObject+","+toObject+"),ISBLANK("+toObject+")))";
+    }
+    
+    var daxResult = EvaluateDax(dax);
+    string blankRowCount = daxResult.ToString();
+    
+    if (blankRowCount != "Table")
+    {
+        sb.Append(fromTable + '\t' + toTable + '\t' + blankRowCount + newline);        
+    }
+}
+
+sb.Output();
+```
+
 No link abaixo segue o passo a passo de como adicionar as regras de melhores praticas do Power BI,
 para serem adicionadas ao Tabular Editor e facilitar na identificação para correção desses itens
 

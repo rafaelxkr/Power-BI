@@ -93,6 +93,7 @@ w.DownloadFile(url, downloadLoc);
 ```c#
 //https://www.elegantbi.com/post/exportbparesults
 using TabularEditor.BestPracticeAnalyzer;
+//using TabularEditor.Shared.BPA;
 
 var bpa = new Analyzer();
 bpa.SetModel(Model);

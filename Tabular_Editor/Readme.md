@@ -111,7 +111,7 @@ sb.Output();
 
 
 ```
-***Nota: Se voc~e  estiver usando o Tabular Editor 3 , altere a primeira linha do script com o código abaixo. Esse script funciona no Tabular Editor 3.0.6 ou posterior.
+***Nota: Se você estiver usando o Tabular Editor 3 , altere a primeira linha do script com o código abaixo. Esse script funciona no Tabular Editor 3.0.6 ou posterior.
 ```c#
 using TabularEditor.Shared.BPA;
 ```

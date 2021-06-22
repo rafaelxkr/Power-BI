@@ -72,7 +72,9 @@ foreach (var m in Selected.Measures)
 4. Selecione 'Tools' do File menu e select 'Best Practice Analyzer'.
 5. Clique no icone "Refresh"(em azul) no canto direito superior.
 ```c#
-// // https://www.elegantbi.com
+// https://powerbi.microsoft.com/pt-br/blog/best-practice-rules-to-improve-your-models-performance/
+// https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules
+
 System.Net.WebClient w = new System.Net.WebClient(); 
 
 string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);

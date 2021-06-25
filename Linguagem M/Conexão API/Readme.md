@@ -116,7 +116,7 @@ Content = Text.ToBinary(body)
 in
 Source
 ```
-* ### API Dinamica metodo GET
+* ## API Dinamica metodo GET
 
 ```m
 let
@@ -148,7 +148,7 @@ in
     #"Data Extraída"
 ```
 
-* ### API metodo GET com Header Atualiazado na Web
+* ## API metodo GET com Header Atualiazado na Web
 
 ```m
 let
@@ -160,7 +160,7 @@ Content = "application/json",
 Source = Json.Document(Web.Contents(url,[Headers=[#"Content-Type" = Content, Authorization = Token], RelativePath = Metodo] ))
 ```
 
-* ### Curl -u **usuario:senha http://api.somesite.com**
+* ## Curl -u **usuario:senha http://api.somesite.com**
 
 ```m
 let
@@ -171,6 +171,35 @@ Senha_Encode = "Basic "& Binary.ToText(Text.ToBinary(Usuario_Senha,BinaryEncodin
 Source = Json.Document(Web.Contents(url,[Headers=[#"Authorization" = Senha_Encode], RelativePath = Relative_Path] ))
 in
 Source
+```
+
+* ## Paginando com List Generate
+
+Função para extrair as informações do site 
+```m
+(Pagina as number) =>
+let
+    Source = Web.BrowserContents("https://www.teste.com/discussions/test/"&Text.From(Pagina)&"/"),
+    Html = Html.Table(Source, {{"Topico", ".discussion-link"}, {"Link", ".discussion-link", each [Attributes][href]?}}, [RowSelector=".discussion-row"]),
+    Separar = Table.SplitColumn(Html, "Topico", Splitter.SplitTextByAnyDelimiter({"topic","question","discussion"}, QuoteStyle.Csv), {"Exame", "Topico", "Questao"}),
+    Link = Table.TransformColumns(Separar, {{"Link", each "https://www.examtopics.com" & _, type text}})
+in
+    try Link otherwise null
+```
+
+Query para paginar o site e trazer todas as paginas 
+```m
+let
+    Lista = List.Generate(
+        ()=> [retorno = Paginas(1), i = 1],
+        each [retorno] is table,
+        each [retorno = Paginas ([i]+1), i = [i]+1],
+        each [retorno]
+    ),
+    Resultado  = Table.Combine(Lista)
+
+ in
+    Resultado
 ```
 
 ## Lista de Contents (Tipos de Conteúdo do Body da API)

@@ -175,7 +175,7 @@ Source
 
 * ## Paginando com List Generate
 
-Função para extrair as informações do site 
+1° Parte - Função para extrair as informações do site colocar o nome como Paginas
 ```m
 (Pagina as number) =>
 let
@@ -187,8 +187,8 @@ in
     try Link otherwise null
 ```
 
-Query para paginar o site e trazer todas as paginas cada pagina tem um numero
-onde deve iniciar do numero 1 e vai acumulando quando a função não retornar uma tabela o List.Genarate
+2° Parte - Query para paginar o site e trazer todas as paginas cada pagina tem um numero
+onde deve iniciar do numero 1 e vai acumulando quando a função "Paginas" não retornar uma tabela o List.Genarate
 irá parar, para essa aplicação não precisa saber a quantidade maxima de paginas que o site tem
 
 ```m

@@ -4,6 +4,12 @@
 
 **Dica:** Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 
+# Link para gerecionar acesso do relatório
+Útil para relatórios Usage Metric que tem essa opção oculta, com link abaixo é possivel compartilha acesso especifico
+para o relatório
+
+`https://app.powerbi.com/groups/{ID_do_Workspace}/permission/report/2/{ID_do_Relatório}/directAccess`
+
 # [Filtrando relatórios pelo link](https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters "Documentação Power BI")
 
 Filtrar relatório pelo link:

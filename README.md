@@ -63,3 +63,24 @@ Adicionando filtros
 
   Apontar para o produto e pronto, o aplicativo irá abrir o relatório correspondente já filtrado
 ![Passo3](https://user-images.githubusercontent.com/31570331/113535981-4edd3c00-95ab-11eb-930e-36f2ac92693c.png)
+
+# Removendo Fonte de Dados Desativada do Fluxo de Dados
+
+Fluxo de dados com duas conexões sendo que uma delas não é mais utilizada
+![image](https://user-images.githubusercontent.com/31570331/125868467-67869b4b-f754-4492-9467-a97fa3617bfd.png)
+
+Insira a conexão por gateway da conexão de deseja remover
+![image](https://user-images.githubusercontent.com/31570331/125868599-0f459dab-1ded-44c5-90d9-ad50a0453826.png)
+
+Abrindo as opções de projeto do Fluxo de Dados, é possivel ver que foi incluido um gateway
+![image](https://user-images.githubusercontent.com/31570331/125868826-d73306c3-d833-4792-b677-ceb97b9c7400.png)
+
+Agora remova o gateway e salve seu fluxo de dados <br>
+![image](https://user-images.githubusercontent.com/31570331/125868880-1a745925-8d9f-47c1-b99d-c4e2b090bb1e.png)
+
+COnferindo agora a fonte de dados, tem somente uma a outra foi removida
+![image](https://user-images.githubusercontent.com/31570331/125868961-aba41d13-43a5-4a18-8fa6-963c2426bbe3.png)
+
+
+
+

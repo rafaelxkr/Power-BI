@@ -81,6 +81,30 @@ Agora remova o gateway e salve seu fluxo de dados <br>
 COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 ![image](https://user-images.githubusercontent.com/31570331/125868961-aba41d13-43a5-4a18-8fa6-963c2426bbe3.png)
 
+# Dicas de Otimização
 
+## Modelo
 
+* [Remover colunas desnecessárias](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#remove-unnecessary-columns)
+* [Remover linhas desnecessárias](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#remove-unnecessary-rows)
+* [Agrupar por e resumir](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#group-by-and-summarize)
+* [Otimizar tipos de dados de coluna](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#optimize-column-data-types)
+* [Preferência por colunas personalizadas](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#preference-for-custom-columns)
+* [Desabilitar a carga de consulta do Power Query](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-power-query-query-load)
+* [Desabilitar data/hora automática](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-auto-datetime)
+* [Mudar para o modo misto](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#switch-to-mixed-mode)
+
+## Dax
+
+ * [DIVIDE ao inves de "/"](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-divide-function-operator)
+ * [Funções de Erro](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-error-functions)
+ * [SELECTEDVALUE ao inves de VALUES](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-error-functions)
+ * [COUNTROWS em vez de COUNT](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-countrows)
+ * [Utilizar Variáveis](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-variables)
+ * [Evite converter BLANKs em valores](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-avoid-converting-blank)
+ * [Evite Utilizar a FILTER](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-avoid-avoid-filter-as-filter-argument)
+
+## Dataset Refresh
+
+ * [Performance tuning Power BI](https://www.youtube.com/watch?v=MxONhJJi4go&t=3s)
 

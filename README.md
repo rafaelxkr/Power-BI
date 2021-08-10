@@ -107,4 +107,9 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 ## Dataset Refresh
 
  * [Performance tuning Power BI](https://www.youtube.com/watch?v=MxONhJJi4go&t=3s)
+ * [Otimizando Conexão com Lista do Sharepoint](https://www.linkedin.com/pulse/power-bi-lista-do-sharepoint-rafael-barbosa/) 
+
+## Visual
+
+* [Reduza a Quantidade de Visuais](https://www.sqlbi.com/tv/optimizing-card-visuals-in-slow-power-bi-reports/)
 

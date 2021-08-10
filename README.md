@@ -93,6 +93,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Desabilitar a carga de consulta do Power Query](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-power-query-query-load)
 * [Desabilitar data/hora automática](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-auto-datetime)
 * [Mudar para o modo misto](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#switch-to-mixed-mode)
+* [Dimensão com Dados Completos Ativa Otimização](https://dax.tips/2019/11/28/clean-data-faster-reports/)
 
 ## Dax
 

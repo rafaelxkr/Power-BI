@@ -95,6 +95,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Mudar para o modo misto](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#switch-to-mixed-mode)
 * [Dimensão com Dados Completos Ativa Otimização](https://dax.tips/2019/11/28/clean-data-faster-reports/)
 * [Desabilitar MDX para valores e Utilizar Encode Hint](https://www.youtube.com/watch?v=b2b-z5Iv-cM)
+* [Artigo de Otimização de Modelo](https://data-mozart.com/how-to-reduce-your-power-bi-model-size-by-90/)
 
 ## Dax
 

@@ -96,6 +96,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Dimensão com Dados Completos Ativa Otimização](https://dax.tips/2019/11/28/clean-data-faster-reports/)
 * [Desabilitar MDX para valores e Utilizar Encode Hint](https://www.youtube.com/watch?v=b2b-z5Iv-cM)
 * [Artigo de Otimização de Modelo](https://data-mozart.com/how-to-reduce-your-power-bi-model-size-by-90/)
+* [Analisando Tamanho do Dicionario DAX STUDIO](https://www.sqlbi.com/articles/measuring-the-dictionary-size-of-a-column-correctly/)
 
 ## Dax
 

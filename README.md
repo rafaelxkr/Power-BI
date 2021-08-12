@@ -97,8 +97,10 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Desabilitar MDX para valores e Utilizar Encode Hint](https://www.youtube.com/watch?v=b2b-z5Iv-cM)
 * [Artigo de Otimização de Modelo](https://data-mozart.com/how-to-reduce-your-power-bi-model-size-by-90/)
 * [Analisando Tamanho do Dicionario DAX STUDIO](https://www.sqlbi.com/articles/measuring-the-dictionary-size-of-a-column-correctly/)
+* [Dicas de Otimização Microsoft](https://docs.microsoft.com/pt-br/power-bi/guidance/power-bi-optimization)
+* [Dicas de Otimização Pragmatic](https://blog.pragmaticworks.com/power-bi-performance-tips-and-techniques)
 
-## Dax
+## DAX
 
  * [DIVIDE ao inves de "/"](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-divide-function-operator)
  * [Funções de Erro](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-error-functions)

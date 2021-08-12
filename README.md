@@ -94,6 +94,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Desabilitar data/hora automática](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-auto-datetime)
 * [Mudar para o modo misto](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#switch-to-mixed-mode)
 * [Dimensão com Dados Completos Ativa Otimização](https://dax.tips/2019/11/28/clean-data-faster-reports/)
+* [Otimizando Modelo com DAX STUDIO e Tabular Editor](https://www.youtube.com/watch?v=b2b-z5Iv-cM)
 
 ## Dax
 

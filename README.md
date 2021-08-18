@@ -89,6 +89,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 * [Remover linhas desnecessárias](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#remove-unnecessary-rows)
 * [Agrupar por e resumir](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#group-by-and-summarize)
 * [Otimizar tipos de dados de coluna](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#optimize-column-data-types)
+* [Ordernar sem Coluna de Referência](https://xxlbi.com/blog/built-in-column-sort-order-power-bi/)
 * [Preferência por colunas personalizadas](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#preference-for-custom-columns)
 * [Desabilitar a carga de consulta do Power Query](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-power-query-query-load)
 * [Desabilitar data/hora automática](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#disable-auto-datetime)

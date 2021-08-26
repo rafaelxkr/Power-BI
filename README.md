@@ -10,6 +10,11 @@ para o relatório
 
 `https://app.powerbi.com/groups/{ID_do_Workspace}/permission/report/2/{ID_do_Relatório}/directAccess`
 
+# [Real e Forcast](https://www.youtube.com/watch?v=YaG49NL3B0E)
+[![image](https://user-images.githubusercontent.com/31570331/131043228-27cda1e1-cb95-4b44-91a7-03fa30ffd53f.png)](https://www.youtube.com/watch?v=YaG49NL3B0E)
+
+
+
 # [Filtrando relatórios pelo link](https://docs.microsoft.com/pt-br/power-bi/collaborate-share/service-url-filters "Documentação Power BI")
 
 Filtrar relatório pelo link:

@@ -1,5 +1,14 @@
 # Formulas em Linguagem M
 
+## Conector SQL (correção de Erro)
+
+Caso ocorra o erro abaixo, basta iniciar o Power BI com Admnistrador e se conecte novamente que resolve:<br>
+Fonte: https://natechamberlain.com/2019/02/12/power-bi-refresh-error-could-not-load-file-or-assembly-provided-impersonation-level-is-invalid/
+
+![image](https://user-images.githubusercontent.com/31570331/131003571-c7c878d7-8191-43d0-b02d-0131e8141dac.png)
+
+
+
 ## Table.FromList
 
 Lista de Records (utilizado em API's em Json)

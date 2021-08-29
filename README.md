@@ -125,3 +125,13 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 
 * [Reduza a Quantidade de Visuais](https://www.sqlbi.com/tv/optimizing-card-visuals-in-slow-power-bi-reports/)
 
+# Listar usuários com acesso ao relatório
+
+1. Abra o gerenciador de permissões do relatório
+2. Aperte F12 e insira o script no Console
+```javascript
+$('.row').each(function() { console.log (
+
+",",$(this).find('div.user-name').text(),",",$(this).find('span.col-emailAddress').text(),",",$(this).find('span.col-permissions').text())})
+```
+3. Será retornado a relação usuário separado por virgula

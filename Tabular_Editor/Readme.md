@@ -173,7 +173,9 @@ sb.Output();
 
 # Medir Redução do Modelo se Desativar IsAvailableInMDX
 
-Primeiro precisa rodar o script VertipaqAnnotations.cs para adicionar o Vertipaq nas anotações de cada coluna
+1° precisa rodar o script VertipaqAnnotations.cs para adicionar o Vertipaq nas anotações de cada coluna [instruções](https://www.elegantbi.com/post/vertipaqintabulareditor)
+
+2° Rodar script abaixo [instruções](https://www.elegantbi.com/post/bestpracticerulesavings)
 ```c#
 var sb = new System.Text.StringBuilder(); 
 string newline = Environment.NewLine;

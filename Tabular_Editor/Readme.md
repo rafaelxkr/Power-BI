@@ -9,6 +9,17 @@ Fonte: https://docs.tabulareditor.com/Useful-script-snippets.html#generating-doc
 Model.AllMeasures.FormatDax();
 ```
 
+### Configurar o Encoding dos números Inteiros, Decimais e Data e Hora como "Value"
+
+```c#
+// for all Int64, Decimal and DateTime columns set EncodingHint
+foreach(var column in Model.Tables.SelectMany(t => t.Columns)) 
+{
+    if(column.DataType == DataType.Int64 || column.DataType == DataType.Decimal || column.DataType == DataType.DateTime)         
+        column.EncodingHint = EncodingHintType.Value;
+}
+```
+
 ### Ocultar colunas em relacionamento
 
 ```c#

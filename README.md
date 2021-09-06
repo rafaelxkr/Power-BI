@@ -92,6 +92,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
 
 * [Remover colunas desnecessárias](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#remove-unnecessary-columns)
 * [Remover linhas desnecessárias](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#remove-unnecessary-rows)
+* [Divir Datetime e 2 Colunas Data e Hora]
 * [Agrupar por e resumir](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#group-by-and-summarize)
 * [Otimizar tipos de dados de coluna](https://docs.microsoft.com/pt-br/power-bi/guidance/import-modeling-data-reduction#optimize-column-data-types)
 * [Ordernar sem Coluna de Referência](https://xxlbi.com/blog/built-in-column-sort-order-power-bi/)

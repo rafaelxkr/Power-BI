@@ -113,6 +113,7 @@ COnferindo agora a fonte de dados, tem somente uma a outra foi removida
  * [DIVIDE ao inves de "/"](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-divide-function-operator)
  * [Funções de Erro](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-error-functions)
  * [SELECTEDVALUE ao inves de VALUES](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-error-functions)
+ * [ALL ao inves de Values]
  * [COUNTROWS em vez de COUNT](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-countrows)
  * [Utilizar Variáveis](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-variables)
  * [Evite converter BLANKs em valores](https://docs.microsoft.com/pt-br/power-bi/guidance/dax-avoid-converting-blank)

@@ -12,11 +12,18 @@ Model.AllMeasures.FormatDax();
 ### Configurar o Encoding dos números Inteiros, Decimais e Data e Hora como "Value"
 
 ```c#
-// for all Int64, Decimal and DateTime columns set EncodingHint
+// for all Double to Decimal And Int64, Decimal and DateTime columns set EncodingHint
 foreach(var column in Model.Tables.SelectMany(t => t.Columns)) 
+    
 {
+    
+    if (column.DataType == DataType.Double)
+        column.DataType = DataType.Decimal;
+    
     if(column.DataType == DataType.Int64 || column.DataType == DataType.Decimal || column.DataType == DataType.DateTime)         
         column.EncodingHint = EncodingHintType.Value;
+    
+    
 }
 ```
 

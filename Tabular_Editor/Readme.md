@@ -185,7 +185,7 @@ long tot = 0;
 // Header
 sb.Append("TableName" + '\t' + "ColumnName" + '\t' + "HierarchySize" + newline);
 
-foreach (var c in Model.AllColumns.Where(a => a.IsAvailableInMDX /*&& (a.IsHidden || a.Table.IsHidden)*/ && ! a.UsedInSortBy.Any() && ! a.UsedInHierarchies.Any() ).OrderBy(a => a.Table.Name).ThenBy(a => a.Name))
+foreach (var c in Model.AllColumns.Where(a => a.IsAvailableInMDX /*&& (a.IsHidden || a.Table.IsHidden)*/ && (a.DataType == DataType.Int64 || a.DataType == DataType.Decimal || a.DataType == DataType.Double)&&! a.UsedInSortBy.Any() && ! a.UsedInHierarchies.Any() ).OrderBy(a => a.Table.Name).ThenBy(a => a.Name))
 {
     string tableName = c.Table.Name;
     string colName = c.Name;
@@ -196,9 +196,6 @@ foreach (var c in Model.AllColumns.Where(a => a.IsAvailableInMDX /*&& (a.IsHidde
 
 tot.Output(); // Value shown in bytes
 sb.ToString().Output();
-
-No link abaixo segue o passo a passo de como adicionar as regras de melhores praticas do Power BI,
-para serem adicionadas ao Tabular Editor e facilitar na identificação para correção desses itens
 ```
 
 https://github.com/TabularEditor/BestPracticeRules

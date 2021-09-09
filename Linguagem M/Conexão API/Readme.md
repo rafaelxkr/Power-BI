@@ -205,6 +205,37 @@ let
     Resultado
 ```
 
+* ## API com limitação de chamadas por minuto
+
+```m
+let
+    Value.WaitFor = (producer as function, interval as function, optional count as number) as any =>
+        let
+            list = List.Generate(
+                () => {0, null},
+                (state) => state{0} <> null and (count = null or state{0} < count),
+                (state) => if state{1} <> null
+                    then {null, state{1}}
+                    else {1 + state{0}, Function.InvokeAfter(() => producer(state{0}), interval(state{0}))},
+                (state) => state{1})
+        in
+            List.Last(list),
+    Web.ContentsCustomRetry = (url as text, optional options as record) => Value.WaitFor(
+        (i) =>
+            let
+                options2 = if options = null then [] else options,
+                options3 = if i=0 then options2 else options2 & [IsRetry=true],
+                result = Web.Contents(url, options3 & [ManualStatusHandling={429}]),
+                buffered = Binary.Buffer(result), /* avoid risk of double request */
+                status = if buffered = null then 0 else Value.Metadata(result)[Response.Status],
+                actualResult = if status = 429 then null else buffered
+            in
+                actualResult,
+        (i) => #duration(0, 0, 0, i*0.1))
+in
+    Web.ContentsCustomRetry("http://www.bing.com")
+```
+
 ## Lista de Contents (Tipos de Conteúdo do Body da API)
 ```
 Json: Content = "application/json"

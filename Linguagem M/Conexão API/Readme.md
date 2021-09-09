@@ -207,6 +207,7 @@ let
 
 * ## API com limitação de chamadas por minuto
 
+Fonte: https://gist.github.com/CurtHagenlocher/68ac18caa0a17667c805
 ```m
 let
     Value.WaitFor = (producer as function, interval as function, optional count as number) as any =>

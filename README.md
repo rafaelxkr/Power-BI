@@ -48,6 +48,8 @@ Filtro AND
 
 ## [Filtrar o link de URL do Power BI embedado](https://powerbi.microsoft.com/pt-br/blog/easily-embed-secure-power-bi-reports-in-your-internal-portals-or-websites/ "Documentação Power BI")
 
+Fonte: https://powerbi.microsoft.com/pt-br/blog/easily-embed-secure-power-bi-reports-in-your-internal-portals-or-websites/
+
 Abra o relatório do serviço Power BI em seu navegador da web e copie o URL da barra de endereço.
 ![Link_PowerBI_Service](https://user-images.githubusercontent.com/31570331/117540290-f43d6280-afe4-11eb-87ab-6821a2a55938.png)
 

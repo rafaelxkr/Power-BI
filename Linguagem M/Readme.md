@@ -110,6 +110,65 @@ each if [Status] = 5 then "compra" else "venda",Replacer.ReplaceText,{"Status"})
 = Table.TransformColumns(Etapa_Anterior,{ "Nome_da_Coluna",each Text.Select(_,{"a".."f"}),type text})
 ```
 
+## Função para remover ascentos
+
+```m
+(Texto as text) =>
+let
+    ListaAcentos = 
+		{
+		{"à","a"},
+		{"á","a"},
+		{"â","a"},
+		{"ã","a"},
+		{"ä","a"},
+		{"è","e"},
+		{"é","e"},
+		{"ê","e"},
+		{"ë","e"},
+		{"ì","i"},
+		{"í","i"},
+		{"î","i"},
+		{"ï","i"},
+		{"ò","o"},
+		{"ó","o"},
+		{"ô","o"},
+		{"õ","o"},
+		{"ö","o"},
+		{"ù","u"},
+		{"ú","u"},
+		{"û","u"},
+		{"ü","u"},
+		{"À","A"},
+		{"Á","A"},
+		{"Â","A"},
+		{"Ã","A"},
+		{"Ä","A"},
+		{"È","E"},
+		{"É","E"},
+		{"Ê","E"},
+		{"Ë","E"},
+		{"Ì","I"},
+		{"Í","I"},
+		{"Î","I"},
+		{"Ò","O"},
+		{"Ó","O"},
+		{"Ô","O"},
+		{"Õ","O"},
+		{"Ö","O"},
+		{"Ù","U"},
+		{"Ú","U"},
+		{"Û","U"},
+		{"Ü","U"},
+		{"ç","c"},
+		{"Ç","C"},
+		{"ñ","n"},
+		{"Ñ","N"}
+		}
+in
+    Text.Combine(List.ReplaceMatchingItems(Text.ToList(Texto), ListaAcentos))
+```
+
 ## Validador de  CPF
 
 |FUNÇÃO CRIADA POR DAVI MARTINS     |

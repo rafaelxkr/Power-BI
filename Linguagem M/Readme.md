@@ -93,6 +93,23 @@ Tabela = Tabela[[Coluna]] //Formato de tabela
 Number.RoundDown(Number.FromText(Text.Middle([Column1.DataNotificacaoMASP],6,13))/1000/86400)))
 ```
 
+## Substituir Valores com Tabela "DE PARA"
+```m
+let
+    Table = Table.FromRecords(
+        {
+        [FROM = "Rafael", TO = "Rafa"], //Linha 1
+        [FROM = "Ana", TO = "Carolina"] //Linha 2
+        },
+        type table [FROM = text, TO = text]
+    ),
+    List = List.Zip({Table[FROM],Table[TO]}), //Lista da tabela "DE PARA"
+    Replace = List.ReplaceMatchingItems({"Rafael", "Ana", "Eduardo", "Mauricio", "Carlos"},List)
+    // Substituir com base na lista
+in
+    Replace
+```
+
 ## Substituir Valores da Coluna com uma Função
 
 ```m
@@ -143,23 +160,6 @@ in
 
 // -- Abaixo é a etapa que ser inserida na sua consulta onde é chamado  função acima com o nome de Funtion, 
 //= Table.ReplaceValue(#"Changed Type",each [Nome_Replace_Column], each Funtion([Nome_Coluna_ID],[Nome_Replace_Column]),Replacer.ReplaceText,{"Nome_Replace_Column"})
-```
-
-## Substituir Valores com Tabela "DE PARA"
-```m
-let
-    Table = Table.FromRecords(
-        {
-        [FROM = "Rafael", TO = "Rafa"], //Linha 1
-        [FROM = "Ana", TO = "Carolina"] //Linha 2
-        },
-        type table [FROM = text, TO = text]
-    ),
-    List = List.Zip({Table[FROM],Table[TO]}), //Lista da tabela "DE PARA"
-    Replace = List.ReplaceMatchingItems({"Rafael", "Ana", "Eduardo", "Mauricio", "Carlos"},List)
-    // Substituir com base na lista
-in
-    Replace
 ```
 
 ## Substituir Valores da Coluna com Condicional

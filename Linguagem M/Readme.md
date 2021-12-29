@@ -1,5 +1,19 @@
 # Formulas em Linguagem M
 
+## Sumario
+* [Transformando uma coluna com base em outra](#Table.FromList-vs-Table.FromRecords)
+* [Table.FromList vs Table.FromRecords](#Table.FromList-vs-Table.FromRecords)
+* [Selecionando Colunas](#Selecionando-Colunas)
+* [Converter DataStamp(ms)em Data](#[Converter-DataStamp(ms)em-Data)
+* [Substituir Valores com Tabela "DE PARA"](#Substituir-Valores-com-Tabela-"DE-PARA")
+* [Substituir Valores da Coluna com uma Função](#Substituir-Valores-da-Coluna-com-uma-Função)
+* [Substituir Valores da Coluna com base em uma coluna de ID](#Substituir-Valores-da-Coluna-com-base-em-uma-coluna-de-ID)
+* [Substituir Valores da Coluna com Condicional](#Substituir-Valores-da-Coluna-com-Condicional)
+* [Ultima data de Atualização](#Ultima-data-de-Atualização)
+* [Manter Somente Caracteres Selecionados](#Manter-Somente-Caracteres-Selecionados)
+* [Função para remover ascentos](#Função-para-remover-ascentos)
+* [Validador de  CPF](#Validador-de-CPF)
+
 ## Conector SQL (correção de Erro)
 
 Caso ocorra o erro abaixo, basta iniciar o Power BI com Admnistrador e se conecte novamente que resolve:<br>
@@ -241,7 +255,7 @@ in
     Text.Combine(List.ReplaceMatchingItems(Text.ToList(Texto), ListaAcentos))
 ```
 
-## Validador de  CPF
+## Validador de CPF
 
 |FUNÇÃO CRIADA POR DAVI MARTINS     |
 |:---------------------------------:|

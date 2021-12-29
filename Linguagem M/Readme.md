@@ -7,7 +7,25 @@ Fonte: https://natechamberlain.com/2019/02/12/power-bi-refresh-error-could-not-l
 
 ![image](https://user-images.githubusercontent.com/31570331/131003571-c7c878d7-8191-43d0-b02d-0131e8141dac.png)
 
+## Transformando uma coluna com base em outra
+Tem o mesmo objetivo que Table.TransformColumns, mas nesse caso
+pode utilizar outras colunas para criar sua regra
 
+```m
+let
+    Tabela = Table.FromRecords(
+      {[Column A = "X",Column B = "1"],[Column A = "Y",Column B = "2"]},//Linhas da Tabela
+      type table [Column A = text,Column B = text] // Tipagem das colunas
+),
+    Custom1 = 
+      Table.FromRecords(Table.TransformRows(Tabela,
+        (r) => Record.TransformFields(r,
+              {"Column A", each if r[Column B]="1" then "Z" else _})),
+      type table [Column A = text,Column B = text,Column C = text]
+      )
+in
+    Custom1
+```
 
 ## Table.FromList vs Table.FromRecords
 
@@ -99,6 +117,23 @@ in
 
 = Table.ReplaceValue(#"Changed Type",each [Status],
 each Funtion([Status]),Replacer.ReplaceText,{"Status"})
+```
+
+## Substituir Valores com Tabela "DE PARA"
+```m
+let
+    Table = Table.FromRecords(
+        {
+        [FROM = "Rafael", TO = "Rafa"], //Linha 1
+        [FROM = "Ana", TO = "Carolina"] //Linha 2
+        },
+        type table [FROM = text, TO = text]
+    ),
+    List = List.Zip({Table[FROM],Table[TO]}), //Lista da tabela "DE PARA"
+    Replace = List.ReplaceMatchingItems({"Rafael", "Ana", "Eduardo", "Mauricio", "Carlos"},List)
+    // Substituir com base na lista
+in
+    Replace
 ```
 
 ## Substituir Valores da Coluna com Condicional

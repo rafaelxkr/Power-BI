@@ -9,16 +9,17 @@ Fonte: https://natechamberlain.com/2019/02/12/power-bi-refresh-error-could-not-l
 
 
 
-## Table.FromList
+## Table.FromList vs Table.FromRecords
 
 Lista de Records (utilizado em API's em Json)
 O 3º argumento da função Table.FromList seleciona as colunas e determina o tipo delas
 * É necessário utilizar as colunas na mesma ordem, mas é possivel ignorar as ultimas colunas
 
-Um arquivo:
+### Um arquivo: (Table.FromList)
+Na etapa "Expandir" precisamos identificar as colunas na mesma ordem que esta no Json da esquerda para direita 
 ```m
 let
-  Source = Json.Document(File.Contents("C:\Users\rafae\Downloads\generated.json")),
+  Source = Json.Document(File.Contents("C:\Users\rafae\OneDrive - Dataside\Documentos\Power BI\Performance\Conexão Json\Base Json\generated.json")),
   Expandir = Table.FromList(Source, 
     Record.FieldValues, type table [_id  = text,index = Int32.Type,guid = text, isActive = logical,balance = text], 
     null, ExtraValues.Ignore
@@ -27,7 +28,8 @@ in
   Expandir
 ```
 
-Vários arquivos:
+### Vários arquivos: (Table.FromList)
+Na etapa "Expandir" precisamos identificar as colunas na mesma ordem que esta no Json da esquerda para direita 
 ```m
 let
     Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),
@@ -37,16 +39,25 @@ in
     Expandir
 ```
 
-Vários com opção de selecionar as primeiras colunas e renomear:
+### Um arquivo: (Table.FromRecords)
+Na etapa "Expandir" expadimos somente as colunas que desejamos e já tipamos cada coluna na mesma etapa
 ```m
 let
-    Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),
-    Json = List.Transform(Source[Content], each Json.Document(_)),
-    Unir = Table.FromList(List.Combine(Json), Splitter.SplitByNothing(), null, null, ExtraValues.Error),
-    Expandir = Table.ExpandRecordColumn(Unir, "Column1", {"_id", "balance"}, {"_id", "balance"}),
-    Tipo = Table.TransformColumnTypes(Expandir,{{"_id", type text}, {"balance", type text}})
+  Source = Json.Document(File.Contents("C:\Users\rafae\OneDrive - Dataside\Documentos\Power BI\Performance\Conexão Json\Base Json\generated.json")),
+  Expandir = Table.FromRecords(Json,type table [_id = text, index= Int64.Type, guid = text, balance = Currency.Type])
 in
-    Tipo
+  Expandir
+```
+
+### Vários arquivos: (Table.FromRecords)
+Na etapa "Expandir" expadimos somente as colunas que desejamos e já tipamos cada coluna na mesma etapa
+```m
+let
+    Source = Folder.Files("C:\Users\rafae\OneDrive - Dataside\Documentos\Power BI\Performance\Conexão Json\Base Json"),
+    Json = List.Combine(List.Transform(Source[Content], each Json.Document(_))),
+    Expandir = Table.FromRecords(Json,type table [_id = text, index= Int64.Type, guid = text, balance = Currency.Type])
+in
+    Expandir
 ```
 
 ## Selecionando Colunas

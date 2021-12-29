@@ -4,7 +4,7 @@
 * [Transformando uma coluna com base em outra](#Table.FromList-vs-Table.FromRecords)
 * [Table.FromList vs Table.FromRecords](#Table.FromList-vs-Table.FromRecords)
 * [Selecionando Colunas](#Selecionando-Colunas)
-* [Converter DataStamp(ms)em Data](#Converter-DataStamp(ms)em-Data)
+* [Converter DataStamp(ms)em Data](#converter-datastamp-ms-em-data)
 * [Substituir Valores com Tabela "DE PARA"](#substituir-valores-com-tabela-de-para)
 * [Substituir Valores da Coluna com uma Função](#Substituir-Valores-da-Coluna-com-uma-Função)
 * [Substituir Valores da Coluna com base em uma coluna de ID](#Substituir-Valores-da-Coluna-com-base-em-uma-coluna-de-ID)
@@ -99,7 +99,7 @@ Lista  = Tabela[Coluna] //Formato de lista
 Tabela = Tabela[[Coluna]] //Formato de tabela
 ```
 
-## Converter DataStamp (ms)em Data
+## Converter DataStamp (ms) em Data
 
 ```m
 #"Data Analisada Inserida" = Table.AddColumn(#"Column1.Avaliacoes Expandido1", 

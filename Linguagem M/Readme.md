@@ -119,6 +119,32 @@ in
 each Funtion([Status]),Replacer.ReplaceText,{"Status"})
 ```
 
+## Substituir Valores da Coluna com base em uma coluna de ID
+
+```m
+//faça uma consulta nula com lista de todos os itens
+let
+  Query = (ID , Replace_Column) =>
+let
+values = {
+  // { ID , Replace_Column }
+{"4538400X","334"},
+{"4550200X","A33"},
+{ID, Replace_Column}
+},
+Result = List.First(List.Select(values, each _{0}=ID)){1}
+in
+Result
+in
+  Query
+  
+// ID é a coluna que contém a chave para identificar qual linha deve ser substituido o valor
+// Replace_Column é o nome da coluna que será feita a substituição dos valores
+
+// -- Abaixo é a etapa que ser inserida na sua consulta onde é chamado  função acima com o nome de Funtion, 
+//= Table.ReplaceValue(#"Changed Type",each [Nome_Replace_Column], each Funtion([Nome_Coluna_ID],[Nome_Replace_Column]),Replacer.ReplaceText,{"Nome_Replace_Column"})
+```
+
 ## Substituir Valores com Tabela "DE PARA"
 ```m
 let

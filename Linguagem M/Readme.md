@@ -37,7 +37,7 @@ in
     Expandir
 ```
 
-Vários com opção de selecionar as colunas em qualquer ordem:
+Vários com opção de selecionar as primeiras colunas e renomear:
 ```m
 let
     Source = Folder.Files("C:\Users\rafae\OneDrive\Documentos\Power BI\Performance\Conexão Json\Base Json"),

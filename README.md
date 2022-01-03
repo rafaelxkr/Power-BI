@@ -4,6 +4,8 @@
 
 **Dica:** Power BI em tela cheia adicione no final do link o código ``?chromeless=true``
 
+<div class="dax-do-query"><code class="dd-lnw-1"><div><span class="dd-ln">1</span><span class="dd-function">EVALUATE</span>&nbsp;</div><div><span class="dd-ln">2</span><span class="dd-function">ALL</span>&nbsp;<span class="dd-parenthesis">(</span>&nbsp;<span class="dd-column">'Product'[Brand]</span><span class="dd-parenthesis">,</span>&nbsp;<span class="dd-column">'Product'[Color]</span>&nbsp;<span class="dd-parenthesis">)</span></div><div><span class="dd-ln">3</span><span class="dd-function">ORDER</span>&nbsp;<span class="dd-function">BY</span>&nbsp;<span class="dd-column">'Product'[Brand]</span><span class="dd-parenthesis">,</span>&nbsp;<span class="dd-column">'Product'[Color]</span></div><div><span class="dd-ln">4</span><span class="dd-function">START</span>&nbsp;<span class="dd-function">AT</span>&nbsp;<span class="dd-string">"Southridge&nbsp;Video"</span><span class="dd-parenthesis">,</span>&nbsp;<span class="dd-string">"Black"</span></div></code><div class="dax-do-try"><a href="https://dax.do/DNtJexIYMrcI9Q/" target="_blank">Try it</a></div></div>
+
 # Link para gerecionar acesso do relatório
 Útil para relatórios Usage Metric que tem essa opção oculta, com link abaixo é possivel compartilha acesso especifico
 para o relatório

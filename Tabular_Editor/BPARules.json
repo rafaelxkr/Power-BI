@@ -91,7 +91,7 @@
   },
   {
     "ID": "NEW_RULE",
-    "Name": "10. Divisão somente com DIVIDE ao invés de \"/\"",
+    "Name": "10. DIVIDE ao invés de \"/\"",
     "Category": "Renner",
     "Description": "Utilizar a função DIVIDE ao invés da \"/\"\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
     "Severity": 2,
@@ -111,12 +111,12 @@
   },
   {
     "ID": "EVITAR_COUNT_COUNTA_COUNTBLANK",
-    "Name": "12. Evitar funções COUNT, COUNTA or COUNTBLANK",
+    "Name": "12. COUNTROWS ao invés de COUNT, COUNTA or COUNTBLANK",
     "Category": "Renner",
     "Description": "Evitar a utilização da funções COUNT, COUNTA and COUNTBLANK aos invés do COUNTROWS\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-countrows",
     "Severity": 2,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")",
+    "Expression": "RegEx.IsMatch(Expression.Replace(\"DISTINCTCOUNT\",\"\"),\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -156,7 +156,7 @@
     "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
     "Severity": 3,
     "Scope": "Table",
-    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name)\n\n\n\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name)\n\r\n)",
+    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\")\n\n\n\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\")\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {

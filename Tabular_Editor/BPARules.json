@@ -1,7 +1,7 @@
 [
   {
     "ID": "SEM_ATUALIZACAO_INCREMENTAL",
-    "Name": "01.1 Atualização Desativada",
+    "Name": "01.1 Atualização Incremental Desativada",
     "Category": "Renner",
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
@@ -36,7 +36,7 @@
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 3,
     "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1",
+    "Expression": "Expression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Name.StartsWith(\"LocalDateTable_\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -46,7 +46,7 @@
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "CalculatedColumn",
-    "Expression": "IsDataTypeInferred == true",
+    "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -56,7 +56,7 @@
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "Partition",
-    "Expression": "Expression.Contains(\"Table.AddColumn\")",
+    "Expression": "Expression.Contains(\"Table.AddColumn\")\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -90,13 +90,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "NEW_RULE",
+    "ID": "DIVIDE",
     "Name": "10. DIVIDE ao invés de \"/\"",
     "Category": "Renner",
     "Description": "Utilizar a função DIVIDE ao invés da \"/\"\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\]\\s*\\/(?!\\/)(?!\\*)\")\r\nor\r\nRegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\)\\s*\\/(?!\\/)(?!\\*)\")",
+    "Expression": "(\r\nRegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\]\\s*\\/(?!\\/)(?!\\*)\")\r\nor\r\nRegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\)\\s*\\/(?!\\/)(?!\\*)\")\r\n)\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -116,7 +116,7 @@
     "Description": "Evitar a utilização da funções COUNT, COUNTA and COUNTBLANK aos invés do COUNTROWS\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-countrows",
     "Severity": 2,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression.Replace(\"DISTINCTCOUNT\",\"\"),\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")",
+    "Expression": "RegEx.IsMatch(Expression.Replace(\"DISTINCTCOUNT\",\"\"),\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTAX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {

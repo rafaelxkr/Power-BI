@@ -6,7 +6,7 @@
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "EnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)",
+    "Expression": "EnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\nAnd\r\n!Name.StartsWith(\"d\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -130,6 +130,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "REFERENCIOU_A_MESMA_MEDIDA",
+    "Name": "14. Referenciou Mesma Medida ao Invés de usar Variável",
+    "Category": "Renner",
+    "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9']\\[([^\\]]+)\\].*?[^A-Za-z0-9']\\[\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "RELACIONAMENTO_MUITOS_MUITOS",
     "Name": "16. Possui Relacionamentos Muitos para Muitos",
     "Category": "Renner",
@@ -217,16 +227,6 @@
     "Severity": 2,
     "Scope": "Relationship",
     "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "REFERENCIOU_A_MESMA_MEDIDA",
-    "Name": "14. Referenciou Mesma Medida ao Invés de usar Variável",
-    "Category": "Renner",
-    "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9']\\[([^\\]]+)\\].*?[^A-Za-z0-9']\\[\\1\\]\")",
     "CompatibilityLevel": 1200
   }
 ]

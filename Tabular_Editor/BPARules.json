@@ -6,7 +6,7 @@
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "EnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\nAnd\r\n!Name.StartsWith(\"d\")",
+    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!Name.StartsWith(\"d\")\r\n\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -21,12 +21,22 @@
   },
   {
     "ID": "Query_INATIVO",
-    "Name": "03. Verificar o Query Folding",
+    "Name": "03.1 Verificar o Query Folding",
     "Category": "Renner",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 3,
-    "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"Table.\") >= 0",
+    "Scope": "Table",
+    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\nExpression.IndexOf(\"Table.\")>0",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "INCREMENTAL_QUERY_FOLDING_DESATIVADO",
+    "Name": "03.2 Incremental com Query Folding Desativado",
+    "Category": "Renner",
+    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -166,7 +176,7 @@
     "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
     "Severity": 3,
     "Scope": "Table",
-    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\")\n\n\n\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\")\n\r\n)",
+    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -176,7 +186,7 @@
     "Description": "Deve ser marcado a tabela de calendario utilizada no modelo como tabela de data",
     "Severity": 2,
     "Scope": "Model",
-    "Expression": "(\r\n    Relationships.Where(\r\n\tFromCardinality.ToString() == \"One\" &&\r\n\tModel.Tables[FromTable.Name].Columns[FromColumn.Name].IsKey== false && \t\r\n        Model.Tables[FromTable.Name].Columns[FromColumn.Name].DataType = \"DateTime\" && \r\n\t!FromTable.Name.StartsWith(\"LocalDateTable\")\r\n    ).Count() > 0\r\n    or\r\n    Relationships.Where(\r\n\tToCardinality.ToString() == \"One\" &&\r\n\tModel.Tables[ToTable.Name].Columns[ToColumn.Name].IsKey == false &&\r\n\tModel.Tables[ToTable.Name].Columns[ToColumn.Name].DataType = \"DateTime\" &&\r\n\t!ToTable.Name.StartsWith(\"LocalDateTable\")\r\n    ).Count() > 0\r\n)",
+    "Expression": "Tables.Any(\r\n!Name.StartsWith(\"f\")\r\nand\r\n\r\nPartitions.Any(\r\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) >0 )\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -226,7 +236,7 @@
     "Description": "Evite relacionamento bi-direcional nos seus modelos ",
     "Severity": 2,
     "Scope": "Relationship",
-    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections",
+    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections and !(FromCardinality == \"One\" and ToCardinality == \"One\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -247,6 +257,16 @@
     "Severity": 3,
     "Scope": "Measure",
     "Expression": "Expression.Contains(\"CONTAINSSTRING\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_1_1_FATO_DIMENSAO",
+    "Name": "[EXTRA] Relacionamento 1:1 entre Fato e Dimensão está Correto?",
+    "Category": "Extras",
+    "Description": "Relacionamento entre fato e dimensão deveria ser 1 para muitos, ou você feito o relacionamento incorreto ou na verdade são tabelas dimensões",
+    "Severity": 2,
+    "Scope": "Relationship",
+    "Expression": "(FromTable.Name.StartsWith(\"d\") and ToTable.Name.StartsWith(\"f\") and ToCardinality == \"One\" and FromCardinality == \"One\")\r\nor\r\n(FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"d\") and ToCardinality == \"One\" and FromCardinality == \"One\")",
     "CompatibilityLevel": 1200
   }
 ]

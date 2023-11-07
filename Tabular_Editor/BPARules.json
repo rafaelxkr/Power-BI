@@ -268,5 +268,15 @@
     "Scope": "Relationship",
     "Expression": "(FromTable.Name.StartsWith(\"d\") and ToTable.Name.StartsWith(\"f\") and ToCardinality == \"One\" and FromCardinality == \"One\")\r\nor\r\n(FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"d\") and ToCardinality == \"One\" and FromCardinality == \"One\")",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
+    "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
+    "Category": "Extras",
+    "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
+    "Severity": 4,
+    "Scope": "Tables",
+    "Expression": "Partitions.Any(Regex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\()\"))",
+    "CompatibilityLevel": 1200
   }
 ]

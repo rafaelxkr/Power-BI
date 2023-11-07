@@ -228,5 +228,25 @@
     "Scope": "Relationship",
     "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_'(X/Y)-1'",
+    "Name": "[EXTRA]  '(X/Y)-1' ao inves (X-Y)/Y",
+    "Category": "Extras",
+    "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
+    "Severity": 2,
+    "Scope": "Measure, CalculatedColumn, CalculationItem",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:SUM|COUNT|MAX|MIN|AVERAGE)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*[-+]\\s*[0-9]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*[0-9]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_CONTAINSSTRING",
+    "Name": "[EXTRA] Evite CONTAINSSTRING",
+    "Category": "Extras",
+    "Description": "Ao invés de utilizar a função CONTAINSSTRING crie uma coluna para classificar se a linha contém a informação desejada",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "Expression.Contains(\"CONTAINSSTRING\")",
+    "CompatibilityLevel": 1200
   }
 ]

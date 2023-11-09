@@ -26,7 +26,7 @@
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 3,
     "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\nExpression.IndexOf(\"Table.\")>0",
+    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\nExpression.IndexOf(\"Table.\", StringComparison.OrdinalIgnoreCase)>0",
     "CompatibilityLevel": 1200
   },
   {
@@ -210,23 +210,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "CONSULTA_UTILIZA_SANDBOX",
+    "ID": "BRONZE_SANDBOX",
     "Name": "[EXTRA] Consulta Utiliza Sandbox",
     "Category": "Extras",
     "Description": "Tabelas quem utilizam dados das tabelas Sandbox não são sustentaveis",
     "Severity": 5,
     "Scope": "Partition",
     "Expression": "Expression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CONSULTA_UTILIZA_BRONZE",
-    "Name": "[EXTRA] Consulta Utiliza Tabela Bronze",
-    "Category": "Extras",
-    "Description": "Tabelas utiliza dados das tabelas Bronze",
-    "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0",
     "CompatibilityLevel": 1200
   },
   {
@@ -270,7 +260,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "INCREMENTAL_QUERY_FOLDING_DESATIVADO",
+    "ID": "NEW_RULE",
     "Name": "03.2 Incremental com Query Folding Desativado",
     "Category": "Renner",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
@@ -286,7 +276,7 @@
     "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\()\")\r\n)",
+    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\(|CommonDataService.Database\\()\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -307,6 +297,16 @@
     "Severity": 5,
     "Scope": "Partition",
     "Expression": "Mode != \"Import\"",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CONSULTA_UTILIZA_TABELA_BRONZE",
+    "Name": "[EXTRA] Consulta Utiliza Tabela Bronze",
+    "Category": "Extras",
+    "Description": "Tabelas utiliza dados das tabelas Bronze",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0",
     "CompatibilityLevel": 1200
   }
 ]

@@ -30,16 +30,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "INCREMENTAL_QUERY_FOLDING_DESATIVADO",
-    "Name": "03.2 Incremental com Query Folding Desativado",
-    "Category": "Renner",
-    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
-    "Severity": 3,
-    "Scope": "Table",
-    "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "TABELA_CRIADA_SEM_SQL",
     "Name": "04. Tabela Criada sem SQL",
     "Category": "Renner",
@@ -220,13 +210,23 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "BRONZE_SANDBOX",
-    "Name": "[EXTRA] Consulta Utiliza Bronze ou Sandbox",
+    "ID": "CONSULTA_UTILIZA_SANDBOX",
+    "Name": "[EXTRA] Consulta Utiliza Sandbox",
     "Category": "Extras",
-    "Description": "Tabelas quem utilizam dados das tabelas Bronze ou Sandbox não são sustentaveis",
+    "Description": "Tabelas quem utilizam dados das tabelas Sandbox não são sustentaveis",
     "Severity": 5,
     "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0\r\nor\r\nExpression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0",
+    "Expression": "Expression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CONSULTA_UTILIZA_BRONZE",
+    "Name": "[EXTRA] Consulta Utiliza Tabela Bronze",
+    "Category": "Extras",
+    "Description": "Tabelas utiliza dados das tabelas Bronze",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0",
     "CompatibilityLevel": 1200
   },
   {
@@ -270,13 +270,43 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "INCREMENTAL_QUERY_FOLDING_DESATIVADO",
+    "Name": "03.2 Incremental com Query Folding Desativado",
+    "Category": "Renner",
+    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
     "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
     "Category": "Extras",
     "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
-    "Severity": 4,
-    "Scope": "Tables",
-    "Expression": "Partitions.Any(Regex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\()\"))",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\()\")\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CALENDARIO_RELACIONADA_DATA_CARGA",
+    "Name": "[EXTRA] Calendario Relacionada com Data de Carga",
+    "Category": "Extras",
+    "Description": "Não faz sentido relacionar a calendario com a data de carga, além de remover o relacionamento entender a data de carga está sendo utilizada no relatório para ser removida",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "ToColumn.Name == \"data_carga\" or FromColumn.Name == \"data_carga\"",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_NAO_ESTA_NO_MODO_IMPORT",
+    "Name": "[EXTRA] Tabela Não Está no Modo Import",
+    "Category": "Extras",
+    "Description": "Evite deixar as tabelas no modo que não seja \"import\"",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "Mode != \"Import\"",
     "CompatibilityLevel": 1200
   }
 ]

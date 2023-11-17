@@ -418,5 +418,15 @@
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "DESATIVAR_REFRESH_TABELA_MANUAL",
+    "Name": "[EXTRA] Desativar Atualização de Tabela Manual",
+    "Category": "Extras",
+    "Description": "Desative a atualização das tabelas configuradas como \"Inserir Dados\" ",
+    "Severity": 1,
+    "Scope": "Table",
+    "Expression": "ExcludeFromModelRefresh == false \r\nand \r\nPartitions.Any(Expression.Contains(\"Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText\"))",
+    "CompatibilityLevel": 1200
   }
 ]

@@ -308,5 +308,115 @@
     "Scope": "Partition",
     "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_COUNTROWS",
+    "Name": "[EXTRA] Utilizar Várivel para o COUNTROWS",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com COUNTROWS",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTROWS\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_SUM",
+    "Name": "[EXTRA] Utilizar Várivel para o SUM",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com SUM",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"SUM\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_COUNT",
+    "Name": "[EXTRA] Utilizar Várivel para o COUNT",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com COUNT",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_COUNTA",
+    "Name": "[EXTRA] Utilizar Várivel para o COUNTA",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com COUNTA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_AVERAGE",
+    "Name": "[EXTRA] Utilizar Várivel para o AVERAGE",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com AVERAGE",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"AVERAGE\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MAX",
+    "Name": "[EXTRA] Utilizar Várivel para o MAX",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com MAX",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAX\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MAXA",
+    "Name": "[EXTRA] Utilizar Várivel para o MAXA",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com MAXA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAXA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MIN",
+    "Name": "[EXTRA] Utilizar Várivel para o MIN",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com MIN",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MIN\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MINA",
+    "Name": "[EXTRA] Utilizar Várivel para o MINA",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com MINA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MINA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_VALUES",
+    "Name": "[EXTRA] Utilizar Várivel para o VALUES",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com VALUES",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_DISTINCT",
+    "Name": "[EXTRA] Utilizar Várivel para o DISTINCT",
+    "Category": "Extras",
+    "Description": "Referenciado o mesmo calculo com DISTINCT",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
   }
 ]

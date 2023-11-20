@@ -286,7 +286,7 @@
     "Description": "Não faz sentido relacionar a calendario com a data de carga, além de remover o relacionamento entender a data de carga está sendo utilizada no relatório para ser removida",
     "Severity": 3,
     "Scope": "Relationship",
-    "Expression": "ToColumn.Name == \"data_carga\" or FromColumn.Name == \"data_carga\"",
+    "Expression": "(ToColumn.Name == \"data_carga\" or FromColumn.Name == \"data_carga\")\r\nand \r\n!(ToTable\n.Name.StartsWith(\"DateTableTemplate_\") \n\nor ToTable.\nName.StartsWith(\"LocalDateTable_\")\n)\r\nand \r\n!(FromTable.Name.StartsWith(\"DateTableTemplate_\") \n\nor FromTable.Name.StartsWith(\"LocalDateTable_\")\n)",
     "CompatibilityLevel": 1200
   },
   {

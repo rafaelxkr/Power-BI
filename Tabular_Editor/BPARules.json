@@ -156,7 +156,7 @@
     "Description": "As tabelas devem ter prefixo \"d\" para dimensões e \"f\" fara fatos",
     "Severity": 1,
     "Scope": "Table",
-    "Expression": "!Name.StartsWith(\"f\") and !Name.StartsWith(\"d\") and UsedInRelationships.Any() == true",
+    "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
     "CompatibilityLevel": 1200
   },
   {
@@ -236,7 +236,7 @@
     "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:SUM|COUNT|MAX|MIN|AVERAGE)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*[-+]\\s*[0-9]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*[0-9]\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:SUM|COUNT|MAX|MIN|AVERAGE)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -316,7 +316,7 @@
     "Description": "Referenciado o mesmo calculo com COUNTROWS",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTROWS\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTROWS\\s*\\(([^\\]]+)\\).*?COUNTROWS\\s*\\(\\1\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -326,7 +326,7 @@
     "Description": "Referenciado o mesmo calculo com SUM",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"SUM\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"SUM\\s*\\(([^\\]]+)\\].*?SUM\\s*\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -366,7 +366,7 @@
     "Description": "Referenciado o mesmo calculo com MAX",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAX\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAX\\s*\\(([^\\]]+)\\].*?MAX\\s*\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -376,7 +376,7 @@
     "Description": "Referenciado o mesmo calculo com MAXA",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAXA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAXA\\s*\\(([^\\]]+)\\].*?MAXA\\s*\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -386,7 +386,7 @@
     "Description": "Referenciado o mesmo calculo com MIN",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MIN\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MIN\\s*\\(([^\\]]+)\\].*?MIN\\s*\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -396,7 +396,7 @@
     "Description": "Referenciado o mesmo calculo com MINA",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MINA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MINA\\s*\\(([^\\]]+)\\].*?MINA\\s*\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -406,7 +406,7 @@
     "Description": "Referenciado o mesmo calculo com VALUES",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?VALUES\\s*\\(\\1\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -416,7 +416,7 @@
     "Description": "Referenciado o mesmo calculo com DISTINCT",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?\\(\\1\\)\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?DISTINCT\\s*\\(\\1\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -427,6 +427,16 @@
     "Severity": 1,
     "Scope": "Table",
     "Expression": "ExcludeFromModelRefresh == false \r\nand \r\nPartitions.Any(Expression.Contains(\"Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText\"))",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CLUSTER_ALTA_CONCORRENCIA_DEV",
+    "Name": "[EXTRA] Cluster Alta Concorrencia ou DEV",
+    "Category": "Extras",
+    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
+    "Severity": 5,
+    "Scope": "Table, NamedExpression",
+    "Expression": "\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\nand\r\nExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n",
     "CompatibilityLevel": 1200
   }
 ]

@@ -24,7 +24,7 @@
     "Name": "03.1 Verificar o Query Folding",
     "Category": "Renner",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
-    "Severity": 3,
+    "Severity": 5,
     "Scope": "Table",
     "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\nExpression.IndexOf(\"Table.\", StringComparison.OrdinalIgnoreCase)>0",
     "CompatibilityLevel": 1200
@@ -34,9 +34,9 @@
     "Name": "04. Tabela Criada sem SQL",
     "Category": "Renner",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
-    "Severity": 3,
-    "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Name.StartsWith(\"LocalDateTable_\")",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \r\nand\r\n!Name.StartsWith(\"LocalDateTable_\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -55,8 +55,8 @@
     "Category": "Renner",
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
-    "Scope": "Partition",
-    "Expression": "Expression.Contains(\"Table.AddColumn\")\r\n",
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"Table.AddColumn\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Contains(\"Table.AddColumn\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -64,9 +64,9 @@
     "Name": "06. Etapas Redundantes",
     "Category": "Renner",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
-    "Severity": 3,
-    "Scope": "Partition",
-    "Expression": "!(Expression == null)\r\nand\r\n(\r\n   Regex.Matches(Expression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(Expression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(Expression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.RenameColumns\").Count > 0\r\nor Regex.Matches(Expression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(Expression, \"Table.Group\").Count > 0\r\n)",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n\r\n!(SourceExpression == null)\r\nand\r\n(\r\n   Regex.Matches(SourceExpression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(SourceExpression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(SourceExpression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.RenameColumns\").Count > 0\r\nor Regex.Matches(SourceExpression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(SourceExpression, \"Table.Group\").Count > 0\r\n)\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\n!(Expression == null)\r\nand\r\n(\r\n   Regex.Matches(Expression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(Expression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(Expression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.RenameColumns\").Count > 0\r\nor Regex.Matches(Expression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(Expression, \"Table.Group\").Count > 0\r\n)\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -74,7 +74,7 @@
     "Name": "09.1 Medida Iteradora Rodando na Tabela Inteira",
     "Category": "Renner",
     "Description": "Evite utilizar iteradora para rodar o calculo em cima da tabela inteira, isso deixa a execução da medida mais pesada",
-    "Severity": 4,
+    "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)TOPN\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)TOPN\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]\")",
     "CompatibilityLevel": 1200
@@ -84,7 +84,7 @@
     "Name": "09.2 FILTER com Sintaxe Inadequada",
     "Category": "Renner",
     "Description": "Em vez de usar este padrão FILTER('Table','Table'[Column]=\"Value\") para os parâmetros de filtro de uma função CALCULATE ou CALCULATETABLE, use uma das opções abaixo. Para saber se deve usar a função KEEPFILTERS, consulte o segundo link de referência abaixo.\r\n\r\nOption 1: FILTER(VALUES('Table'[Column]),[Measure] > Value)\r\nOption 2: FILTER(ALL('Table'[Column]),[Measure] > Value)\r\n\r\nReference: https://docs.microsoft.com/power-bi/guidance/dax-avoid-avoid-filter-as-filter-argument",
-    "Severity": 4,
+    "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*[^,]+,\\s*(?i)FILTER\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CALCULATETABLE\\s*\\([^,]*,\\s*(?i)FILTER\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")",
     "CompatibilityLevel": 1200
@@ -104,7 +104,7 @@
     "Name": "11. Evitar a função IFERROR e ISERROR",
     "Category": "Renner",
     "Description": "Não utilize as funções IFERROR e ISERROR, ao invés disso deve ser feito a correção do DAX para a função não retornar erro.\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-error-functions#recommendations",
-    "Severity": 2,
+    "Severity": 3,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)IFERROR\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ISERROR\\s*\\(\")",
     "CompatibilityLevel": 1200
@@ -114,7 +114,7 @@
     "Name": "12. COUNTROWS ao invés de COUNT, COUNTA or COUNTBLANK",
     "Category": "Renner",
     "Description": "Evitar a utilização da funções COUNT, COUNTA and COUNTBLANK aos invés do COUNTROWS\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-countrows",
-    "Severity": 2,
+    "Severity": 3,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Expression.Replace(\"DISTINCTCOUNT\",\"\"),\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTAX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)",
     "CompatibilityLevel": 1200
@@ -124,7 +124,7 @@
     "Name": "13. Relacionamento de Fato para Fato",
     "Category": "Renner",
     "Description": "Evite relacionamento entre fato utilize as tabelas dimensões para isso para isso",
-    "Severity": 2,
+    "Severity": 5,
     "Scope": "Relationship",
     "Expression": "FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"f\")",
     "CompatibilityLevel": 1200
@@ -134,7 +134,7 @@
     "Name": "14. Referenciou Mesma Medida ao Invés de usar Variável",
     "Category": "Renner",
     "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
-    "Severity": 3,
+    "Severity": 4,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9']\\[([^\\]]+)\\].*?[^A-Za-z0-9']\\[\\1\\]\")",
     "CompatibilityLevel": 1200
@@ -184,7 +184,7 @@
     "Name": "20. Desativar Data/Hora Automática",
     "Category": "Renner",
     "Description": "Deve ser desabilitado a função Data/Hora Aultomática no Power BI",
-    "Severity": 3,
+    "Severity": 4,
     "Scope": "Table, CalculatedTable",
     "Expression": "ObjectTypeName == \"Calculated Table\"\n\r\nand\r\n(\r\n\n(\nName.StartsWith(\"DateTableTemplate_\") \n\nor \n\nName.StartsWith(\"LocalDateTable_\")\n)\r\nor\r\nHasAnnotation(\"__PBI_LocalDateTable\")\r\n)",
     "CompatibilityLevel": 1200
@@ -194,7 +194,7 @@
     "Name": "[EXTRA] Relacionamentos devem ter o mesmo tipo",
     "Category": "Extras",
     "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
-    "Severity": 3,
+    "Severity": 5,
     "Scope": "Relationship",
     "Expression": "FromColumn.DataType != ToColumn.DataType",
     "CompatibilityLevel": 1200
@@ -204,7 +204,7 @@
     "Name": "[EXTRA] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
     "Category": "Extras",
     "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também utiliza segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como no RLS.",
-    "Severity": 3,
+    "Severity": 5,
     "Scope": "Table, CalculatedTable",
     "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + current.Name + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
@@ -215,8 +215,8 @@
     "Category": "Extras",
     "Description": "Tabelas quem utilizam dados das tabelas Sandbox não são sustentaveis",
     "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0",
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -244,7 +244,7 @@
     "Name": "[EXTRA] Evite CONTAINSSTRING",
     "Category": "Extras",
     "Description": "Ao invés de utilizar a função CONTAINSSTRING crie uma coluna para classificar se a linha contém a informação desejada",
-    "Severity": 3,
+    "Severity": 4,
     "Scope": "Measure",
     "Expression": "Expression.Contains(\"CONTAINSSTRING\")",
     "CompatibilityLevel": 1200
@@ -260,7 +260,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "NEW_RULE",
+    "ID": "INCREMENTAL_FOLDING_DESATIVADO",
     "Name": "03.2 Incremental com Query Folding Desativado",
     "Category": "Renner",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
@@ -276,7 +276,7 @@
     "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\(|CommonDataService.Database\\()\")\r\n)",
+    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\(|CommonDataService.Database\\()\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -284,7 +284,7 @@
     "Name": "[EXTRA] Calendario Relacionada com Data de Carga",
     "Category": "Extras",
     "Description": "Não faz sentido relacionar a calendario com a data de carga, além de remover o relacionamento entender a data de carga está sendo utilizada no relatório para ser removida",
-    "Severity": 3,
+    "Severity": 2,
     "Scope": "Relationship",
     "Expression": "(ToColumn.Name == \"data_carga\" or FromColumn.Name == \"data_carga\")\r\nand \r\n!(ToTable\n.Name.StartsWith(\"DateTableTemplate_\") \n\nor ToTable.\nName.StartsWith(\"LocalDateTable_\")\n)\r\nand \r\n!(FromTable.Name.StartsWith(\"DateTableTemplate_\") \n\nor FromTable.Name.StartsWith(\"LocalDateTable_\")\n)",
     "CompatibilityLevel": 1200
@@ -297,16 +297,6 @@
     "Severity": 5,
     "Scope": "Partition",
     "Expression": "Mode != \"Import\"",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CONSULTA_UTILIZA_TABELA_BRONZE",
-    "Name": "[EXTRA] Consulta Utiliza Tabela Bronze",
-    "Category": "Extras",
-    "Description": "Tabelas utiliza dados das tabelas Bronze",
-    "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "Expression.IndexOf(\"bronze\", StringComparison.OrdinalIgnoreCase) >= 0",
     "CompatibilityLevel": 1200
   },
   {
@@ -437,6 +427,26 @@
     "Severity": 5,
     "Scope": "Table, NamedExpression",
     "Expression": "\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\nand\r\nExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "INCREMENTAL_DIA_MES",
+    "Name": "[EXTRA] Avaliar Incremental de Dia para Mês",
+    "Category": "Extras",
+    "Description": "Avaliar se é mais performatico atualização incremental por mês ao invés de fazer do dia",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "EnableRefreshPolicy = true\r\nand\r\nIncrementalGranularity = \"Day\"\r\nand\r\nIncrementalPeriods > 7",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "INCREMENTAL_HISTORICO",
+    "Name": "[EXTRA] Historico da Incremental Maior que 5 Anos",
+    "Category": "Extras",
+    "Description": "Verificar se realmente é necessário manter um histórico maior que 5 anos de dados",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "EnableRefreshPolicy = true\r\nand\r\nRollingWindowGranularity = \"YEAR\"\r\nand\r\nRollingWindowPeriods > 5",
     "CompatibilityLevel": 1200
   }
 ]

@@ -425,8 +425,8 @@
     "Category": "Extras",
     "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
     "Severity": 5,
-    "Scope": "Table, NamedExpression",
-    "Expression": "\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\nand\r\nExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n",
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -447,6 +447,16 @@
     "Severity": 4,
     "Scope": "Table",
     "Expression": "EnableRefreshPolicy = true\r\nand\r\nRollingWindowGranularity = \"YEAR\"\r\nand\r\nRollingWindowPeriods > 5",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CLUSTER_ALTA_CONCORRENCIA_PARAMETRO",
+    "Name": "[EXTRA] Cluster Alta Concorrencia ou DEV no Parametro",
+    "Category": "Extras",
+    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "Expression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\nor\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0",
     "CompatibilityLevel": 1200
   }
 ]

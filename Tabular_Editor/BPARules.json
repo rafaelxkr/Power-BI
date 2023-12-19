@@ -236,7 +236,7 @@
     "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:SUM|COUNT|MAX|MIN|AVERAGE)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*,\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
     "CompatibilityLevel": 1200
   },
   {

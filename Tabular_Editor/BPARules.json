@@ -26,7 +26,7 @@
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\nExpression.IndexOf(\"Table.\", StringComparison.OrdinalIgnoreCase)>0",
+    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\n(\r\nExpression.Contains(\"Table.\")\r\nor\r\nExpression.Contains(\"List.\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -457,6 +457,36 @@
     "Severity": 5,
     "Scope": "NamedExpression",
     "Expression": "Expression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\nor\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_MAIS_20_COLUNAS",
+    "Name": "[EXTRA] Tabela com Mais de 20 Colunas",
+    "Category": "Extras",
+    "Description": "Verificar se todas colunas são realmente utilizadas",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "Columns.Count() > 20",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "ORDER_BY_CONSULTA_SQL",
+    "Name": "[EXTRA] Evite ORDER BY da Consulta SQL",
+    "Category": "Extras",
+    "Description": "A função de ORDER BY deixa a consulta SQL muito pesada é recomendavel não utilizar essa função em tabelas principamente em tabelas fatos",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?i)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?i)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?i)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?i)ORDER\\s*BY\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "REMOVER_DATA_CARGA_FATO_DIMENSAO",
+    "Name": "[EXTRA] Remover Data Carga da Fato ou Dimensão",
+    "Category": "Extras",
+    "Description": "Crie uma tabela auxiliar para retornar a ultima data de carga em uma linha",
+    "Severity": 2,
+    "Scope": "Table",
+    "Expression": "Columns.Count() > 2\r\nand\r\nColumns.Any(Name.ToUpper() = \"DATA_HORA_CARGA\" or Name.ToUpper() = \"DATA_CARGA\")",
     "CompatibilityLevel": 1200
   }
 ]

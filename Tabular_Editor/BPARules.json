@@ -136,7 +136,7 @@
     "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
     "Severity": 4,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9']\\[([^\\]]+)\\].*?[^A-Za-z0-9']\\[\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9']\\[([^\\]]+)\\].*?[^A-Za-z0-9']\\[\\1\\]\")\r\nand\r\n!RegEx.IsMatch(Expression,\"(?i)(:?SUMX|COUNTX|TOPN|AVERAGEX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX.EXC|PERCENTILEX.INC|CONCATENATEX|MEDIANX|TOPN|RANKX|ADDCOLUMNS)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -460,13 +460,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "TABELA_MAIS_20_COLUNAS",
-    "Name": "[EXTRA] Tabela com Mais de 20 Colunas",
+    "ID": "TABELA_MAIS_30_COLUNAS",
+    "Name": "[EXTRA] Tabela com Mais de 30 Colunas",
     "Category": "Extras",
     "Description": "Verificar se todas colunas são realmente utilizadas",
     "Severity": 4,
     "Scope": "Table",
-    "Expression": "Columns.Count() > 20",
+    "Expression": "Columns.Count() > 30",
     "CompatibilityLevel": 1200
   },
   {
@@ -476,7 +476,7 @@
     "Description": "A função de ORDER BY deixa a consulta SQL muito pesada é recomendavel não utilizar essa função em tabelas principamente em tabelas fatos",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?i)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?i)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?i)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?i)ORDER\\s*BY\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

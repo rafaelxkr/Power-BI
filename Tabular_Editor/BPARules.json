@@ -488,5 +488,15 @@
     "Scope": "Table",
     "Expression": "Columns.Count() > 2\r\nand\r\nColumns.Any(Name.ToUpper() = \"DATA_HORA_CARGA\" or Name.ToUpper() = \"DATA_CARGA\")",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_MEDIDA_DUPLICADA",
+    "Name": "[EXTRA] Evite Medidas Duplicadas",
+    "Category": "DAX Expressions",
+    "Description": "Encontrado medidas com o nome diferente, mas que possuem a mesma expresão DAX",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "Model.AllMeasures.Any(Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") = outerIt.Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") and it <> outerIt)",
+    "CompatibilityLevel": 1200
   }
 ]

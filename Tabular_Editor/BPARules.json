@@ -20,6 +20,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "CORRIGIR_FILTRO_INCREMENTAL",
+    "Name": "01.3 Corrigir Filtro da Atualização Incremental",
+    "Category": "Renner",
+    "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"RangeStart\")\r\nand\r\nSourceExpression.Contains(\"RangeEnd\") \r\nand\r\nRegex.IsMatch(SourceExpression, \"(?s)(?:>=.*RangeStart.*<=.*RangeEnd|>[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<.*RangeStart.*<.*RangeEnd|<.*RangeStart.*>.*RangeEndd|>.*RangeStart.*>.*RangeEnd)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\r\n\tExpression.Contains(\"RangeStart\")\r\n\tand\r\n        Expression.Contains(\"RangeEnd\") \r\n\tand\r\n        Regex.IsMatch(Expression, \"(?s)(?:>=.*RangeStart.*<=.*RangeEnd|>[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<.*RangeStart.*<.*RangeEnd|<.*RangeStart.*>.*RangeEndd|>.*RangeStart.*>.*RangeEnd)\")\r\n\t\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "Query_INATIVO",
     "Name": "03.1 Verificar o Query Folding",
     "Category": "Renner",

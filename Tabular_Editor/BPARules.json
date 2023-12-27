@@ -508,5 +508,15 @@
     "Scope": "Measure",
     "Expression": "Model.AllMeasures.Any(Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") = outerIt.Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") and it <> outerIt)",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_VALUES_DISTINCT_TABELA",
+    "Name": "[EXTRA] Evite VALUES ou DISTINCT da Tabela Inteira",
+    "Category": "Extras",
+    "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression, \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9_]\\s*\\)\")",
+    "CompatibilityLevel": 1200
   }
 ]

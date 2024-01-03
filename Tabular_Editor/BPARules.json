@@ -26,7 +26,7 @@
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"RangeStart\")\r\nand\r\nSourceExpression.Contains(\"RangeEnd\") \r\nand\r\nRegex.IsMatch(SourceExpression, \"(?s)(?:>=.*RangeStart.*<=.*RangeEnd|>[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<.*RangeStart.*<.*RangeEnd|<.*RangeStart.*>.*RangeEndd|>.*RangeStart.*>.*RangeEnd)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\r\n\tExpression.Contains(\"RangeStart\")\r\n\tand\r\n        Expression.Contains(\"RangeEnd\") \r\n\tand\r\n        Regex.IsMatch(Expression, \"(?s)(?:>=.*RangeStart.*<=.*RangeEnd|>[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<.*RangeStart.*<.*RangeEnd|<.*RangeStart.*>.*RangeEndd|>.*RangeStart.*>.*RangeEnd)\")\r\n\t\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"RangeStart\")\r\nand\r\nSourceExpression.Contains(\"RangeEnd\") \r\nand\r\nRegex.IsMatch(SourceExpression, \"(?is)(?:>=\\s*'\"\".*RangeStart.*<=.*RangeEnd|>\\s*'\"\"[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*>.*RangeEndd|>\\s*'\"\".*RangeStart.*>.*RangeEnd)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\r\n\tExpression.Contains(\"RangeStart\")\r\n\tand\r\n        Expression.Contains(\"RangeEnd\") \r\n\tand\r\n        Regex.IsMatch(Expression, \"(?is)(?:>=\\s*'\"\".*RangeStart.*<=.*RangeEnd|>\\s*'\"\"[A-Za-z0-9_\\s].*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*>.*RangeEndd|>\\s*'\"\".*RangeStart.*>.*RangeEnd)\")\r\n\t\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -46,7 +46,7 @@
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \r\nand\r\n!Name.StartsWith(\"LocalDateTable_\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nColumns.Count() > 1\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nColumns.Count() > 1\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \r\nand\r\n!Name.StartsWith(\"LocalDateTable_\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -296,7 +296,7 @@
     "Description": "Não faz sentido relacionar a calendario com a data de carga, além de remover o relacionamento entender a data de carga está sendo utilizada no relatório para ser removida",
     "Severity": 2,
     "Scope": "Relationship",
-    "Expression": "(ToColumn.Name == \"data_carga\" or FromColumn.Name == \"data_carga\")\r\nand \r\n!(ToTable\n.Name.StartsWith(\"DateTableTemplate_\") \n\nor ToTable.\nName.StartsWith(\"LocalDateTable_\")\n)\r\nand \r\n!(FromTable.Name.StartsWith(\"DateTableTemplate_\") \n\nor FromTable.Name.StartsWith(\"LocalDateTable_\")\n)",
+    "Expression": "(\r\nToColumn.Name.ToLower() == \"data_carga\"\r\nor\r\nFromColumn.Name.ToLower() == \"data_carga\"\r\nor\r\nToColumn.Name.ToLower() == \"data_hora_carga\"\r\nor\r\nFromColumn.Name.ToLower() == \"data_hora_carga\"\r\n)\r\nand \r\n!(ToTable\n.Name.StartsWith(\"DateTableTemplate_\") \n\nor ToTable.\nName.StartsWith(\"LocalDateTable_\")\n)\r\nand \r\n!(FromTable.Name.StartsWith(\"DateTableTemplate_\") \n\nor FromTable.Name.StartsWith(\"LocalDateTable_\")\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -486,7 +486,7 @@
     "Description": "A função de ORDER BY deixa a consulta SQL muito pesada é recomendavel não utilizar essa função em tabelas principamente em tabelas fatos",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)PARTITION\\s*BY.*?ORDER\\s*BY\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

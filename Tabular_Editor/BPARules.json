@@ -128,7 +128,7 @@
     "Scope": "Relationship",
     "Expression": "FromColumn.DataType != ToColumn.DataType",
     "CompatibilityLevel": 1200
-  }, 
+  },
   {
     "ID": "CLUSTER_ALTA_CONCORRENCIA_DEV",
     "Name": "11.1 Cluster Alta Concorrencia ou DEV",
@@ -186,7 +186,7 @@
     "Description": "Evite relacionamentos bi-direcionais, o ideal é sempre utilizar relacionamentos unidirecionais",
     "Severity": 3,
     "Scope": "Relationship",
-    "Expression": "CrossFilteringBehavior== \"BothDirections\"\n",
+    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections and !(FromCardinality == \"One\" and ToCardinality == \"One\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -207,6 +207,16 @@
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*[^,]+,\\s*(?i)FILTER\\s*\\(\\s*\\'*[A-Za-z0-9 _]+'*\\s*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CALCULATETABLE\\s*\\([^,]*,\\s*(?i)FILTER\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*,\\s*\\'*[A-Za-z0-9 _]+\\'*\\[[A-Za-z0-9 _]+\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_VALUES_DISTINCT_TABELA",
+    "Name": "18.3 Evite VALUES ou DISTINCT da Tabela Inteira",
+    "Category": "05.Medidas",
+    "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression, \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9_]\\s*\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -420,17 +430,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "EVITE_RELACIONAMENTO_BI_DIRECIONAL",
-    "Name": "[EXTRA] Evite Relacionamento Bi-Direcional",
-    "Category": "Extras",
-    "Description": "Evite relacionamento bi-direcional nos seus modelos ",
-    "Severity": 2,
-    "Scope": "Relationship",
-    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections and !(FromCardinality == \"One\" and ToCardinality == \"One\")",
-    "CompatibilityLevel": 1200
-  },
-  
-  {
     "ID": "EVITE_CONTAINSSTRING",
     "Name": "[EXTRA] Evite CONTAINSSTRING",
     "Category": "Extras",
@@ -450,7 +449,6 @@
     "Expression": "(FromTable.Name.StartsWith(\"d\") and ToTable.Name.StartsWith(\"f\") and ToCardinality == \"One\" and FromCardinality == \"One\")\r\nor\r\n(FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"d\") and ToCardinality == \"One\" and FromCardinality == \"One\")",
     "CompatibilityLevel": 1200
   },
-  
   {
     "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
     "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
@@ -523,22 +521,12 @@
   },
   {
     "ID": "EVITE_MEDIDA_DUPLICADA",
-    "Name": "[EXTRA] Evite Medidas Duplicadas",
+    "Name": "[EXTRA] Medidas com mesmo DAX",
     "Category": "Extras",
     "Description": "Encontrado medidas com o nome diferente, mas que possuem a mesma expresão DAX",
     "Severity": 1,
     "Scope": "Measure",
     "Expression": "Model.AllMeasures.Any(Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") = outerIt.Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") and it <> outerIt)",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "EVITE_VALUES_DISTINCT_TABELA",
-    "Name": "[EXTRA] Evite VALUES ou DISTINCT da Tabela Inteira",
-    "Category": "Extras",
-    "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression, \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9_]\\s*\\)\")",
     "CompatibilityLevel": 1200
   }
 ]

@@ -2,7 +2,7 @@
   {
     "ID": "SEM_ATUALIZACAO_INCREMENTAL",
     "Name": "01.1 Atualização Incremental Desativada",
-    "Category": "Renner",
+    "Category": "01.Atualização",
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
     "Scope": "Table",
@@ -12,7 +12,7 @@
   {
     "ID": "CORRIGIR_PARAMETRO_INCREMENTAL",
     "Name": "01.2 Corrigir Parametro da Atualização Incremental",
-    "Category": "Renner",
+    "Category": "01.Atualização",
     "Description": "Os parametros foram digitados de forma correta \"RangeStart\" e \"RangeEnd\"",
     "Severity": 5,
     "Scope": "NamedExpression",
@@ -22,7 +22,7 @@
   {
     "ID": "CORRIGIR_FILTRO_INCREMENTAL",
     "Name": "01.3 Corrigir Filtro da Atualização Incremental",
-    "Category": "Renner",
+    "Category": "01.Atualização",
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
     "Scope": "Table",
@@ -30,9 +30,19 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "HISTORICO_TRIMESTRE",
+    "Name": "02. Histórico da atualização incremental utilizar Trimestre ao invés de Ano",
+    "Category": "01.Atualização",
+    "Description": "Configurar o histórico como trimestre ao invés de ano, com isso reduz o volume de dados históricos.",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "EnableRefreshPolicy = true\r\nand\r\nRollingWindowGranularity = \"YEAR\"",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "Query_INATIVO",
     "Name": "03.1 Verificar o Query Folding",
-    "Category": "Renner",
+    "Category": "02.Consulta SQL",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 5,
     "Scope": "Table",
@@ -40,9 +50,19 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "INCREMENTAL_FOLDING_DESATIVADO",
+    "Name": "03.2 Incremental com Query Folding Desativado",
+    "Category": "02.Consulta SQL",
+    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "TABELA_CRIADA_SEM_SQL",
     "Name": "04. Tabela Criada sem SQL",
-    "Category": "Renner",
+    "Category": "02.Consulta SQL",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 5,
     "Scope": "Table",
@@ -52,7 +72,7 @@
   {
     "ID": "COLUNAS_CALCULADAS_DAX",
     "Name": "05.1 Colunas Calculadas no DAX",
-    "Category": "Renner",
+    "Category": "02.Consulta SQL",
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "CalculatedColumn",
@@ -62,7 +82,7 @@
   {
     "ID": "COLUNAS_CALCULADAS_POWER_QUERY",
     "Name": "05.2 Colunas Calculadas no Power Query",
-    "Category": "Renner",
+    "Category": "02.Consulta SQL",
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "Table",
@@ -70,9 +90,29 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "SEM_TABELA_CALENDARIO_SQL",
+    "Name": "06. Sem Tabela dCalendario (Consulta SQL)",
+    "Category": "02.Consulta SQL",
+    "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_MAIS_30_COLUNAS",
+    "Name": "07. Tabela com Mais de 30 Colunas. Está Normalizada?",
+    "Category": "02.Consulta SQL",
+    "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "Columns.Count() > 30",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ETAPAS_REDUNDANTES",
-    "Name": "06. Etapas Redundantes",
-    "Category": "Renner",
+    "Name": "08. Etapas Redundantes",
+    "Category": "03.Power Query",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 5,
     "Scope": "Table",
@@ -80,9 +120,79 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "RELACIONAMENTO_MESMO_TIPO",
+    "Name": "10. Corrigir tipagem dos dados, colunas do relacionamentos devem ter o mesmo tipo",
+    "Category": "03.Power Query",
+    "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
+    "Severity": 5,
+    "Scope": "Relationship",
+    "Expression": "FromColumn.DataType != ToColumn.DataType",
+    "CompatibilityLevel": 1200
+  }, 
+  {
+    "ID": "CLUSTER_ALTA_CONCORRENCIA_DEV",
+    "Name": "11.1 Cluster Alta Concorrencia ou DEV",
+    "Category": "03.Power Query",
+    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CLUSTER_ALTA_CONCORRENCIA_PARAMETRO",
+    "Name": "11.2 Cluster Alta Concorrencia ou DEV no Parametro",
+    "Category": "03.Power Query",
+    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "Expression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\nor\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "DESATIVAR_REFRESH_TABELA_MANUAL",
+    "Name": "12. Desativar Atualização de Tabela Manual",
+    "Category": "03.Power Query",
+    "Description": "Desative a atualização das tabelas configuradas como \"Inserir Dados\" ",
+    "Severity": 1,
+    "Scope": "Table",
+    "Expression": "ExcludeFromModelRefresh == false \r\nand \r\nPartitions.Any(\r\nExpression.Contains(\"Binary.Decompress(Binary.FromText\")\r\n)\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_FATO_FATO",
+    "Name": "14. Relacionamento de Fato para Fato",
+    "Category": "04.Relacionamentos",
+    "Description": "Evite relacionamento entre fato utilize as tabelas dimensões para isso para isso",
+    "Severity": 5,
+    "Scope": "Relationship",
+    "Expression": "FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"f\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_MUITOS_MUITOS",
+    "Name": "15. Possui Relacionamentos Muitos para Muitos",
+    "Category": "04.Relacionamentos",
+    "Description": "Evite relacionamentos de muitos para muitos",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "FromCardinality == \"Many\"\n and ToCardinality == \"Many\"",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_BI_DIRECIONAL",
+    "Name": "16. Relacionamento Bi-Direcional",
+    "Category": "04.Relacionamentos",
+    "Description": "Evite relacionamentos bi-direcionais, o ideal é sempre utilizar relacionamentos unidirecionais",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "CrossFilteringBehavior== \"BothDirections\"\n",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ITERADORA_NA_TABELA",
-    "Name": "09.1 Medida Iteradora Rodando na Tabela Inteira",
-    "Category": "Renner",
+    "Name": "18.1 Medida Iteradora Rodando na Tabela Inteira",
+    "Category": "05.Medidas",
     "Description": "Evite utilizar iteradora para rodar o calculo em cima da tabela inteira, isso deixa a execução da medida mais pesada",
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
@@ -91,8 +201,8 @@
   },
   {
     "ID": "FILTER_SINTAX_INADEQUADA",
-    "Name": "09.2 FILTER com Sintaxe Inadequada",
-    "Category": "Renner",
+    "Name": "18.2 FILTER com Sintaxe Inadequada",
+    "Category": "05.Medidas",
     "Description": "Em vez de usar este padrão FILTER('Table','Table'[Column]=\"Value\") para os parâmetros de filtro de uma função CALCULATE ou CALCULATETABLE, use uma das opções abaixo. Para saber se deve usar a função KEEPFILTERS, consulte o segundo link de referência abaixo.\r\n\r\nOption 1: FILTER(VALUES('Table'[Column]),[Measure] > Value)\r\nOption 2: FILTER(ALL('Table'[Column]),[Measure] > Value)\r\n\r\nReference: https://docs.microsoft.com/power-bi/guidance/dax-avoid-avoid-filter-as-filter-argument",
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
@@ -101,8 +211,8 @@
   },
   {
     "ID": "DIVIDE",
-    "Name": "10. DIVIDE ao invés de \"/\"",
-    "Category": "Renner",
+    "Name": "19. DIVIDE ao invés de \"/\"",
+    "Category": "05.Medidas",
     "Description": "Utilizar a função DIVIDE ao invés da \"/\"\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
@@ -111,8 +221,8 @@
   },
   {
     "ID": "EVITAR_IFERROR_ISERROR",
-    "Name": "11. Evitar a função IFERROR e ISERROR",
-    "Category": "Renner",
+    "Name": "20. Evitar a função IFERROR e ISERROR",
+    "Category": "05.Medidas",
     "Description": "Não utilize as funções IFERROR e ISERROR, ao invés disso deve ser feito a correção do DAX para a função não retornar erro.\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-error-functions#recommendations",
     "Severity": 3,
     "Scope": "Measure",
@@ -121,8 +231,8 @@
   },
   {
     "ID": "EVITAR_COUNT_COUNTA_COUNTBLANK",
-    "Name": "12. COUNTROWS ao invés de COUNT, COUNTA or COUNTBLANK",
-    "Category": "Renner",
+    "Name": "21. COUNTROWS ao invés de COUNT, COUNTA or COUNTBLANK",
+    "Category": "05.Medidas",
     "Description": "Evitar a utilização da funções COUNT, COUNTA and COUNTBLANK aos invés do COUNTROWS\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-countrows",
     "Severity": 3,
     "Scope": "Measure",
@@ -130,19 +240,9 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "RELACIONAMENTO_FATO_FATO",
-    "Name": "13. Relacionamento de Fato para Fato",
-    "Category": "Renner",
-    "Description": "Evite relacionamento entre fato utilize as tabelas dimensões para isso para isso",
-    "Severity": 5,
-    "Scope": "Relationship",
-    "Expression": "FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"f\")",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "REFERENCIOU_A_MESMA_MEDIDA",
-    "Name": "14. Referenciou Mesma Medida ao Invés de usar Variável",
-    "Category": "Renner",
+    "Name": "22.01 Referenciou Mesma Medida ao Invés de usar Variável",
+    "Category": "05.Medidas",
     "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
     "Severity": 4,
     "Scope": "Measure",
@@ -150,39 +250,129 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "RELACIONAMENTO_MUITOS_MUITOS",
-    "Name": "16. Possui Relacionamentos Muitos para Muitos",
-    "Category": "Renner",
-    "Description": "Evite relacionamentos de muitos para muitos",
+    "ID": "VARIAVEL_AVERAGE",
+    "Name": "22.02 Utilizar Várivel para o AVERAGE",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com AVERAGE",
     "Severity": 3,
-    "Scope": "Relationship",
-    "Expression": "FromCardinality == \"Many\"\n and ToCardinality == \"Many\"",
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"AVERAGE\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "PREFIXO_FATO_DIMENSAO",
-    "Name": "17. Tabelas Devem ter Prefixo \"d\" para Dimensões e \"f\" fara Fatos",
-    "Category": "Renner",
-    "Description": "As tabelas devem ter prefixo \"d\" para dimensões e \"f\" fara fatos",
-    "Severity": 1,
-    "Scope": "Table",
-    "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
+    "ID": "VARIAVEL_COUNTA",
+    "Name": "22.03 Utilizar Várivel para o COUNTA",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com COUNTA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "SEM_TABELA_CALENDARIO_SQL",
-    "Name": "18. Sem Tabela dCalendario (Consulta SQL)",
-    "Category": "Renner",
-    "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
+    "ID": "VARIAVEL_COUNTROWS",
+    "Name": "22.04 Utilizar Várivel para o COUNTROWS",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com COUNTROWS",
     "Severity": 3,
-    "Scope": "Table",
-    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTROWS\\s*\\(([^\\]]+)\\).*?COUNTROWS\\s*\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_DISTINCT",
+    "Name": "22.05 Utilizar Várivel para o DISTINCT",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com DISTINCT",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?DISTINCT\\s*\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MAX",
+    "Name": "22.06 Utilizar Várivel para o MAX",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com MAX",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAX\\s*\\(([^\\]]+)\\].*?MAX\\s*\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MAXA",
+    "Name": "22.07 Utilizar Várivel para o MAXA",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com MAXA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAXA\\s*\\(([^\\]]+)\\].*?MAXA\\s*\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MIN",
+    "Name": "22.08 Utilizar Várivel para o MIN",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com MIN",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MIN\\s*\\(([^\\]]+)\\].*?MIN\\s*\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_MINA",
+    "Name": "22.09 Utilizar Várivel para o MINA",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com MINA",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MINA\\s*\\(([^\\]]+)\\].*?MINA\\s*\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_COUNT",
+    "Name": "22.10 Utilizar Várivel para o COUNT",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com COUNT",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_SUM",
+    "Name": "22.11 Utilizar Várivel para o SUM",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com SUM",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"SUM\\s*\\(([^\\]]+)\\].*?SUM\\s*\\(\\1\\]\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "VARIAVEL_VALUES",
+    "Name": "22.12 Utilizar Várivel para o VALUES",
+    "Category": "05.Medidas",
+    "Description": "Referenciado o mesmo calculo com VALUES",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?VALUES\\s*\\(\\1\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_'(X/Y)-1'",
+    "Name": "23. '(X/Y)-1' ao inves (X-Y)/Y",
+    "Category": "05.Medidas",
+    "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
+    "Severity": 2,
+    "Scope": "Measure, CalculatedColumn, CalculationItem",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*,\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
     "CompatibilityLevel": 1200
   },
   {
     "ID": "MARCAR_TABELA_DATA",
-    "Name": "19. Marcar a dCalendario Como Tabela de Data",
-    "Category": "Renner",
+    "Name": "25. Marcar a dCalendario Como Tabela de Data",
+    "Category": "06.Opções/Configurações",
     "Description": "Deve ser marcado a tabela de calendario utilizada no modelo como tabela de data",
     "Severity": 2,
     "Scope": "Model",
@@ -191,8 +381,8 @@
   },
   {
     "ID": "Desativar_Data_Hora_Automática",
-    "Name": "20. Desativar Data/Hora Automática",
-    "Category": "Renner",
+    "Name": "26. Desativar Data/Hora Automática",
+    "Category": "06.Opções/Configurações",
     "Description": "Deve ser desabilitado a função Data/Hora Aultomática no Power BI",
     "Severity": 4,
     "Scope": "Table, CalculatedTable",
@@ -200,13 +390,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "RELACIONAMENTO_MESMO_TIPO",
-    "Name": "[EXTRA] Relacionamentos devem ter o mesmo tipo",
-    "Category": "Extras",
-    "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
-    "Severity": 5,
-    "Scope": "Relationship",
-    "Expression": "FromColumn.DataType != ToColumn.DataType",
+    "ID": "PREFIXO_FATO_DIMENSAO",
+    "Name": "27. Tabelas Devem ter Prefixo \"d\" para Dimensões e \"f\" fara Fatos",
+    "Category": "07.Nomenclatura",
+    "Description": "As tabelas devem ter prefixo \"d\" para dimensões e \"f\" fara fatos",
+    "Severity": 1,
+    "Scope": "Table",
+    "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
     "CompatibilityLevel": 1200
   },
   {
@@ -239,16 +429,7 @@
     "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections and !(FromCardinality == \"One\" and ToCardinality == \"One\")",
     "CompatibilityLevel": 1200
   },
-  {
-    "ID": "EVITE_'(X/Y)-1'",
-    "Name": "[EXTRA]  '(X/Y)-1' ao inves (X-Y)/Y",
-    "Category": "Extras",
-    "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
-    "Severity": 2,
-    "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*,\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9 _]+\\'*\\s*\\[[A-Za-z0-9 _]+\\]\\s*\\)\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9 _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
-    "CompatibilityLevel": 1200
-  },
+  
   {
     "ID": "EVITE_CONTAINSSTRING",
     "Name": "[EXTRA] Evite CONTAINSSTRING",
@@ -269,16 +450,7 @@
     "Expression": "(FromTable.Name.StartsWith(\"d\") and ToTable.Name.StartsWith(\"f\") and ToCardinality == \"One\" and FromCardinality == \"One\")\r\nor\r\n(FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"d\") and ToCardinality == \"One\" and FromCardinality == \"One\")",
     "CompatibilityLevel": 1200
   },
-  {
-    "ID": "INCREMENTAL_FOLDING_DESATIVADO",
-    "Name": "03.2 Incremental com Query Folding Desativado",
-    "Category": "Renner",
-    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
-    "Severity": 3,
-    "Scope": "Table",
-    "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
-    "CompatibilityLevel": 1200
-  },
+  
   {
     "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
     "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
@@ -310,136 +482,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "VARIAVEL_COUNTROWS",
-    "Name": "[EXTRA] Utilizar Várivel para o COUNTROWS",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com COUNTROWS",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTROWS\\s*\\(([^\\]]+)\\).*?COUNTROWS\\s*\\(\\1\\)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_SUM",
-    "Name": "[EXTRA] Utilizar Várivel para o SUM",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com SUM",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"SUM\\s*\\(([^\\]]+)\\].*?SUM\\s*\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_COUNT",
-    "Name": "[EXTRA] Utilizar Várivel para o COUNT",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com COUNT",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_COUNTA",
-    "Name": "[EXTRA] Utilizar Várivel para o COUNTA",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com COUNTA",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNTA\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_AVERAGE",
-    "Name": "[EXTRA] Utilizar Várivel para o AVERAGE",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com AVERAGE",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"AVERAGE\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_MAX",
-    "Name": "[EXTRA] Utilizar Várivel para o MAX",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com MAX",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAX\\s*\\(([^\\]]+)\\].*?MAX\\s*\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_MAXA",
-    "Name": "[EXTRA] Utilizar Várivel para o MAXA",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com MAXA",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MAXA\\s*\\(([^\\]]+)\\].*?MAXA\\s*\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_MIN",
-    "Name": "[EXTRA] Utilizar Várivel para o MIN",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com MIN",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MIN\\s*\\(([^\\]]+)\\].*?MIN\\s*\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_MINA",
-    "Name": "[EXTRA] Utilizar Várivel para o MINA",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com MINA",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"MINA\\s*\\(([^\\]]+)\\].*?MINA\\s*\\(\\1\\]\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_VALUES",
-    "Name": "[EXTRA] Utilizar Várivel para o VALUES",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com VALUES",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?VALUES\\s*\\(\\1\\)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "VARIAVEL_DISTINCT",
-    "Name": "[EXTRA] Utilizar Várivel para o DISTINCT",
-    "Category": "Extras",
-    "Description": "Referenciado o mesmo calculo com DISTINCT",
-    "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?DISTINCT\\s*\\(\\1\\)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "DESATIVAR_REFRESH_TABELA_MANUAL",
-    "Name": "[EXTRA] Desativar Atualização de Tabela Manual",
-    "Category": "Extras",
-    "Description": "Desative a atualização das tabelas configuradas como \"Inserir Dados\" ",
-    "Severity": 1,
-    "Scope": "Table",
-    "Expression": "ExcludeFromModelRefresh == false \r\nand \r\nPartitions.Any(\r\nExpression.Contains(\"Binary.Decompress(Binary.FromText\")\r\n)\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CLUSTER_ALTA_CONCORRENCIA_DEV",
-    "Name": "[EXTRA] Cluster Alta Concorrencia ou DEV",
-    "Category": "Extras",
-    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "INCREMENTAL_DIA_MES",
     "Name": "[EXTRA] Avaliar Incremental de Dia para Mês",
     "Category": "Extras",
@@ -457,26 +499,6 @@
     "Severity": 4,
     "Scope": "Table",
     "Expression": "EnableRefreshPolicy = true\r\nand\r\nRollingWindowGranularity = \"YEAR\"\r\nand\r\nRollingWindowPeriods > 5",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CLUSTER_ALTA_CONCORRENCIA_PARAMETRO",
-    "Name": "[EXTRA] Cluster Alta Concorrencia ou DEV no Parametro",
-    "Category": "Extras",
-    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
-    "Severity": 5,
-    "Scope": "NamedExpression",
-    "Expression": "Expression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\nor\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "TABELA_MAIS_30_COLUNAS",
-    "Name": "[EXTRA] Tabela com Mais de 30 Colunas",
-    "Category": "Extras",
-    "Description": "Verificar se todas colunas são realmente utilizadas",
-    "Severity": 4,
-    "Scope": "Table",
-    "Expression": "Columns.Count() > 30",
     "CompatibilityLevel": 1200
   },
   {
@@ -502,7 +524,7 @@
   {
     "ID": "EVITE_MEDIDA_DUPLICADA",
     "Name": "[EXTRA] Evite Medidas Duplicadas",
-    "Category": "DAX Expressions",
+    "Category": "Extras",
     "Description": "Encontrado medidas com o nome diferente, mas que possuem a mesma expresão DAX",
     "Severity": 1,
     "Scope": "Measure",

@@ -1,4 +1,4 @@
-﻿Segment;Country; Product ; Discount Band ;Units Sold; Manufacturing Price ; Sale Price ; Gross Sales ; Discounts ;  Sales ; COGS ; Profit ;Date;Month Number; Month Name ;Year
+﻿Segment;Country;Product;Discount Band;Units Sold;Manufacturing Price;Sale Price;Gross Sales;Discounts;Sales;COGS;Profit;Date;Month Number;Month Name;Year
 Government;Canada; Carretera ; None ;1618,5; $3,00 ; $20,00 ; $32.370,00 ; $-   ; $32.370,00 ; $16.185,00 ; $16.185,00 ;01/01/2014;1; January ;2014
 Government;Germany; Carretera ; None ;1321; $3,00 ; $20,00 ; $26.420,00 ; $-   ; $26.420,00 ; $13.210,00 ; $13.210,00 ;01/01/2014;1; January ;2014
 Midmarket;France; Carretera ; None ;2178; $3,00 ; $15,00 ; $32.670,00 ; $-   ; $32.670,00 ; $21.780,00 ; $10.890,00 ;01/06/2014;6; June ;2014

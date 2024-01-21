@@ -1,57 +1,57 @@
 ﻿Segment;Country;Product;Discount Band;Units Sold;Manufacturing Price;Sale Price;Gross Sales;Discounts; Sales;COGS;Profit;Date;Month Number;Month Name;Year
-Government;Canada; Carretera ; None ;1618,5;3,00 ;20,00 ;32.370,00 ;-   ;32.370,00 ;16.185,00 ;16.185,00 ;01/01/2014;1; January ;2014
-Government;Germany; Carretera ; None ;1321;3,00 ;20,00 ;26.420,00 ;-   ;26.420,00 ;13.210,00 ;13.210,00 ;01/01/2014;1; January ;2014
-Midmarket;France; Carretera ; None ;2178;3,00 ;15,00 ;32.670,00 ;-   ;32.670,00 ;21.780,00 ;10.890,00 ;01/06/2014;6; June ;2014
-Midmarket;Germany; Carretera ; None ;888;3,00 ;15,00 ;13.320,00 ;-   ;13.320,00 ;8.880,00 ;4.440,00 ;01/06/2014;6; June ;2014
-Midmarket;Mexico; Carretera ; None ;2470;3,00 ;15,00 ;37.050,00 ;-   ;37.050,00 ;24.700,00 ;12.350,00 ;01/06/2014;6; June ;2014
-Government;Germany; Carretera ; None ;1513;3,00 ;350,00 ;529.550,00 ;-   ;529.550,00 ;393.380,00 ;136.170,00 ;01/12/2014;12; December ;2014
-Midmarket;Germany; Montana ; None ;921;5,00 ;15,00 ;13.815,00 ;-   ;13.815,00 ;9.210,00 ;4.605,00 ;01/03/2014;3; March ;2014
-Channel Partners;Canada; Montana ; None ;2518;5,00 ;12,00 ;30.216,00 ;-   ;30.216,00 ;7.554,00 ;22.662,00 ;01/06/2014;6; June ;2014
-Government;France; Montana ; None ;1899;5,00 ;20,00 ;37.980,00 ;-   ;37.980,00 ;18.990,00 ;18.990,00 ;01/06/2014;6; June ;2014
-Channel Partners;Germany; Montana ; None ;1545;5,00 ;12,00 ;18.540,00 ;-   ;18.540,00 ;4.635,00 ;13.905,00 ;01/06/2014;6; June ;2014
-Midmarket;Mexico; Montana ; None ;2470;5,00 ;15,00 ;37.050,00 ;-   ;37.050,00 ;24.700,00 ;12.350,00 ;01/06/2014;6; June ;2014
-Enterprise;Canada; Montana ; None ;2665,5;5,00 ;125,00 ;333.187,50 ;-   ;333.187,50 ;319.860,00 ;13.327,50 ;01/07/2014;7; July ;2014
-Small Business;Mexico; Montana ; None ;958;5,00 ;300,00 ;287.400,00 ;-   ;287.400,00 ;239.500,00 ;47.900,00 ;01/08/2014;8; August ;2014
-Government;Germany; Montana ; None ;2146;5,00 ;7,00 ;15.022,00 ;-   ;15.022,00 ;10.730,00 ;4.292,00 ;01/09/2014;9; September ;2014
-Enterprise;Canada; Montana ; None ;345;5,00 ;125,00 ;43.125,00 ;-   ;43.125,00 ;41.400,00 ;1.725,00 ;01/10/2013;10; October ;2013
-Midmarket;United States of America; Montana ; None ;615;5,00 ;15,00 ;9.225,00 ;-   ;9.225,00 ;6.150,00 ;3.075,00 ;01/12/2014;12; December ;2014
-Government;Canada; Paseo ; None ;292;10,00 ;20,00 ;5.840,00 ;-   ;5.840,00 ;2.920,00 ;2.920,00 ;01/02/2014;2; February ;2014
-Midmarket;Mexico; Paseo ; None ;974;10,00 ;15,00 ;14.610,00 ;-   ;14.610,00 ;9.740,00 ;4.870,00 ;01/02/2014;2; February ;2014
-Channel Partners;Canada; Paseo ; None ;2518;10,00 ;12,00 ;30.216,00 ;-   ;30.216,00 ;7.554,00 ;22.662,00 ;01/06/2014;6; June ;2014
-Government;Germany; Paseo ; None ;1006;10,00 ;350,00 ;352.100,00 ;-   ;352.100,00 ;261.560,00 ;90.540,00 ;01/06/2014;6; June ;2014
-Channel Partners;Germany; Paseo ; None ;367;10,00 ;12,00 ;4.404,00 ;-   ;4.404,00 ;1.101,00 ;3.303,00 ;01/07/2014;7; July ;2014
-Government;Mexico; Paseo ; None ;883;10,00 ;7,00 ;6.181,00 ;-   ;6.181,00 ;4.415,00 ;1.766,00 ;01/08/2014;8; August ;2014
-Midmarket;France; Paseo ; None ;549;10,00 ;15,00 ;8.235,00 ;-   ;8.235,00 ;5.490,00 ;2.745,00 ;01/09/2013;9; September ;2013
-Small Business;Mexico; Paseo ; None ;788;10,00 ;300,00 ;236.400,00 ;-   ;236.400,00 ;197.000,00 ;39.400,00 ;01/09/2013;9; September ;2013
-Midmarket;Mexico; Paseo ; None ;2472;10,00 ;15,00 ;37.080,00 ;-   ;37.080,00 ;24.720,00 ;12.360,00 ;01/09/2014;9; September ;2014
-Government;United States of America; Paseo ; None ;1143;10,00 ;7,00 ;8.001,00 ;-   ;8.001,00 ;5.715,00 ;2.286,00 ;01/10/2014;10; October ;2014
-Government;Canada; Paseo ; None ;1725;10,00 ;350,00 ;603.750,00 ;-   ;603.750,00 ;448.500,00 ;155.250,00 ;01/11/2013;11; November ;2013
-Channel Partners;United States of America; Paseo ; None ;912;10,00 ;12,00 ;10.944,00 ;-   ;10.944,00 ;2.736,00 ;8.208,00 ;01/11/2013;11; November ;2013
-Midmarket;Canada; Paseo ; None ;2152;10,00 ;15,00 ;32.280,00 ;-   ;32.280,00 ;21.520,00 ;10.760,00 ;01/12/2013;12; December ;2013
-Government;Canada; Paseo ; None ;1817;10,00 ;20,00 ;36.340,00 ;-   ;36.340,00 ;18.170,00 ;18.170,00 ;01/12/2014;12; December ;2014
-Government;Germany; Paseo ; None ;1513;10,00 ;350,00 ;529.550,00 ;-   ;529.550,00 ;393.380,00 ;136.170,00 ;01/12/2014;12; December ;2014
-Government;Mexico; Velo ; None ;1493;120,00 ;7,00 ;10.451,00 ;-   ;10.451,00 ;7.465,00 ;2.986,00 ;01/01/2014;1; January ;2014
-Enterprise;France; Velo ; None ;1804;120,00 ;125,00 ;225.500,00 ;-   ;225.500,00 ;216.480,00 ;9.020,00 ;01/02/2014;2; February ;2014
-Channel Partners;Germany; Velo ; None ;2161;120,00 ;12,00 ;25.932,00 ;-   ;25.932,00 ;6.483,00 ;19.449,00 ;01/03/2014;3; March ;2014
-Government;Germany; Velo ; None ;1006;120,00 ;350,00 ;352.100,00 ;-   ;352.100,00 ;261.560,00 ;90.540,00 ;01/06/2014;6; June ;2014
-Channel Partners;Germany; Velo ; None ;1545;120,00 ;12,00 ;18.540,00 ;-   ;18.540,00 ;4.635,00 ;13.905,00 ;01/06/2014;6; June ;2014
-Enterprise;United States of America; Velo ; None ;2821;120,00 ;125,00 ;352.625,00 ;-   ;352.625,00 ;338.520,00 ;14.105,00 ;01/08/2014;8; August ;2014
-Enterprise;Canada; Velo ; None ;345;120,00 ;125,00 ;43.125,00 ;-   ;43.125,00 ;41.400,00 ;1.725,00 ;01/10/2013;10; October ;2013
-Small Business;Canada; VTT ; None ;2001;250,00 ;300,00 ;600.300,00 ;-   ;600.300,00 ;500.250,00 ;100.050,00 ;01/02/2014;2; February ;2014
-Channel Partners;Germany; VTT ; None ;2838;250,00 ;12,00 ;34.056,00 ;-   ;34.056,00 ;8.514,00 ;25.542,00 ;01/04/2014;4; April ;2014
-Midmarket;France; VTT ; None ;2178;250,00 ;15,00 ;32.670,00 ;-   ;32.670,00 ;21.780,00 ;10.890,00 ;01/06/2014;6; June ;2014
-Midmarket;Germany; VTT ; None ;888;250,00 ;15,00 ;13.320,00 ;-   ;13.320,00 ;8.880,00 ;4.440,00 ;01/06/2014;6; June ;2014
-Government;France; VTT ; None ;1527;250,00 ;350,00 ;534.450,00 ;-   ;534.450,00 ;397.020,00 ;137.430,00 ;01/09/2013;9; September ;2013
-Small Business;France; VTT ; None ;2151;250,00 ;300,00 ;645.300,00 ;-   ;645.300,00 ;537.750,00 ;107.550,00 ;01/09/2014;9; September ;2014
-Government;Canada; VTT ; None ;1817;250,00 ;20,00 ;36.340,00 ;-   ;36.340,00 ;18.170,00 ;18.170,00 ;01/12/2014;12; December ;2014
-Government;France; Amarilla ; None ;2750;260,00 ;350,00 ;962.500,00 ;-   ;962.500,00 ;715.000,00 ;247.500,00 ;01/02/2014;2; February ;2014
-Channel Partners;United States of America; Amarilla ; None ;1953;260,00 ;12,00 ;23.436,00 ;-   ;23.436,00 ;5.859,00 ;17.577,00 ;01/04/2014;4; April ;2014
-Enterprise;Germany; Amarilla ; None ;4219,5;260,00 ;125,00 ;527.437,50 ;-   ;527.437,50 ;506.340,00 ;21.097,50 ;01/04/2014;4; April ;2014
-Government;France; Amarilla ; None ;1899;260,00 ;20,00 ;37.980,00 ;-   ;37.980,00 ;18.990,00 ;18.990,00 ;01/06/2014;6; June ;2014
-Government;Germany; Amarilla ; None ;1686;260,00 ;7,00 ;11.802,00 ;-   ;11.802,00 ;8.430,00 ;3.372,00 ;01/07/2014;7; July ;2014
-Channel Partners;United States of America; Amarilla ; None ;2141;260,00 ;12,00 ;25.692,00 ;-   ;25.692,00 ;6.423,00 ;19.269,00 ;01/08/2014;8; August ;2014
-Government;United States of America; Amarilla ; None ;1143;260,00 ;7,00 ;8.001,00 ;-   ;8.001,00 ;5.715,00 ;2.286,00 ;01/10/2014;10; October ;2014
-Midmarket;United States of America; Amarilla ; None ;615;260,00 ;15,00 ;9.225,00 ;-   ;9.225,00 ;6.150,00 ;3.075,00 ;01/12/2014;12; December ;2014
+Government;Canada; Carretera ; None ;1618,5;3,00 ;20,00 ;32.370,00 ;;32.370,00 ;16.185,00 ;16.185,00 ;01/01/2014;1; January ;2014
+Government;Germany; Carretera ; None ;1321;3,00 ;20,00 ;26.420,00 ;;26.420,00 ;13.210,00 ;13.210,00 ;01/01/2014;1; January ;2014
+Midmarket;France; Carretera ; None ;2178;3,00 ;15,00 ;32.670,00 ;;32.670,00 ;21.780,00 ;10.890,00 ;01/06/2014;6; June ;2014
+Midmarket;Germany; Carretera ; None ;888;3,00 ;15,00 ;13.320,00 ;;13.320,00 ;8.880,00 ;4.440,00 ;01/06/2014;6; June ;2014
+Midmarket;Mexico; Carretera ; None ;2470;3,00 ;15,00 ;37.050,00 ;;37.050,00 ;24.700,00 ;12.350,00 ;01/06/2014;6; June ;2014
+Government;Germany; Carretera ; None ;1513;3,00 ;350,00 ;529.550,00 ;;529.550,00 ;393.380,00 ;136.170,00 ;01/12/2014;12; December ;2014
+Midmarket;Germany; Montana ; None ;921;5,00 ;15,00 ;13.815,00 ;;13.815,00 ;9.210,00 ;4.605,00 ;01/03/2014;3; March ;2014
+Channel Partners;Canada; Montana ; None ;2518;5,00 ;12,00 ;30.216,00 ;;30.216,00 ;7.554,00 ;22.662,00 ;01/06/2014;6; June ;2014
+Government;France; Montana ; None ;1899;5,00 ;20,00 ;37.980,00 ;;37.980,00 ;18.990,00 ;18.990,00 ;01/06/2014;6; June ;2014
+Channel Partners;Germany; Montana ; None ;1545;5,00 ;12,00 ;18.540,00 ;;18.540,00 ;4.635,00 ;13.905,00 ;01/06/2014;6; June ;2014
+Midmarket;Mexico; Montana ; None ;2470;5,00 ;15,00 ;37.050,00 ;;37.050,00 ;24.700,00 ;12.350,00 ;01/06/2014;6; June ;2014
+Enterprise;Canada; Montana ; None ;2665,5;5,00 ;125,00 ;333.187,50 ;;333.187,50 ;319.860,00 ;13.327,50 ;01/07/2014;7; July ;2014
+Small Business;Mexico; Montana ; None ;958;5,00 ;300,00 ;287.400,00 ;;287.400,00 ;239.500,00 ;47.900,00 ;01/08/2014;8; August ;2014
+Government;Germany; Montana ; None ;2146;5,00 ;7,00 ;15.022,00 ;;15.022,00 ;10.730,00 ;4.292,00 ;01/09/2014;9; September ;2014
+Enterprise;Canada; Montana ; None ;345;5,00 ;125,00 ;43.125,00 ;;43.125,00 ;41.400,00 ;1.725,00 ;01/10/2013;10; October ;2013
+Midmarket;United States of America; Montana ; None ;615;5,00 ;15,00 ;9.225,00 ;;9.225,00 ;6.150,00 ;3.075,00 ;01/12/2014;12; December ;2014
+Government;Canada; Paseo ; None ;292;10,00 ;20,00 ;5.840,00 ;;5.840,00 ;2.920,00 ;2.920,00 ;01/02/2014;2; February ;2014
+Midmarket;Mexico; Paseo ; None ;974;10,00 ;15,00 ;14.610,00 ;;14.610,00 ;9.740,00 ;4.870,00 ;01/02/2014;2; February ;2014
+Channel Partners;Canada; Paseo ; None ;2518;10,00 ;12,00 ;30.216,00 ;;30.216,00 ;7.554,00 ;22.662,00 ;01/06/2014;6; June ;2014
+Government;Germany; Paseo ; None ;1006;10,00 ;350,00 ;352.100,00 ;;352.100,00 ;261.560,00 ;90.540,00 ;01/06/2014;6; June ;2014
+Channel Partners;Germany; Paseo ; None ;367;10,00 ;12,00 ;4.404,00 ;;4.404,00 ;1.101,00 ;3.303,00 ;01/07/2014;7; July ;2014
+Government;Mexico; Paseo ; None ;883;10,00 ;7,00 ;6.181,00 ;;6.181,00 ;4.415,00 ;1.766,00 ;01/08/2014;8; August ;2014
+Midmarket;France; Paseo ; None ;549;10,00 ;15,00 ;8.235,00 ;;8.235,00 ;5.490,00 ;2.745,00 ;01/09/2013;9; September ;2013
+Small Business;Mexico; Paseo ; None ;788;10,00 ;300,00 ;236.400,00 ;;236.400,00 ;197.000,00 ;39.400,00 ;01/09/2013;9; September ;2013
+Midmarket;Mexico; Paseo ; None ;2472;10,00 ;15,00 ;37.080,00 ;;37.080,00 ;24.720,00 ;12.360,00 ;01/09/2014;9; September ;2014
+Government;United States of America; Paseo ; None ;1143;10,00 ;7,00 ;8.001,00 ;;8.001,00 ;5.715,00 ;2.286,00 ;01/10/2014;10; October ;2014
+Government;Canada; Paseo ; None ;1725;10,00 ;350,00 ;603.750,00 ;;603.750,00 ;448.500,00 ;155.250,00 ;01/11/2013;11; November ;2013
+Channel Partners;United States of America; Paseo ; None ;912;10,00 ;12,00 ;10.944,00 ;;10.944,00 ;2.736,00 ;8.208,00 ;01/11/2013;11; November ;2013
+Midmarket;Canada; Paseo ; None ;2152;10,00 ;15,00 ;32.280,00 ;;32.280,00 ;21.520,00 ;10.760,00 ;01/12/2013;12; December ;2013
+Government;Canada; Paseo ; None ;1817;10,00 ;20,00 ;36.340,00 ;;36.340,00 ;18.170,00 ;18.170,00 ;01/12/2014;12; December ;2014
+Government;Germany; Paseo ; None ;1513;10,00 ;350,00 ;529.550,00 ;;529.550,00 ;393.380,00 ;136.170,00 ;01/12/2014;12; December ;2014
+Government;Mexico; Velo ; None ;1493;120,00 ;7,00 ;10.451,00 ;;10.451,00 ;7.465,00 ;2.986,00 ;01/01/2014;1; January ;2014
+Enterprise;France; Velo ; None ;1804;120,00 ;125,00 ;225.500,00 ;;225.500,00 ;216.480,00 ;9.020,00 ;01/02/2014;2; February ;2014
+Channel Partners;Germany; Velo ; None ;2161;120,00 ;12,00 ;25.932,00 ;;25.932,00 ;6.483,00 ;19.449,00 ;01/03/2014;3; March ;2014
+Government;Germany; Velo ; None ;1006;120,00 ;350,00 ;352.100,00 ;;352.100,00 ;261.560,00 ;90.540,00 ;01/06/2014;6; June ;2014
+Channel Partners;Germany; Velo ; None ;1545;120,00 ;12,00 ;18.540,00 ;;18.540,00 ;4.635,00 ;13.905,00 ;01/06/2014;6; June ;2014
+Enterprise;United States of America; Velo ; None ;2821;120,00 ;125,00 ;352.625,00 ;;352.625,00 ;338.520,00 ;14.105,00 ;01/08/2014;8; August ;2014
+Enterprise;Canada; Velo ; None ;345;120,00 ;125,00 ;43.125,00 ;;43.125,00 ;41.400,00 ;1.725,00 ;01/10/2013;10; October ;2013
+Small Business;Canada; VTT ; None ;2001;250,00 ;300,00 ;600.300,00 ;;600.300,00 ;500.250,00 ;100.050,00 ;01/02/2014;2; February ;2014
+Channel Partners;Germany; VTT ; None ;2838;250,00 ;12,00 ;34.056,00 ;;34.056,00 ;8.514,00 ;25.542,00 ;01/04/2014;4; April ;2014
+Midmarket;France; VTT ; None ;2178;250,00 ;15,00 ;32.670,00 ;;32.670,00 ;21.780,00 ;10.890,00 ;01/06/2014;6; June ;2014
+Midmarket;Germany; VTT ; None ;888;250,00 ;15,00 ;13.320,00 ;;13.320,00 ;8.880,00 ;4.440,00 ;01/06/2014;6; June ;2014
+Government;France; VTT ; None ;1527;250,00 ;350,00 ;534.450,00 ;;534.450,00 ;397.020,00 ;137.430,00 ;01/09/2013;9; September ;2013
+Small Business;France; VTT ; None ;2151;250,00 ;300,00 ;645.300,00 ;;645.300,00 ;537.750,00 ;107.550,00 ;01/09/2014;9; September ;2014
+Government;Canada; VTT ; None ;1817;250,00 ;20,00 ;36.340,00 ;;36.340,00 ;18.170,00 ;18.170,00 ;01/12/2014;12; December ;2014
+Government;France; Amarilla ; None ;2750;260,00 ;350,00 ;962.500,00 ;;962.500,00 ;715.000,00 ;247.500,00 ;01/02/2014;2; February ;2014
+Channel Partners;United States of America; Amarilla ; None ;1953;260,00 ;12,00 ;23.436,00 ;;23.436,00 ;5.859,00 ;17.577,00 ;01/04/2014;4; April ;2014
+Enterprise;Germany; Amarilla ; None ;4219,5;260,00 ;125,00 ;527.437,50 ;;527.437,50 ;506.340,00 ;21.097,50 ;01/04/2014;4; April ;2014
+Government;France; Amarilla ; None ;1899;260,00 ;20,00 ;37.980,00 ;;37.980,00 ;18.990,00 ;18.990,00 ;01/06/2014;6; June ;2014
+Government;Germany; Amarilla ; None ;1686;260,00 ;7,00 ;11.802,00 ;;11.802,00 ;8.430,00 ;3.372,00 ;01/07/2014;7; July ;2014
+Channel Partners;United States of America; Amarilla ; None ;2141;260,00 ;12,00 ;25.692,00 ;;25.692,00 ;6.423,00 ;19.269,00 ;01/08/2014;8; August ;2014
+Government;United States of America; Amarilla ; None ;1143;260,00 ;7,00 ;8.001,00 ;;8.001,00 ;5.715,00 ;2.286,00 ;01/10/2014;10; October ;2014
+Midmarket;United States of America; Amarilla ; None ;615;260,00 ;15,00 ;9.225,00 ;;9.225,00 ;6.150,00 ;3.075,00 ;01/12/2014;12; December ;2014
 Government;France; Paseo ; Low ;3945;10,00 ;7,00 ;27.615,00 ;276,15 ;27.338,85 ;19.725,00 ;7.613,85 ;01/01/2014;1; January ;2014
 Midmarket;France; Paseo ; Low ;2296;10,00 ;15,00 ;34.440,00 ;344,40 ;34.095,60 ;22.960,00 ;11.135,60 ;01/02/2014;2; February ;2014
 Government;France; Paseo ; Low ;1030;10,00 ;7,00 ;7.210,00 ;72,10 ;7.137,90 ;5.150,00 ;1.987,90 ;01/05/2014;5; May ;2014
@@ -186,20 +186,20 @@ Midmarket;Canada; Montana ; Low ;1967;5,00 ;15,00 ;29.505,00 ;1.180,20 ;28.324,8
 Small Business;Germany; Montana ; Low ;1859;5,00 ;300,00 ;557.700,00 ;22.308,00 ;535.392,00 ;464.750,00 ;70.642,00 ;01/08/2014;8; August ;2014
 Government;Canada; Montana ; Low ;2851;5,00 ;7,00 ;19.957,00 ;798,28 ;19.158,72 ;14.255,00 ;4.903,72 ;01/10/2013;10; October ;2013
 Small Business;Germany; Montana ; Low ;2021;5,00 ;300,00 ;606.300,00 ;24.252,00 ;582.048,00 ;505.250,00 ;76.798,00 ;01/10/2014;10; October ;2014
-Enterprise;Mexico; Montana ; Low ;1138;5,00 ;125,00 ;142.250,00 ;5.690,00 ;136.560,00 ;136.560,00 ;-   ;01/12/2014;12; December ;2014
+Enterprise;Mexico; Montana ; Low ;1138;5,00 ;125,00 ;142.250,00 ;5.690,00 ;136.560,00 ;136.560,00 ;;01/12/2014;12; December ;2014
 Government;Canada; Paseo ; Low ;4251;10,00 ;7,00 ;29.757,00 ;1.190,28 ;28.566,72 ;21.255,00 ;7.311,72 ;01/01/2014;1; January ;2014
-Enterprise;Germany; Paseo ; Low ;795;10,00 ;125,00 ;99.375,00 ;3.975,00 ;95.400,00 ;95.400,00 ;-   ;01/03/2014;3; March ;2014
+Enterprise;Germany; Paseo ; Low ;795;10,00 ;125,00 ;99.375,00 ;3.975,00 ;95.400,00 ;95.400,00 ;;01/03/2014;3; March ;2014
 Small Business;Germany; Paseo ; Low ;1414,5;10,00 ;300,00 ;424.350,00 ;16.974,00 ;407.376,00 ;353.625,00 ;53.751,00 ;01/04/2014;4; April ;2014
 Small Business;United States of America; Paseo ; Low ;2918;10,00 ;300,00 ;875.400,00 ;35.016,00 ;840.384,00 ;729.500,00 ;110.884,00 ;01/05/2014;5; May ;2014
 Government;United States of America; Paseo ; Low ;3450;10,00 ;350,00 ;1.207.500,00 ;48.300,00 ;1.159.200,00 ;897.000,00 ;262.200,00 ;01/07/2014;7; July ;2014
-Enterprise;France; Paseo ; Low ;2988;10,00 ;125,00 ;373.500,00 ;14.940,00 ;358.560,00 ;358.560,00 ;-   ;01/07/2014;7; July ;2014
+Enterprise;France; Paseo ; Low ;2988;10,00 ;125,00 ;373.500,00 ;14.940,00 ;358.560,00 ;358.560,00 ;;01/07/2014;7; July ;2014
 Midmarket;Canada; Paseo ; Low ;218;10,00 ;15,00 ;3.270,00 ;130,80 ;3.139,20 ;2.180,00 ;959,20 ;01/09/2014;9; September ;2014
 Government;Canada; Paseo ; Low ;2074;10,00 ;20,00 ;41.480,00 ;1.659,20 ;39.820,80 ;20.740,00 ;19.080,80 ;01/09/2014;9; September ;2014
 Government;United States of America; Paseo ; Low ;1056;10,00 ;20,00 ;21.120,00 ;844,80 ;20.275,20 ;10.560,00 ;9.715,20 ;01/09/2014;9; September ;2014
 Midmarket;United States of America; Paseo ; Low ;671;10,00 ;15,00 ;10.065,00 ;402,60 ;9.662,40 ;6.710,00 ;2.952,40 ;01/10/2013;10; October ;2013
 Midmarket;Mexico; Paseo ; Low ;1514;10,00 ;15,00 ;22.710,00 ;908,40 ;21.801,60 ;15.140,00 ;6.661,60 ;01/10/2013;10; October ;2013
 Government;United States of America; Paseo ; Low ;274;10,00 ;350,00 ;95.900,00 ;3.836,00 ;92.064,00 ;71.240,00 ;20.824,00 ;01/12/2014;12; December ;2014
-Enterprise;Mexico; Paseo ; Low ;1138;10,00 ;125,00 ;142.250,00 ;5.690,00 ;136.560,00 ;136.560,00 ;-   ;01/12/2014;12; December ;2014
+Enterprise;Mexico; Paseo ; Low ;1138;10,00 ;125,00 ;142.250,00 ;5.690,00 ;136.560,00 ;136.560,00 ;;01/12/2014;12; December ;2014
 Channel Partners;United States of America; Velo ; Low ;1465;120,00 ;12,00 ;17.580,00 ;703,20 ;16.876,80 ;4.395,00 ;12.481,80 ;01/03/2014;3; March ;2014
 Government;Canada; Velo ; Low ;2646;120,00 ;20,00 ;52.920,00 ;2.116,80 ;50.803,20 ;26.460,00 ;24.343,20 ;01/09/2013;9; September ;2013
 Government;France; Velo ; Low ;2177;120,00 ;350,00 ;761.950,00 ;30.478,00 ;731.472,00 ;566.020,00 ;165.452,00 ;01/10/2014;10; October ;2014
@@ -208,7 +208,7 @@ Government;United States of America; VTT ; Low ;349;250,00 ;350,00 ;122.150,00 ;
 Government;France; VTT ; Low ;2177;250,00 ;350,00 ;761.950,00 ;30.478,00 ;731.472,00 ;566.020,00 ;165.452,00 ;01/10/2014;10; October ;2014
 Midmarket;Mexico; VTT ; Low ;1514;250,00 ;15,00 ;22.710,00 ;908,40 ;21.801,60 ;15.140,00 ;6.661,60 ;01/10/2013;10; October ;2013
 Government;Mexico; Amarilla ; Low ;1865;260,00 ;350,00 ;652.750,00 ;26.110,00 ;626.640,00 ;484.900,00 ;141.740,00 ;01/02/2014;2; February ;2014
-Enterprise;Mexico; Amarilla ; Low ;1074;260,00 ;125,00 ;134.250,00 ;5.370,00 ;128.880,00 ;128.880,00 ;-   ;01/04/2014;4; April ;2014
+Enterprise;Mexico; Amarilla ; Low ;1074;260,00 ;125,00 ;134.250,00 ;5.370,00 ;128.880,00 ;128.880,00 ;;01/04/2014;4; April ;2014
 Government;Germany; Amarilla ; Low ;1907;260,00 ;350,00 ;667.450,00 ;26.698,00 ;640.752,00 ;495.820,00 ;144.932,00 ;01/09/2014;9; September ;2014
 Midmarket;United States of America; Amarilla ; Low ;671;260,00 ;15,00 ;10.065,00 ;402,60 ;9.662,40 ;6.710,00 ;2.952,40 ;01/10/2013;10; October ;2013
 Government;Canada; Amarilla ; Low ;1778;260,00 ;350,00 ;622.300,00 ;24.892,00 ;597.408,00 ;462.280,00 ;135.128,00 ;01/12/2013;12; December ;2013

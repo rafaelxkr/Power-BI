@@ -216,7 +216,7 @@
     "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression, \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9_]\\s*\\)\")",
+    "Expression": "RegEx.IsMatch(Expression, \"(?i)(?:VALUES|DISTINCT)\\s*\\(.*?[A-Za-z0-9_']\\s*\\)\")",
     "CompatibilityLevel": 1200
   },
   {

@@ -528,5 +528,15 @@
     "Scope": "Measure",
     "Expression": "Model.AllMeasures.Any(Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") = outerIt.Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") and it <> outerIt)",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "[EXTRA]_EVITE_MODELAGEM_SNOW_FLAKE",
+    "Name": "[EXTRA] Evite Modelagem Snow Flake",
+    "Category": "Extras",
+    "Description": "Utilize preferenciamente a modelagem Star Schema\r\nReferência: https://docs.microsoft.com/power-bi/guidance/star-schema",
+    "Severity": 2,
+    "Scope": "Table, CalculatedTable",
+    "Expression": "UsedInRelationships.Any(current.Name == FromTable.Name)\r\nand\r\nUsedInRelationships.Any(current.Name == ToTable.Name)",
+    "CompatibilityLevel": 1200
   }
 ]

@@ -438,5 +438,25 @@
     "Scope": "Table, CalculatedTable",
     "Expression": "UsedInRelationships.Any(current.Name == FromTable.Name)\r\nand\r\nUsedInRelationships.Any(current.Name == ToTable.Name)",
     "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_CALCULATE_MEDIDA",
+    "Name": "[EXTRA] Evite CALCULATE([Medida])",
+    "Category": "Extras",
+    "Description": "Quando você referência uma medida exemplo [Qtd de Vendas] implicitamente o DAX já adiciona uma função CALCULATE, com isso não é necessário colocar uma medida dentro de uma função CALCULATE se não for passar um filtro ou um modificador de contexto",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*\\[\\s*[A-Za-z0-9_ ]*\\]\\s*\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_CALCULATE_SEM_FILTRO_OU_MODIFICADOR",
+    "Name": "[EXTRA] Evite CALCULATE() sem Filtro ou Modificador de Contexto",
+    "Category": "Extras",
+    "Description": "Medidas agregadoras que não precisam ser filtradas ou adicionar um modificador de contexto, não precisam de adicionadas dentro de uma função CALCULATE\r\n\r\nCALCULATE(SUM(TABELA[Coluna])) --> SUM(TABELA[Coluna])\r\n\r\nCALCULATE(MAX(TABELA[Coluna])) --> MAX(TABELA[Coluna])",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*[A-Za-z0-9\\[\\]_\\( ]*\\)\\s*\\)\")\r\nand\r\n!RegEx.IsMatch(Expression,\"(?is)(?:SUMX|COUNTX|COUNTAX|AVERAGEX|MINX|MAXX|PRODUCTX|FILTER|TOPN|RANK)\")",
+    "CompatibilityLevel": 1200
   }
 ]

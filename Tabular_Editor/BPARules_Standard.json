@@ -96,7 +96,7 @@
     "Description": "Desative a atualização das tabelas configuradas como \"Inserir Dados\" ",
     "Severity": 1,
     "Scope": "Table",
-    "Expression": "ExcludeFromModelRefresh == false \r\nand \r\nPartitions.Any(\r\nExpression.Contains(\"Binary.Decompress(Binary.FromText\")\r\n)\r\n",
+    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)Binary\\.Decompress\\s*\\(\\s*Binary\\.FromText\")\r\n)\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -280,10 +280,10 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "VARIAVEL_COUNT",
-    "Name": "22.10 Utilizar Várivel para o COUNT",
+    "ID": "VARIAVEL_COUNT_DISTINCTCOUNT",
+    "Name": "22.10 Utilizar Várivel para o COUNT ou DISTINCTCOUNT",
     "Category": "05.Medidas",
-    "Description": "Referenciado o mesmo calculo com COUNT",
+    "Description": "Referenciado o mesmo calculo com COUNTou DISTINCTCOUNT",
     "Severity": 3,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",

@@ -156,7 +156,7 @@
     "Description": "Desative a atualização das tabelas configuradas como \"Inserir Dados\" ",
     "Severity": 1,
     "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)Binary\\.Decompress\\s*\\(\\s*Binary\\.FromText\")\r\n)\r\n",
+    "Expression": "ExcludeFromModelRefresh == false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)Binary\\.Decompress\\s*\\(\\s*Binary\\.FromText\")\r\n)\r\n",
     "CompatibilityLevel": 1200
   },
   {

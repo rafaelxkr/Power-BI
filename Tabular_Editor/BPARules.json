@@ -571,7 +571,7 @@
   },
   {
     "ID": "DISTINCTCOUNTNOBLANK_DISTINCTCOUNT_BLANK",
-    "Name": "[EXTRA] DISTINCTCOUNTNOBLANK ao invés de DISTINCTCOUNT <> Blank() ",
+    "Name": "[EXTRA] DISTINCTCOUNTNOBLANK ao invés de DISTINCTCOUNT <> Blank()",
     "Category": "Extras",
     "Description": "Para contar valores distintos desconsiderando linhas em branco utilize a função DISTINCTCOUNT \r\n\r\nRecomendado:\r\nDISTINCTCOUNTNOBLANK(TABELA[Coluna])\r\n\r\nEvitar:\r\nCALCULATE(\r\n         DISTINCTCOUNT(Tabela[Coluna]),\r\n         Tabela[Coluna] <> Blank()\r\n)\r\n\r\nou \r\n\r\nCALCULATE(\r\n         DISTINCTCOUNT(Tabela[Coluna]),\r\n         Tabela[Coluna] <> 0\r\n)",
     "Severity": 3,

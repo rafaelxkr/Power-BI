@@ -340,16 +340,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "PREFIXO_FATO_DIMENSAO",
-    "Name": "27. Tabelas Devem ter Prefixo \"d\" para Dimensões e \"f\" fara Fatos",
-    "Category": "07.Nomenclatura",
-    "Description": "As tabelas devem ter prefixo \"d\" para dimensões e \"f\" fara fatos",
-    "Severity": 1,
-    "Scope": "Table",
-    "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "USERELATIONSHIP_COM_RLS",
     "Name": "[EXTRA] Evite USERELATIONSHIP ou CROSSFILTER em Tabelas com Filtro de RLS",
     "Category": "Extras",
@@ -357,6 +347,16 @@
     "Severity": 5,
     "Scope": "Table, CalculatedTable",
     "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\ + current.Name + \\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "USERELATIONSHIP_COM_RLS",
+    "Name": "[EXTRA] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
+    "Category": "Extras",
+    "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também utiliza segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como no RLS.",
+    "Severity": 5,
+    "Scope": "Table, CalculatedTable",
+    "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + current.Name + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {

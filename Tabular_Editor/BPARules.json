@@ -340,17 +340,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "PREFIXO_FATO_DIMENSAO",
-    "Name": "27. Tabelas Devem ter Prefixo \"d\" para Dimensões e \"f\" fara Fatos",
-    "Category": "07.Nomenclatura",
-    "Description": "As tabelas devem ter prefixo \"d\" para dimensões e \"f\" fara fatos",
-    "Severity": 1,
-    "Scope": "Table",
-    "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "USERELATIONSHIP_COM_RLS",
+    "ID": "USERELATIONSHIP_TABELA_COM_RLS",
     "Name": "[EXTRA] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
     "Category": "Extras",
     "Description": "Não utilize a função USERELATIONSHIP em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",

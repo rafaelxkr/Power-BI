@@ -351,9 +351,9 @@
   },
   {
     "ID": "USERELATIONSHIP_COM_RLS",
-    "Name": "[EXTRA] Evite USERELATIONSHIP ou CROSSFILTER em Tabelas com Filtro de RLS",
+    "Name": "[EXTRA] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
     "Category": "Extras",
-    "Description": "Não utilize a função USERELATIONSHIP e CROSSFILTER em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
+    "Description": "Não utilize a função USERELATIONSHIP em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
     "Severity": 5,
     "Scope": "Table, CalculatedTable",
     "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\ + current.Name + \\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",

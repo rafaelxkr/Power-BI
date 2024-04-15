@@ -26,7 +26,7 @@
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"RangeStart\")\r\nand\r\nSourceExpression.Contains(\"RangeEnd\") \r\nand\r\nRegex.IsMatch(SourceExpression, \"(?is)(?:>=\\s*'\"\".*?RangeStart.*?<=.*?RangeEnd|>\\s*'\"\"[A-Za-z0-9À-ÿ_\\s].*?RangeStart.*?<.*?RangeEnd|<\\s*'\"\".*?RangeStart.*?>.*?RangeEndd|>\\s*'\"\".*?RangeStart.*?>.*?RangeEnd)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\r\n\tExpression.Contains(\"RangeStart\")\r\n\tand\r\n        Expression.Contains(\"RangeEnd\") \r\n\tand\r\n        Regex.IsMatch(Expression, \"(?is)(?:>=\\s*'\"\".*?RangeStart.*?<=.*?RangeEnd|>\\s*'\"\"[A-Za-z0-9À-ÿ_\\s].*?RangeStart.*?<.*?RangeEnd|<\\s*'\"\".*?RangeStart.*?>.*?RangeEndd|>\\s*'\"\".*?RangeStart.*?>.*?RangeEnd)\")\r\n\t\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"RangeStart\")\r\nand\r\nSourceExpression.Contains(\"RangeEnd\") \r\nand\r\nRegex.IsMatch(SourceExpression, \"(?is)(?:>=\\s*'\"\".*RangeStart.*<=.*RangeEnd|>\\s*'\"\"[A-Za-z0-9À-ÿ_\\s].*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*>.*RangeEndd|>\\s*'\"\".*RangeStart.*>.*RangeEnd)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\r\n\tExpression.Contains(\"RangeStart\")\r\n\tand\r\n        Expression.Contains(\"RangeEnd\") \r\n\tand\r\n        Regex.IsMatch(Expression, \"(?is)(?:>=\\s*'\"\".*RangeStart.*<=.*RangeEnd|>\\s*'\"\"[A-Za-z0-9À-ÿ_\\s].*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*<.*RangeEnd|<\\s*'\"\".*RangeStart.*>.*RangeEndd|>\\s*'\"\".*RangeStart.*>.*RangeEnd)\")\r\n\t\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -40,33 +40,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "Query_INATIVO",
-    "Name": "03.1 Verificar o Query Folding",
-    "Category": "02.Consulta SQL",
-    "Description": "Verificar se o Query Folding dessas tabelas está ativo",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "Partitions.Any(\r\nExpression.IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"FROM\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\nand \r\n(\r\nExpression.Contains(\"Table.\")\r\nor\r\nExpression.Contains(\"List.\")\r\n)",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "INCREMENTAL_FOLDING_DESATIVADO",
-    "Name": "03.2 Incremental com Query Folding Desativado",
+    "Name": "03 Incremental com Query Folding Desativado",
     "Category": "02.Consulta SQL",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 3,
     "Scope": "Table",
     "Expression": "!(GetAnnotation(\"PBI_IsMQueryFoldable\") = \"True\")\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >= 0\r\nand\r\nExpression.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\n\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "TABELA_CRIADA_SEM_SQL",
-    "Name": "04. Tabela Criada sem SQL",
-    "Category": "02.Consulta SQL",
-    "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nColumns.Count() > 1\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nColumns.Count() > 1\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \r\nand\r\n!Name.StartsWith(\"LocalDateTable_\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -77,26 +57,6 @@
     "Severity": 4,
     "Scope": "CalculatedColumn",
     "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "COLUNAS_CALCULADAS_POWER_QUERY",
-    "Name": "05.2 Colunas Calculadas no Power Query",
-    "Category": "02.Consulta SQL",
-    "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
-    "Severity": 4,
-    "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Contains(\"Table.AddColumn\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Contains(\"Table.AddColumn\")\r\n)\r\n)",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "SEM_TABELA_CALENDARIO_SQL",
-    "Name": "06. Sem Tabela dCalendario (Consulta SQL)",
-    "Category": "02.Consulta SQL",
-    "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
-    "Severity": 3,
-    "Scope": "Table",
-    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -127,26 +87,6 @@
     "Severity": 5,
     "Scope": "Relationship",
     "Expression": "FromColumn.DataType != ToColumn.DataType",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CLUSTER_ALTA_CONCORRENCIA_DEV",
-    "Name": "11.1 Cluster Alta Concorrencia ou DEV",
-    "Category": "03.Power Query",
-    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n\tExpression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\n\tor\r\n\tExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\n)\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CLUSTER_ALTA_CONCORRENCIA_PARAMETRO",
-    "Name": "11.2 Cluster Alta Concorrencia ou DEV no Parametro",
-    "Category": "03.Power Query",
-    "Description": "Não utilizar cluster de alta concorrencia ou de DEV\r\n\r\nCluster de DEV: /sql/1.0/endpoints/1727d88509900ba1\r\nCluster Alta Concorrencia: sql/protocolv1/o/...",
-    "Severity": 5,
-    "Scope": "NamedExpression",
-    "Expression": "Expression.IndexOf(\"sql/protocolv1/o/\", StringComparison.OrdinalIgnoreCase) >=0\r\nor\r\nExpression.IndexOf(\"/sql/1.0/endpoints/1727d88509900ba1\", StringComparison.OrdinalIgnoreCase) >=0",
     "CompatibilityLevel": 1200
   },
   {
@@ -196,7 +136,7 @@
     "Description": "Evite utilizar iteradora para rodar o calculo em cima da tabela inteira, isso deixa a execução da medida mais pesada",
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)TOPN\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)TOPN\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -216,7 +156,7 @@
     "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression, \"(?i)(?:VALUES|DISTINCT)\\s*\\(.*?[A-Za-z0-9À-ÿ_']\\s*\\)\")",
+    "Expression": "RegEx.IsMatch(Expression, \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9À-ÿ_]\\s*\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -340,10 +280,10 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "VARIAVEL_COUNT_DISTINCTCOUNT",
-    "Name": "22.10 Utilizar Várivel para o COUNT ou DISTINCTCOUNT",
+    "ID": "VARIAVEL_COUNT",
+    "Name": "22.10 Utilizar Várivel para o COUNT",
     "Category": "05.Medidas",
-    "Description": "Referenciado o mesmo calculo com COUNTou DISTINCTCOUNT",
+    "Description": "Referenciado o mesmo calculo com COUNT",
     "Severity": 3,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
@@ -376,7 +316,7 @@
     "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:DIVIDE\\s*\\(\\s*.*\\s*,\\s*.*\\)\\s*[-]\\s*1|DIVIDE\\s*\\(\\s*.*,\\s*.*\\s*,\\s*.*\\)\\s*[-]\\s*1)\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\s*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*\\)\\s*,\\s*(?:SUM|COUNT|MAX|MIN|AVERAGE|COUNTROWS)\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\s*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*\\)\\s*\\)\\s*[-+]\\s*1\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)DIVIDE\\s*\\(\\s*[[A-Za-z0-9À-ÿ _]+\\]+\\'*\\s*,\\s*[[A-Za-z0-9À-ÿ _]+\\]+\\'*\\s*\\)\\s*[-+]\\s*1\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -411,22 +351,12 @@
   },
   {
     "ID": "USERELATIONSHIP_COM_RLS",
-    "Name": "[EXTRA] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
+    "Name": "[EXTRA] Evite USERELATIONSHIP ou CROSSFILTER em Tabelas com Filtro de RLS",
     "Category": "Extras",
-    "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também utiliza segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como no RLS.",
+    "Description": "Não utilize a função USERELATIONSHIP e CROSSFILTER em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
     "Severity": 5,
     "Scope": "Table, CalculatedTable",
-    "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + current.Name + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "BRONZE_SANDBOX",
-    "Name": "[EXTRA] Consulta Utiliza Sandbox",
-    "Category": "Extras",
-    "Description": "Tabelas quem utilizam dados das tabelas Sandbox não são sustentaveis",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nExpression.IndexOf(\"db_group\", StringComparison.OrdinalIgnoreCase) >= 0\r\n)\r\n)",
+    "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\ + current.Name + \\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {
@@ -447,26 +377,6 @@
     "Severity": 2,
     "Scope": "Relationship",
     "Expression": "(FromTable.Name.StartsWith(\"d\") and ToTable.Name.StartsWith(\"f\") and ToCardinality == \"One\" and FromCardinality == \"One\")\r\nor\r\n(FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"d\") and ToCardinality == \"One\" and FromCardinality == \"One\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
-    "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
-    "Category": "Extras",
-    "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\(|CommonDataService.Database\\()\")\r\n)",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "CALENDARIO_RELACIONADA_DATA_CARGA",
-    "Name": "[EXTRA] Calendario Relacionada com Data de Carga",
-    "Category": "Extras",
-    "Description": "Não faz sentido relacionar a calendario com a data de carga, além de remover o relacionamento entender a data de carga está sendo utilizada no relatório para ser removida",
-    "Severity": 2,
-    "Scope": "Relationship",
-    "Expression": "(\r\nToColumn.Name.ToLower() == \"data_carga\"\r\nor\r\nFromColumn.Name.ToLower() == \"data_carga\"\r\nor\r\nToColumn.Name.ToLower() == \"data_hora_carga\"\r\nor\r\nFromColumn.Name.ToLower() == \"data_hora_carga\"\r\n)\r\nand \r\n!(ToTable\n.Name.StartsWith(\"DateTableTemplate_\") \n\nor ToTable.\nName.StartsWith(\"LocalDateTable_\")\n)\r\nand \r\n!(FromTable.Name.StartsWith(\"DateTableTemplate_\") \n\nor FromTable.Name.StartsWith(\"LocalDateTable_\")\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -507,16 +417,6 @@
     "Severity": 5,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "REMOVER_DATA_CARGA_FATO_DIMENSAO",
-    "Name": "[EXTRA] Remover Data Carga da Fato ou Dimensão",
-    "Category": "Extras",
-    "Description": "Crie uma tabela auxiliar para retornar a ultima data de carga em uma linha",
-    "Severity": 2,
-    "Scope": "Table",
-    "Expression": "Columns.Count() > 2\r\nand\r\nColumns.Any(Name.ToUpper() = \"DATA_HORA_CARGA\" or Name.ToUpper() = \"DATA_CARGA\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -577,6 +477,16 @@
     "Severity": 3,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*DISTINCTCOUNT\\s*\\(\\s*'*[A-Za-z0-9À-ÿ _]+\\'*\\s*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*\\)\\s*,\\s*'*[A-Za-z0-9À-ÿ _]+\\'*\\s*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*<>\\s*(?:BLANK\\(\\s*\\)|0)\\s*\\)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_INATIVO_SEM _USO",
+    "Name": "[EXTRA] Relacionamento Inativo não é utilizado",
+    "Category": "Extras",
+    "Description": "Modelo possuem relacionamentos inativos, mas não possuem uma USERELATIONSHIP para ativar ele",
+    "Severity": 2,
+    "Scope": "Relationship",
+    "Expression": "IsActive == false\r\nand not\r\n(\r\nModel.AllMeasures.Any(RegEx.IsMatch(Expression,\r\n\"(?i)USERELATIONSHIP\\s*\\(\\s*\\'*\" +\r\ncurrent.FromTable.Name + \"\\'*\\[\" + \r\ncurrent.FromColumn.Name + \"\\]\\s*,\\s*\\'*\" +\r\ncurrent.ToTable.Name + \"\\'*\\[\" +\r\ncurrent.ToColumn.Name + \"\\]\")\r\n)\r\nor\r\nModel.AllCalculationItems.Any(RegEx.IsMatch(Expression,\r\n\"(?i)USERELATIONSHIP\\s*\\(\\s*\\'*\" +\r\ncurrent.FromTable.Name + \"\\'*\\[\" + \r\ncurrent.FromColumn.Name + \"\\]\\s*,\\s*\\'*\" +\r\ncurrent.ToTable.Name + \"\\'*\\[\" +\r\ncurrent.ToColumn.Name + \"\\]\")\r\n)\r\n)\r\n",
     "CompatibilityLevel": 1200
   }
 ]

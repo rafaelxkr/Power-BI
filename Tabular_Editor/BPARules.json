@@ -453,10 +453,10 @@
     "ID": "FONTE_DADOS_SEM_HOMOLOGACAO",
     "Name": "[EXTRA] Utiliza Fonte Dados sem Homologação",
     "Category": "Extras",
-    "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel e Web.Contents",
+    "Description": "Tabela possui fonte de dados não homolagadas como Sharepoint, Excel, Web.Contents e ODBC",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint.Files\\(|SharePoint.Contents\\(|SharePoint.Tables\\(|Excel.Workbook\\(|Web.Contents\\(|Web.Headers\\(|Web.Page\\(|CommonDataService.Database\\()\")\r\n)",
+    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression, \"(?:SharePoint\\.Files\\(|SharePoint\\.Contents\\(|SharePoint\\.Tables\\(|Excel\\.Workbook\\(|Web\\.Contents\\(|Web\\.Headers\\(|Web\\.Page\\(|CommonDataService\\.Database\\()|Odbc\\.\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {

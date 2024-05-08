@@ -21,7 +21,7 @@
   },
   {
     "ID": "CORRIGIR_FILTRO_INCREMENTAL",
-    "Name": "01.3 Corrigir Filtro da Atualização Incremental",
+    "Name": "[Atualização] Corrigir Filtro da Atualização Incremental",
     "Category": "01.Atualização",
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
@@ -296,7 +296,7 @@
     "Description": "Evite rodar a função VALUES ou DISTINCT da tabela inteira ao invés disso referecie somente a coluna necessária, caso precise refereciar 2 colunas ou mais utilize a função SUMMARIZE",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(\r\n  RegEx.Replace(\r\n     Expression,\r\n     \"(?is)(?:COUNTROWS\\s*\\(\\s*VALUES|COUNTROWS\\s*\\(\\s*DISTINCT|,\\s*VALUES|,\\s*DISTINCT)\",\r\n     \"\"\r\n  ),\r\n  \"(?is)(?:VALUES|DISTINCT)\\s*\\(.*[A-Za-z0-9À-ÿ_]\\s*\\)\"\r\n)",
+    "Expression": "RegEx.IsMatch(\r\n  RegEx.Replace(\r\n     Expression,\r\n     \"(?is)(?:COUNTROWS\\s*\\(\\s*VALUES|COUNTROWS\\s*\\(\\s*DISTINCT|,\\s*VALUES|,\\s*DISTINCT)\",\r\n     \"\"\r\n  ),\r\n  \"(?is)(?:VALUES|DISTINCT)\\s*\\(\\s*['A-Za-z0-9À-ÿ_\\s]*\\s*\\)\"\r\n)",
     "CompatibilityLevel": 1200
   },
   {

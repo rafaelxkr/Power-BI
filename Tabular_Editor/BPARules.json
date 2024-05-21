@@ -96,7 +96,7 @@
     "Description": "Utilizar a tabela calendario do Databricks \"silver.calendario\"",
     "Severity": 3,
     "Scope": "Table",
-    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
+    "Expression": "\r\nPartitions.Where(\nExpression.IndexOf(\"calendar\", StringComparison.OrdinalIgnoreCase) = -1).Count() > 0\n\n\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {

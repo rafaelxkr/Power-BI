@@ -20,7 +20,8 @@ Em seguida faça a configuração abaixo:
 
 ## 3° Rode o script BPA_Automation_VLI.ps1 no seu Windows PowerShell ISE
 
-Mas antes é necessário fazer algumas configurações no código
+Mas antes é necessário fazer algumas configurações no código, edite essas informações antes de rodar o script.
 
+![image](https://github.com/rafaelxkr/Power-BI/assets/31570331/fd934ff9-ac23-40dc-8d15-74a30566242d)
 
 

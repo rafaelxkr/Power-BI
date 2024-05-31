@@ -1,6 +1,8 @@
 # Análise de Melhores Práticas no Power BI Service
 
 Esse script tem o objetivo de identificar problemas de desenvolvimento de relatórios publicados no Power BI Service utilizando o Tabular Editor para exportar os dados em arquivos .trx e serem analisados posteriormente no Power BI.
+<br></br>
+Utilizado o projeto do [Dave Ruijter](https://github.com/DaveRuijter/BestPracticeAnalyzerAutomation)
 
 ## 1° Instale o Power BI CLI
 abra seu terminal rode esse código para instalar

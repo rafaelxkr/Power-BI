@@ -47,7 +47,7 @@ $PowerBIServicePrincipalTenantId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" #Read-H
 
 
 # Download URL for Tabular Editor portable (you can leave this default, or specify another version):
-$BPAATemplateReportDownloadUrl = "https://github.com/DaveRuijter/BestPracticeAnalyzerAutomation/raw/master/BPAA%20insights.pbit"
+$BPAATemplateReportDownloadUrl = "https://github.com/rafaelxkr/Power-BI/raw/master/Tabular_Editor/BPAA/BPA%20do%20Power%20BI%20Premium.pbit"
 
 # =================================================================================================================================================
 

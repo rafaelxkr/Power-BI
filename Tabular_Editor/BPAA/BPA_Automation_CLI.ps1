@@ -1,9 +1,9 @@
 ﻿# =================================================================================================================================================
 # Best Practice Analyzer Automation (BPAA)
-# Version 0.01 alpha 2
 # 
-# Dave Ruijter
-# https://moderndata.ai/
+# Rafael Barbosa
+# https://github.com/rafaelxkr/Power-BI/tree/master/Tabular_Editor/BPAA
+# https://www.linkedin.com/in/rafael-barbosa2
 # =================================================================================================================================================
 
 # README

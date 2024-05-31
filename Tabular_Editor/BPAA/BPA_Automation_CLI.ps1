@@ -6,31 +6,25 @@
 # https://www.linkedin.com/in/rafael-barbosa2
 # =================================================================================================================================================
 
-# README
+# O poder deste script está, obviamente, no Best Practice Analyzer que faz parte do Tabular Editor!
+# Essa automação nada mais é do que um orquestrador.
 
-# The power of this script is of course in the Best Practice Analyzer that is part of Tabular Editor! 
-# This automation is nothing but a fancy orchestrator.
-# Please visit https://tabulareditor.com/ and reach out Daniel Otykier and thank him!
+# Se você quiser modificar as regras de práticas recomendadas ou adicionar as suas próprias, contribua com as regras no GitHub:
+# https://github.com/TabularEditor/BestPracticeRules#contributing.
 
-# If you want to modify the best-practices rules, or add your own, contribute to the rules on GitHub:
-# https://github.com/TabularEditor/BestPracticeRules#contributing. 
+# O script faz um loop nos espaços de trabalho nos quais a entidade de serviço determinada.
+# O script produzirá os resultados de cada análise no diretório fornecido como arquivos .trx, um resultado VSTEST padrão (JSON).
+# O script baixa a versão portátil do Tabular Editor para uma nova pasta chamada TabularEditorPortable no diretório deste .ps1.
 
-# The script loopts the workspaces that the given service principal has the admin role membership in.
-# The script will output the results of each analysis in the given directory as .trx files, a standard VSTEST result (JSON).
-# The script downloads the portable version of Tabular Editor to a new folder called TabularEditorPortable in the directory of this .ps1.
-# The script installs the PowerShell Power BI management module (MicrosoftPowerBIMgmt).
-
-
-# Also credits and thanks to https://mnaoumov.wordpress.com/ for the functions to help call the .exe.
 # =================================================================================================================================================
 
 # Settings
 # Link configuração UTF-8 para o Powershell --> https://stackoverflow.com/a/57134096
 
-# PARAMETERS
-
 # Install in cmd
 # npm i -g @powerbi-cli/powerbi-cli
+
+# PARAMETERS
 
 
 # Directories

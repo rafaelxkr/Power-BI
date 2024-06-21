@@ -70,6 +70,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_INCREMENTAL_MES_TRIMESTRE",
+    "Name": "[Atualização] Evite Incremental de 1 Mês ou 1 Trimestre",
+    "Category": "01.Atualização",
+    "Description": "O comportamento da incremental 1 mês não é de atualizar os ultimos 30 dias e sim atualizar somente o mês atual\r\nExemplo para o dia 01/04/2024\r\nIncremental de 1 Mês atualiza o periodo     = 01/04/2024 - 30/04/2024 (não considera mês anterior)\r\nIncremental de 2 Meses atualiza o periodo = 01/03/2024 - 30/04/2024 (considera mês anterior)\r\n\r\nO mesmo se aplicada para o trimestre, caso precise que seus dados atualizem os ultimos 3 meses, utilize a opção de meses ao invés de trimestre",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "\r\nEnableRefreshPolicy = true\r\nand\r\n(\r\nIncrementalGranularity = \"Month\"\r\nor\r\nIncrementalGranularity = \"Quarter\"\r\n)\r\nand\r\nIncrementalPeriods = 1",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ORDER_BY_CONSULTA_SQL",
     "Name": "[Consulta SQL] Evite ORDER BY da Consulta SQL",
     "Category": "02.Consulta SQL",

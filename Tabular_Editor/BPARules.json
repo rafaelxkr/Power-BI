@@ -395,8 +395,8 @@
     "Category": "06.Opções/Configurações",
     "Description": "Deve ser marcado a tabela de calendario utilizada no modelo como tabela de data",
     "Severity": 2,
-    "Scope": "Model",
-    "Expression": "Tables.Any(\r\n!Name.StartsWith(\"f\")\r\nand\r\n\r\nPartitions.Any(\r\nExpression.IndexOf(\"silver.calendario\", StringComparison.OrdinalIgnoreCase) >0 )\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\n\r\n)",
+    "Scope": "Table, CalculatedTable",
+    "Expression": "\r\n!Name.StartsWith(\"f\")\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
     "CompatibilityLevel": 1200
   },
   {

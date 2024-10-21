@@ -6,7 +6,7 @@
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!Name.StartsWith(\"d\")\r\n\r\n",
+    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!RegEx.IsMatch(Name,\"^[dD]\")\r\n\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -256,7 +256,7 @@
     "Description": "Evitar a utilização da funções COUNT, COUNTA and COUNTBLANK aos invés do COUNTROWS\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-countrows",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression.Replace(\"DISTINCTCOUNT\",\"\"),\"(?i)COUNT\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTA\\s*\\(\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTBLANK\\s*\\(\")\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)\r\nor\r\n(\r\nRegex.IsMatch(Expression, \"(?i)COUNTAX\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(Expression, \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)",
+    "Expression": "RegEx.IsMatch(RegEx.Replace(Expression,\"(?i)(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/|DISTINCTCOUNT)\",\"\"),\"(?i)(?:COUNTA\\s*\\(|COUNTBLANK\\s*\\(|COUNT\\s*\\()\")\r\nor\r\n(\r\nRegex.IsMatch(RegEx.Replace(Expression,\"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\",\"\"), \"(?i)COUNTX\\s*\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(RegEx.Replace(Expression,\"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\",\"\"), \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)\r\nor\r\n(\r\nRegex.IsMatch(RegEx.Replace(Expression,\"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\",\"\"), \"(?i)COUNTAX\\s*\\((?:[^[\\]]|\\[[^\\]]*\\])*,\")\r\nand\r\nRegex.IsMatch(RegEx.Replace(Expression,\"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\",\"\"), \"(?i)\\,[^\\)]*\\[.*?\\][^\\)]*\\)\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -306,7 +306,7 @@
     "Description": "Referenciado o mesmo calculo com DISTINCT",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"DISTINCT\\s*\\(([^\\]]+)\\).*?DISTINCT\\s*\\(\\1\\)\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"(?i)(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\", \"\"), \"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"(?is)DISTINCT\\s*\\(\\s*([^\\)]+)\\s*\\).*?DISTINCT\\s*\\(\\s*\\1\\s*\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -356,7 +356,7 @@
     "Description": "Referenciado o mesmo calculo com COUNTou DISTINCTCOUNT",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"COUNT\\s*\\(([^\\]]+)\\].*?\\(\\1\\]\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\", \"\"),\"(?is)CALCULATE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"(?is)COUNT\\s*\\(\\s*([^\\]]+)\\].*?COUNT\\s*\\(\\s*\\1\\]\")\r\n",
     "CompatibilityLevel": 1200
   },
   {
@@ -376,7 +376,7 @@
     "Description": "Referenciado o mesmo calculo com VALUES",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"VALUES\\s*\\(([^\\]]+)\\).*?VALUES\\s*\\(\\1\\)\")",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"(?i)(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\", \"\"), \"CALCULATETABLE\\s*\\(\\s*(?:(?!\\,).)*,\", \"\"), \"(?is)VALUES\\s*\\(\\s*([^\\)]+)\\s*\\).*?VALUES\\s*\\(\\s*\\1\\s*\\)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -516,7 +516,7 @@
     "Description": "A função de ORDER BY deixa a consulta SQL muito pesada é recomendavel não utilizar essa função em tabelas principamente em tabelas fatos",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(Regex.Replace(SourceExpression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY|OVER\\s*\\(\\s*ORDER\\s*BY|--.*?\\#\\(lf\\)|--.*?\\n)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Regex.Replace(Expression,\"(?is)(?:PARTITION\\s*BY.*?ORDER\\s*BY|row_number.*?ORDER\\s*BY|OVER\\s*\\(\\s*ORDER\\s*BY|--.*?\\#\\(lf\\)|--.*?\\n)\",\"\"),\"(?is)ORDER\\s*BY\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

@@ -1,28 +1,31 @@
 ﻿# =================================================================================================================================================
 # Best Practice Analyzer Automation (BPAA)
+# Version 0.01 alpha 2
 # 
-# Rafael Barbosa
-# https://github.com/rafaelxkr/Power-BI/tree/master/Tabular_Editor/BPAA
-# https://www.linkedin.com/in/rafael-barbosa2
+# Dave Ruijter
+# https://moderndata.ai/
 # =================================================================================================================================================
 
-# O poder deste script está, obviamente, no Best Practice Analyzer que faz parte do Tabular Editor!
-# Essa automação nada mais é do que um orquestrador.
+# README
 
-# Se você quiser modificar as regras de práticas recomendadas ou adicionar as suas próprias, contribua com as regras no GitHub:
-# https://github.com/TabularEditor/BestPracticeRules#contributing.
+# The power of this script is of course in the Best Practice Analyzer that is part of Tabular Editor! 
+# This automation is nothing but a fancy orchestrator.
+# Please visit https://tabulareditor.com/ and reach out Daniel Otykier and thank him!
 
-# O script faz um loop nos espaços de trabalho nos quais a entidade de serviço determinada.
-# O script produzirá os resultados de cada análise no diretório fornecido como arquivos .trx, um resultado VSTEST padrão (JSON).
-# O script baixa a versão portátil do Tabular Editor para uma nova pasta chamada TabularEditorPortable no diretório deste .ps1.
+# If you want to modify the best-practices rules, or add your own, contribute to the rules on GitHub:
+# https://github.com/TabularEditor/BestPracticeRules#contributing. 
 
+# The script loopts the workspaces that the given service principal has the admin role membership in.
+# The script will output the results of each analysis in the given directory as .trx files, a standard VSTEST result (JSON).
+# The script downloads the portable version of Tabular Editor to a new folder called TabularEditorPortable in the directory of this .ps1.
+# The script installs the PowerShell Power BI management module (MicrosoftPowerBIMgmt).
+
+
+# Also credits and thanks to https://mnaoumov.wordpress.com/ for the functions to help call the .exe.
 # =================================================================================================================================================
 
 # Settings
 # Link configuração UTF-8 para o Powershell --> https://stackoverflow.com/a/57134096
-
-# Install in cmd
-# npm i -g @powerbi-cli/powerbi-cli
 
 # PARAMETERS
 
@@ -32,22 +35,24 @@ $OutputDirectory = "C:\PowerBI_BPAA_output"
 $TRXFilesOutputSubfolderName = "BPAA_output"
 
 # Download URL for Tabular Editor portable (you can leave this default, or specify another version):
-$TabularEditorUrl = "https://github.com/TabularEditor/TabularEditor/archive/refs/tags/2.24.1.zip"
+$TabularEditorUrl = "https://github.com/TabularEditor/TabularEditor/releases/latest/download/TabularEditor.Portable.zip"
 
 # URL to the BPA rules file
-#$BestPracticesRulesUrl = "https://raw.githubusercontent.com/TabularEditor/BestPracticeRules/master/BPARules-PowerBI.json"
-$BestPracticesRulesUrl = "https://raw.githubusercontent.com/rafaelxkr/Power-BI/master/Tabular_Editor/BPARules.json"
+
+#Versão Standard
+$BestPracticesRulesUrl = "https://raw.githubusercontent.com/rafaelxkr/Power-BI/master/Tabular_Editor/BPARules_Standard.json"
 
 # Service Principal values
-$PowerBIServicePrincipalClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" #Read-Host -Prompt 'Specify the Application (Client) Id of the Service Principal'
-$PowerBIServicePrincipalSecret = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" #Read-Host -Prompt 'Specify the secret of the Service Principal'
-# $PowerBIServicePrincipalSecret = Read-Host -Prompt 'Specify the secret of the Service Principal' -AsSecureString 
-$PowerBIServicePrincipalTenantId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" #Read-Host -Prompt 'Specify the tenantid of the Service Principal'
 
+#---------Principal Service ------------------
+$PowerBIServicePrincipalClientId = "XXXXXXXXXXXXXXXXXXXXXXXXXXX" #Read-Host -Prompt 'Specify the Application (Client) Id of the Service Principal'
+$PowerBIServicePrincipalSecret =   "XXXXXXXXXXXXXXXXXXXXXXXXXXX"
+$PowerBIServicePrincipalTenantId = "XXXXXXXXXXXXXXXXXXXXXXXXXXX" #Read-Host -Prompt 'Specify the tenantid of the Service Principal'
+#---------------------------------
 
 
 # Download URL for Tabular Editor portable (you can leave this default, or specify another version):
-$BPAATemplateReportDownloadUrl = "https://github.com/rafaelxkr/Power-BI/raw/master/Tabular_Editor/BPAA/BPA%20do%20Power%20BI%20Premium.pbit"
+$BPAATemplateReportDownloadUrl = "https://github.com/rafaelxkr/Power-BI/blob/master/Tabular_Editor/BPAA/BPA%20do%20Power%20BI%20Premium.pbit"
 
 # =================================================================================================================================================
 
@@ -132,8 +137,6 @@ Start-Transcript -Path $Logfile
 
 Clear-Host
 
-<#
-
 # Verifying if the PowerShell Power BI management module is installed
 Write-Host "=================================================================================================================================="
 Write-Host 'Verifying if the PowerShell Power BI management module is installed...'
@@ -150,7 +153,6 @@ else {
         exit
     }
 }
-#>
 
 Write-Host "=================================================================================================================================="
 
@@ -205,6 +207,11 @@ new-item $OutputDir -itemtype directory -Force | Out-Null # the Out-Null prevent
 # Retrieving all workspaces
 Write-Host 'Retrieving all Premium Power BI workspaces (that the Service Principal has the admin role membership in)...'
 #$workspaces = Get-PowerBIWorkspace -All #-Include All -Scope Organization (commented this, I'm getting an 'Unauthorized' for this approach) # Need Fabric Admin 
+
+
+$WorkspacesFilter = "Administração de Vendas - Area","Administração de Vendas [Test]","Analytics_Controladoria_Financeiro","Auditoria Interna","BRACE PHARMA","COMERCIAL VAREJO","CyberSecurity","Dashboards Grupo NC","Data Warehouse","Embalagem de Solidos","EMS - Intel. Com. (MEU PDV)","EMS_QUALIDADE","EMS_Regulatórios (SAC)","Equipe Dados","Excelência Fábrica Manaus (NVM)","EXCELÊNCIA OPERACIONAL HORTO E JAGUA","Fabric Admin","Farmacotécnica","Galênico P&D","Gestão da Rotina","Gestão de Riscos Corporativos","Governança","GX","GX - Feiras","GX - Mercanet","GX - Sell Out Disty","IM Corporativo","IPP - AREA","IPP - HOMOLOGACAO","LBP - Legal Business Partner","Manutenção","Manutenção Elétrica","Martech","Médico Científico","MercadoFarma","MercadoFarma - Interno","Microsoft Fabric Capacity Metrics 06/12/2023 18:10:43","Multilab Marketing","Multilab SJ","NC TECH","NC+ à vista","NCTECH - Historico Uso Capacidade","OPERACIONAL BRASILIA","PCP e Diretoria Fabrica","Personal","Planejamento Estratégico Pro","Polaris Workspace","Portal Snellog","Portifolio&Inovação","Premium Capacity Utilization And Metrics OUT/2022","Primavera Cloud","Primeiros Passos - EMS Marcas","PRODUÇÃO","QA Dashboards Grupo NC","RBBL","Relacionamento e Solução","Relatórios Unificados  ","Segurança Patrimonial","SEN - DATAFLOW | EFETIVIDADE","SEN - DATAFLOW | IM","SEN - DATAFLOW | PE","SEN - DATAFLOW | RAWDATA","SEN+","Testec","TRADE MARKETING","SEN | CUBO"
+$Contador_iteração = 1
+
 $workspaces = pbicli workspace list | ConvertFrom-Json 
 if ($workspaces) {
     Write-Host 'Outputting all workspace info to disk...'
@@ -213,40 +220,65 @@ if ($workspaces) {
 
     Write-Host 'Done. Now iterating the workspaces...'
     # Ignora os workspaces que contém "HML","Quarentena","Teste" ou "Modelo" no nome ou se é igual a Deploy
-    $workspaces | Where-Object {$_.IsOnDedicatedCapacity -eq $True -and -not ($_.Name -like "*Hml*") -and -not ($_.Name -like "*Quarentena*") -and -not ($_.Name -like "*Teste*") -and -not ($_.Name -like "*Modelo*") -and $_.Name -ne "Deploy"} | ForEach-Object {
+    #$workspaces | Where-Object {$_.IsOnDedicatedCapacity -eq $True -and $_.Name -in $WorkspacesFilter   } | ForEach-Object {
+    #$workspaces | Where-Object {$_.IsOnDedicatedCapacity -eq $True -and -not ($_.Name -like "*Hml*") -and -not ($_.Name -like "*Quarentena*") -and -not ($_.Name -like "*Teste*") -and -not ($_.Name -like "*Modelo*") -and $_.Name -ne "Deploy"} | ForEach-Object {
+    $workspaces | Where-Object {$_.IsOnDedicatedCapacity -eq $True   } | ForEach-Object {
         Write-Host "=================================================================================================================================="
         $workspaceName = $_.Name
+        $workspaceNameCorrigido = $workspaceName -replace '(?:\||\\|\/|\*|\?|\"|\:|<|>)', ''
         $worskpaceId = $_.Id
         Write-Host "Found Premium workspace: $workspaceName.`n"
-
         Write-Host "Now retrieving all datasets in the workspace..."
-        # Added a filter to skip datasets called "Report Usage Metrics Model"
-        #$datasets = Get-PowerBIDataset -WorkspaceId $_.Id | Where-Object {$_.Name -ne "Report Usage Metrics Model" -and $_.Name -ne "Usage Metrics Report"} # Need Fabric Admin 
-        $datasets = pbicli dataset list --workspace $_.Name | Where-Object {$_.Name -ne "Report Usage Metrics Model" -and $_.Name -ne "Usage Metrics Report"} | ConvertFrom-Json 
-        #$dataset = Invoke-PowerBIRestMethod -Url 'groups/44aa6959-fd30-4971-974b-081b66ab192c/datasets' -Method Get | Where-Object {$_.Name -ne "Report Usage Metrics Model" -and $_.Name -ne "Usage Metrics Report"}
-        $datasets | Add-Member -MemberType NoteProperty -Name "WorkspaceId" -Value $worskpaceId
+        
+        $datasets = pbicli dataset list --workspace $worskpaceId | ConvertFrom-Json 
+
+
+
+        #realiza o login a cada 10 iterações de Workspace
+        if ($Contador_iteração % 10 -eq 0 ) 
+        { 
+            pbicli login --service-principal -p $PowerBIServicePrincipalClientId -s $PowerBIServicePrincipalSecret -t $PowerBIServicePrincipalTenantId 
+            Write-Host 'Update. Credential based on Service Principal'
+        }
+        $Contador_iteração++
+
+
         $biglistofdatasets += $datasets
         #$datasets
         
+         
         if ($datasets) {
             Write-Host 'Done. Now iterating the datasets...'
-            $datasets | ForEach-Object {
-                $datasetName = $_.name
+            # Added a filter to skip datasets called "Report Usage Metrics Model" e "Usage Metrics Report"
+            $datasets | Where-Object {$_.Name -ne "Report Usage Metrics Model" -and $_.Name -ne "Usage Metrics Report" } | ForEach-Object {
+
+                $datasetName = $_.name 
+                $datasetNameCorrigido = $datasetName -replace '(?:\||\\|\/|\*|\?|\"|\:|<|>)', ''
                 Write-Host "Found dataset: $datasetName.`n"
 
+                
                 # Prepare the output directory (it needs to exist)
-                $DatasetTRXOutputDir = Join-Path -Path $OutputDirectory -ChildPath "\$CurrentDateTime\$TRXFilesOutputSubfolderName\$workspaceName\"
-                new-item $DatasetTRXOutputDir -itemtype directory -Force | Out-Null # the Out-Null prevents this line of code to output to the host
-                $DatasetTRXOutputPath = Join-Path -Path $DatasetTRXOutputDir -ChildPath "\BPAA - $workspaceName - $datasetName.trx"
+                $DatasetTRXOutputDir = Join-Path -Path $OutputDirectory -ChildPath "\$CurrentDateTime\$TRXFilesOutputSubfolderName\$workspaceNameCorrigido\" 
+                new-item $DatasetTRXOutputDir -itemtype directory -Force | Out-Null # the Out-Null prevents this line of code to output to the host 
+                $DatasetTRXOutputPath = Join-Path -Path $DatasetTRXOutputDir -ChildPath "\BPAA - $workspaceNameCorrigido - $datasetNameCorrigido.trx" 
 
                 # Call Tabular Editor BPA!
                 Write-Host "Performing Best Practice Analyzer on dataset: $datasetName."
                 Write-Host "Output will be saved in file: $DatasetTRXOutputPath."
-                exec { cmd /c """$TabularEditorPortableExePath"" ""Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/$workspaceName;User ID=app:$PowerBIServicePrincipalClientId@$PowerBIServicePrincipalTenantId;Password=$PowerBIServicePrincipalSecret"" ""$datasetName"" -A ""$TabularEditorBPARulesPath"" -TRX ""$DatasetTRXOutputPath""" } @(0, 1) $True #| Out-Null
+
+
+               
+                 
+                try{ 
+                exec { cmd /c """$TabularEditorPortableExePath"" ""Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/$workspaceName;User ID=app:$PowerBIServicePrincipalClientId@$PowerBIServicePrincipalTenantId;Password=$PowerBIServicePrincipalSecret"" ""$datasetName"" -A ""$TabularEditorBPARulesPath"" -TRX ""$DatasetTRXOutputPath"" -ERR" }  @(0, 1) $True  #| Out-Null 
+                }
+                catch {}
 
                 Write-Host """$TabularEditorPortableExePath"" ""Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/$workspaceName;User ID=app:$PowerBIServicePrincipalClientId@$PowerBIServicePrincipalTenantId;Password=$PowerBIServicePrincipalSecret"" ""$datasetName"" -A ""$TabularEditorBPARulesPath"" -TRX ""$DatasetTRXOutputPath"""
+                
             }
         }
+        
         Write-Host "=================================================================================================================================="
     }
     

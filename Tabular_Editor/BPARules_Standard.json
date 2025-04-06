@@ -270,16 +270,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "EVITE_CONTAINSSTRING",
-    "Name": "[Medidas] Evite CONTAINSSTRING",
-    "Category": "05.Medidas",
-    "Description": "Ao invés de utilizar a função CONTAINSSTRING crie uma coluna para classificar se a linha contém a informação desejada",
-    "Severity": 4,
-    "Scope": "Measure",
-    "Expression": "Expression.Contains(\"CONTAINSSTRING\")",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "ITERADORA_NA_TABELA",
     "Name": "[Medidas] Medida Iteradora Rodando na Tabela Inteira",
     "Category": "05.Medidas",
@@ -316,7 +306,7 @@
     "Description": "Utilizar a função DIVIDE ao invés da \"/\"\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "(\r\nRegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\]\\s*\\/(?!\\/)(?!\\*)\")\r\nor\r\nRegEx.IsMatch(Expression.Replace(\"/*\",\"\").Replace(\"*/\",\"\").Replace(\"//\",\"\"),\"\\)\\s*\\/(?!\\/)(?!\\*)\")\r\n)\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
+    "Expression": "RegEx.IsMatch(RegEx.Replace(Expression,\"(\\/\\*|\\*\\/|\\/\\/|\"\".*?\"\"|\\s*)\",\"\"),\"(\\)|\\])\\s*\\/[^0-9]\")\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -476,7 +466,27 @@
     "Description": "Utilize a função TREATAS ao invés de utilizar o IN VALUES ou IN DISTINCT\r\n\r\nEvitar:\r\nTabela1[Coluna1] IN VALUES(Tabela2[Coluna2])\r\nTabela1[Coluna1] IN DISTINCT(Tabela2[Coluna2])\r\n\r\nCorreto:\r\nTREATAS(VALUES(Tabela2[Coluna2]),Tabela1[Coluna1])\r\nTREATAS(DISTINCT(Tabela2[Coluna2]),Tabela1[Coluna1])",
     "Severity": 3,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression,\"(?is)[A-Za-z0-9À-ÿ _]+\\'*\\s*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*IN\\s*(?:VALUES|DISTINCT)\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)IN\\s*(?:VALUES|DISTINCT|SUMMARIZE)\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MEDIDAS_EVITE_FUNCOES_TEXTO",
+    "Name": "[Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,...",
+    "Category": "05.Medidas",
+    "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER",
+    "Severity": 5,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|MID|UPPER|LOWER)\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MEDIDAS_COUNTROWS_SUMMARIZE",
+    "Name": "[Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
+    "Category": "05.Medidas",
+    "Description": "Para contar quantidade de linhas de uma seleção de colunas utilize COUNTROWS + SUMMARIZE",
+    "Severity": 4,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression, \"(?i)SUMX\\s*\\([^\\)]*SUMMARIZE\\s*\\([^\\)]*COUNT\\s*\\(\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -507,6 +517,16 @@
     "Severity": 1,
     "Scope": "Table",
     "Expression": "!Name.StartsWith(\"f\") \r\nand\r\n!Name.StartsWith(\"F\")\r\nand\r\n!Name.StartsWith(\"d\")\r\nand\r\n!Name.StartsWith(\"D\")\r\nand\r\nUsedInRelationships.Any() == true",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RLS_EVITE_FUNCOES_DE_TEXTO",
+    "Name": "[RLS] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,...",
+    "Category": "08.RLS",
+    "Description": "Evite funções de texto na regra de RLS como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER",
+    "Severity": 5,
+    "Scope": "TablePermission",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|MID|UPPER|LOWER)\\s*\\(\")",
     "CompatibilityLevel": 1200
   }
 ]

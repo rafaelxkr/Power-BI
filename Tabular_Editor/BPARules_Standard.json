@@ -496,7 +496,7 @@
     "Description": "Deve ser marcado a tabela de calendario utilizada no modelo como tabela de data",
     "Severity": 2,
     "Scope": "Table, CalculatedTable",
-    "Expression": "\r\n!Name.StartsWith(\"f\")\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)",
+    "Expression": "\r\n!Name.StartsWith(\"f\")\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Name.StartsWith(\"LocalDateTable_\")",
     "CompatibilityLevel": 1200
   },
   {

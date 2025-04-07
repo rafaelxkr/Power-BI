@@ -471,7 +471,7 @@
   },
   {
     "ID": "MEDIDAS_EVITE_FUNCOES_TEXTO",
-    "Name": "[Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,...",
+    "Name": "[Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
     "Category": "05.Medidas",
     "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER",
     "Severity": 5,
@@ -487,6 +487,26 @@
     "Severity": 4,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Expression, \"(?i)SUMX\\s*\\([^\\)]*SUMMARIZE\\s*\\([^\\)]*COUNT\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVALUATEANDLOG_Nao_Usar_Modelos_Produtivos",
+    "Name": "[Medidas] A função EVALUATEANDLOG não deve ser usada em modelos de produção",
+    "Category": "05.Medidas",
+    "Description": "A função EVALUATEANDLOG deve ser usada apenas em ambientes de desenvolvimento/teste e não deve ser usada em modelos de produção.\r\n\r\nReference: https://pbidax.wordpress.com/2022/08/16/introduce-the-dax-evaluateandlog-function/",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)EVALUATEANDLOG\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_USERRELATIONSHIP_EM_TABELAS_COM_RLS",
+    "Name": "[Medidas] Evite a função USERELATIONSHIP e RLS na mesma tabela",
+    "Category": "05.Medidas",
+    "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também aproveite a segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como RLS.\r\n\r\nReference: https://blog.crossjoin.co.uk/2013/05/10/userelationship-and-tabular-row-security/",
+    "Severity": 3,
+    "Scope": "Table, CalculatedTable",
+    "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + current.Name + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {
@@ -507,6 +527,28 @@
     "Severity": 4,
     "Scope": "Table, CalculatedTable",
     "Expression": "ObjectTypeName == \"Calculated Table\"\n\r\nand\r\n(\r\n\n(\nName.StartsWith(\"DateTableTemplate_\") \n\nor \n\nName.StartsWith(\"LocalDateTable_\")\n)\r\nor\r\nHasAnnotation(\"__PBI_LocalDateTable\")\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PERSPECTIVA_SEM_OBJETOS",
+    "Name": "[Opções/Configurações] Perspectivas sem objetos",
+    "Category": "06.Opções/Configurações",
+    "Description": "Perspectivas que não contêm objetos (tabelas) provavelmente não são necessárias. Nesta regra, é necessário apenas verificar tabelas, pois adicionar uma coluna/medida/hierarquia a uma perspectiva também adiciona a tabela à perspectiva. Além disso, tabelas em geral abrangem tabelas calculadas e grupos de cálculo também.",
+    "Severity": 1,
+    "Scope": "Perspective",
+    "Expression": "Model.Tables.Any(InPerspective[current.Name]) == false",
+    "FixExpression": "Delete()",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "GRUPO_DE_CALCULOS_SEM_ITENS_DE_CALCULO",
+    "Name": "[Opções/Configurações] Grupos de cálculo sem itens de cálculo",
+    "Category": "06.Opções/Configurações",
+    "Description": "Grupos de cálculo não têm função a menos que tenham itens de cálculo.",
+    "Severity": 2,
+    "Scope": "CalculationGroup",
+    "Expression": "CalculationItems.Count == 0",
+    "FixExpression": "Delete()",
     "CompatibilityLevel": 1200
   },
   {

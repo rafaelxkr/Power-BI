@@ -471,12 +471,12 @@
   },
   {
     "ID": "MEDIDAS_EVITE_FUNCOES_TEXTO",
-    "Name": "[Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
+    "Name": "[Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
     "Category": "05.Medidas",
-    "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER",
+    "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER, SUBSTITUTE",
     "Severity": 5,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|MID|UPPER|LOWER)\\s*\\(\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|MID|UPPER|SUBSTITUTE|LOWER)\\s*\\(\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -563,12 +563,12 @@
   },
   {
     "ID": "RLS_EVITE_FUNCOES_DE_TEXTO",
-    "Name": "[RLS] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,...",
+    "Name": "[RLS] LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
     "Category": "08.RLS",
-    "Description": "Evite funções de texto na regra de RLS como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER",
+    "Description": "Evite funções de texto na regra de RLS como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER, SUBSTITUTE",
     "Severity": 5,
     "Scope": "TablePermission",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|MID|UPPER|LOWER)\\s*\\(\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|SUBSTITUTE|MID|UPPER|LOWER)\\s*\\(\")",
     "CompatibilityLevel": 1200
   }
 ]

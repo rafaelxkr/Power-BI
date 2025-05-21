@@ -246,7 +246,7 @@
     "Description": "Medidas agregadoras que não precisam ser filtradas ou adicionar um modificador de contexto, não precisam de adicionadas dentro de uma função CALCULATE\r\n\r\nCALCULATE(SUM(TABELA[Coluna])) --> SUM(TABELA[Coluna])\r\n\r\nCALCULATE(MAX(TABELA[Coluna])) --> MAX(TABELA[Coluna])",
     "Severity": 1,
     "Scope": "Measure",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*[A-Za-z0-9À-ÿ\\[\\]_\\( ]*\\)\\s*\\)\")\r\nand\r\n!RegEx.IsMatch(Expression,\"(?is)(?:SUMX|COUNTX|COUNTAX|AVERAGEX|MINX|MAXX|PRODUCTX|FILTER|TOPN|RANK)\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)CALCULATE\\s*\\(\\s*(?:SUM|COUNT|COUNTA|AVERAGE|MIN|MAX|COUNTBLANK|COUNTROWS|DISTINCTCOUNT|DISTINCTCOUNTNOBLANK)\\s*\\([^\\)]+\\s*\\)\\s*\\)\")\r\nand\r\n!RegEx.IsMatch(Expression,\"(?is)(?:SUMX|COUNTX|COUNTAX|AVERAGEX|MINX|MAXX|PRODUCTX|FILTER|TOPN|RANK)\")",
     "CompatibilityLevel": 1200
   },
   {

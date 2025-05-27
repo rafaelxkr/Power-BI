@@ -1,5 +1,39 @@
 # Tabular Editor
 
+## Comando de linha Tabular Editor
+
+### Comando Power Shell para analisar relatório publicados no Power BI Service
+```c#
+$ClientId = "xxxxxxxxxxxxxxxxxxxx" #Client_ID
+$Secret = "xxxxxxxxxxxxxxxxxxxxxx" #Secret_ID
+$TenantId = "xxxxxxxxxxxxxxxxxxxx" #Tenant_ID
+
+$TabularEditorBPARulesPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\BPARules-PowerBI.json"  # Arquivo Json com as regras do BPA
+$DatasetTRXOutputPath = "C:\Users\rafae\Downloads\CSU04 - Metas_V0.SemanticModel\test2.trx"        # Caminho para salvar do arquivo TRX do resultado da analise
+$TabularEditorPortableExePath = "C:\PowerBI_BPAA_output\TabularEditorPortable\TabularEditor.exe"   # Caminho do executavel do Tabular Editor
+
+
+$workspaceName = "Auditoria.Interna"       # Nome do Workspace
+$datasetName = "Fabrica - Gestao estoque"  # Nome do dataset
+
+
+Start-Process -filePath $TabularEditorPortableExePath `
+ -ArgumentList """Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/$workspaceName;User ID=app:$ClientId@$TenantId;Password=$Secret"" ""$datasetName"" -A ""$TabularEditorBPARulesPath"" -V -TRX ""$DatasetTRXOutputPath""" -NoNewWindow -Wait -PassThru
+```
+
+### Comando Power Shell para analisar localmente relatório salvo como .pbip
+```c#
+$toolPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\TabularEditor.exe"                    # Caminho do executavel do Tabular Editor
+$TMDL_Path = "C:\Users\rafae\Downloads\CSU04 - Metas_V0.SemanticModel\definition\model.tmdl"    # Modelo .tmdl do Power BI salvo como .pbip
+$rulesPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\BPARules-PowerBI.json"               # Arquivo Json com as regras do BPA
+$DatasetTRXOutputPath = "C:\Users\rafae\Downloads\CSU04 - Metas_V0.SemanticModel\test.trx"      # Caminho para salvar do arquivo TRX do resultado da analise
+
+
+Start-Process -filePath $toolPath -Wait -NoNewWindow -PassThru `
+       -ArgumentList """$TMDL_Path"" -A ""$rulesPath"" -TRX ""$DatasetTRXOutputPath"""
+```
+
+
 ## Automatizando Ações no Power BI
 Fonte: https://docs.tabulareditor.com/Useful-script-snippets.html#generating-documentation
 

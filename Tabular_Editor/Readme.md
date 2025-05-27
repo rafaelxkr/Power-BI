@@ -3,7 +3,7 @@
 ## Comando de linha Tabular Editor
 
 ### Comando Power Shell para analisar relatório publicados no Power BI Service
-```csharp
+```powershell
 $ClientId = "xxxxxxxxxxxxxxxxxxxx" #Client_ID
 $Secret = "xxxxxxxxxxxxxxxxxxxxxx" #Secret_ID
 $TenantId = "xxxxxxxxxxxxxxxxxxxx" #Tenant_ID
@@ -22,7 +22,7 @@ Start-Process -filePath $TabularEditorPortableExePath `
 ```
 
 ### Comando Power Shell para analisar localmente relatório salvo como .pbip
-```csharp
+```powershell
 $toolPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\TabularEditor.exe"                    # Caminho do executavel do Tabular Editor
 $TMDL_Path = "C:\Users\rafae\Downloads\CSU04 - Metas_V0.SemanticModel\definition\model.tmdl"    # Modelo .tmdl do Power BI salvo como .pbip
 $rulesPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\BPARules-PowerBI.json"               # Arquivo Json com as regras do BPA

@@ -3,7 +3,7 @@
 ## Comando de linha Tabular Editor
 
 ### Comando Power Shell para analisar relatório publicados no Power BI Service
-```c#
+```csharp
 $ClientId = "xxxxxxxxxxxxxxxxxxxx" #Client_ID
 $Secret = "xxxxxxxxxxxxxxxxxxxxxx" #Secret_ID
 $TenantId = "xxxxxxxxxxxxxxxxxxxx" #Tenant_ID
@@ -22,7 +22,7 @@ Start-Process -filePath $TabularEditorPortableExePath `
 ```
 
 ### Comando Power Shell para analisar localmente relatório salvo como .pbip
-```c#
+```csharp
 $toolPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\TabularEditor.exe"                    # Caminho do executavel do Tabular Editor
 $TMDL_Path = "C:\Users\rafae\Downloads\CSU04 - Metas_V0.SemanticModel\definition\model.tmdl"    # Modelo .tmdl do Power BI salvo como .pbip
 $rulesPath = "C:\PowerBI_BPAA_output\TabularEditorPortable\BPARules-PowerBI.json"               # Arquivo Json com as regras do BPA
@@ -39,13 +39,13 @@ Fonte: https://docs.tabulareditor.com/Useful-script-snippets.html#generating-doc
 
 ### Identar todas medidas do modelo
 
-```c#
+```csharp
 Model.AllMeasures.FormatDax();
 ```
 
 ### Configurar o Encoding dos números Inteiros, Decimais e Data e Hora como "Value"
 
-```c#
+```csharp
 // for all Double to Decimal And Int64, Decimal and DateTime columns set EncodingHint
 foreach(var column in Model.Tables.SelectMany(t => t.Columns)) 
     
@@ -63,7 +63,7 @@ foreach(var column in Model.Tables.SelectMany(t => t.Columns))
 
 ### Ocultar colunas em relacionamento
 
-```c#
+```csharp
 foreach (var r in Model.Relationships) {
 r.FromColumn.IsHidden = true;
 }
@@ -71,7 +71,7 @@ r.FromColumn.IsHidden = true;
 
 ### Criando uma medida de soma da coluna selecionada
 
-```c#
+```csharp
 foreach (var c in Selected.Columns)
 {
     var NovaMedida = Model.Tables["_Medidas"].AddMeasure(  //criar na tabela "_Medidas"
@@ -87,7 +87,7 @@ foreach (var c in Selected.Columns)
 
 ### Contar a quantidade de linhas da tabela da coluna selecionada
 
-```c#
+```csharp
 foreach (var c in Selected.Columns)
 {
     var NovaMedida = Model.Tables["_Medidas"].AddMeasure(
@@ -103,7 +103,7 @@ foreach (var c in Selected.Columns)
 
 ### Acumulado do Ano da medida selecionada
 
-```c#
+```csharp
 foreach (var m in Selected.Measures)
 {
     m.Table.AddMeasure(
@@ -123,7 +123,7 @@ foreach (var m in Selected.Measures)
 2. Feche e abra Tabular Editor conectado no modelo.
 4. Selecione 'Tools' do File menu e select 'Best Practice Analyzer'.
 5. Clique no icone "Refresh"(em azul) no canto direito superior.
-```c#
+```csharp
 // https://powerbi.microsoft.com/pt-br/blog/best-practice-rules-to-improve-your-models-performance/
 // https://github.com/microsoft/Analysis-Services/tree/master/BestPracticeRules
 
@@ -144,7 +144,7 @@ w.DownloadFile(url, downloadLoc);
 
 # Exportar Alertas de melhores praticas
 
-```c#
+```csharp
 //https://www.elegantbi.com/post/exportbparesults
 using TabularEditor.BestPracticeAnalyzer;
 //using TabularEditor.Shared.BPA;
@@ -167,13 +167,13 @@ sb.Output();
 
 ```
 ***Nota: Se você estiver usando o Tabular Editor 3 , altere a primeira linha do script com o código abaixo. Esse script funciona no Tabular Editor 3.0.6 ou posterior.
-```c#
+```csharp
 using TabularEditor.Shared.BPA;
 ```
 
 # Encontrar Relacionamentos que Retornam Linha em Branco no Filtro
 
-```c#
+```csharp
 // https://www.elegantbi.com/post/findblankrows
 
 var sb = new System.Text.StringBuilder();
@@ -217,7 +217,7 @@ sb.Output();
 1° precisa rodar o script VertipaqAnnotations.cs para adicionar o Vertipaq nas anotações de cada coluna [instruções](https://www.elegantbi.com/post/vertipaqintabulareditor)
 
 2° Rodar script abaixo [instruções](https://www.elegantbi.com/post/bestpracticerulesavings)
-```c#
+```csharp
 var sb = new System.Text.StringBuilder(); 
 string newline = Environment.NewLine;
 string ann = "Vertipaq_ColumnHierarchySize";

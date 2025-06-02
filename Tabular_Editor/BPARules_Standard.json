@@ -220,6 +220,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "VERIFICAR_UTILIZACAO_TABELA",
+    "Name": "[Relacionamentos] Verificar Utilização de Tabela 1 Relacionamento e Coluna",
+    "Category": "04.Relacionamentos",
+    "Description": "Tabela que possui uma unica coluna relacionando com outra tabela, tem grande chance de não estar sendo utilizada. Verifique no Measure Killer aonde ela está sendo utilizada",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "Columns.Count() == UsedInRelationships.Count() && Columns.Count() == 1",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "EVITE_MEDIDA_DUPLICADA",
     "Name": "[Medidas] Medidas com mesmo DAX",
     "Category": "05.Medidas",

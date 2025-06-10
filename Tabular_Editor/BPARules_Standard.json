@@ -466,7 +466,7 @@
     "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Regex.Replace(Expression, \"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\", \"\"), \"(?i)DIVIDE\\s*\\(.*\\)\\s*[+-]\\s*\\d\")\r\n",
+    "Expression": "RegEx.IsMatch(Regex.Replace(Expression, \"(?:--.*?$|\\/\\/.*?$|--.*?\\n|\\/\\/.*?\\n|(?s)\\/\\*.*?\\*\\/)\", \"\"), \"(?i)DIVIDE\\s*\\(.*\\)\\s*[+-]\\s*\\d[^\\d]\")\r\n",
     "CompatibilityLevel": 1200
   },
   {

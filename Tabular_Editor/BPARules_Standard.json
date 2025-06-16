@@ -80,6 +80,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_CONSULTA_ARQUIVO_LOCAL",
+    "Name": "[Atualização] Evite Consultas de Arquivos no Computador Local",
+    "Category": "01.Atualização",
+    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)C\\:\\\\Users\\\\\")\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ORDER_BY_CONSULTA_SQL",
     "Name": "[Consulta SQL] Evite ORDER BY da Consulta SQL",
     "Category": "02.Consulta SQL",

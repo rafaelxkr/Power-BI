@@ -520,6 +520,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_DISTINCTCOUNT_COLUNA_RELACIONAMENTO_DE_DADOS_UNICOS",
+    "Name": "[Medidas] Evite DISTINCTCOUNT em Coluna de Relacionamento com Dados Unicos",
+    "Category": "05.Medidas",
+    "Description": "Colunas de relacionamento com dados unicos não precisa de contagem distinta, pode se utilizar a função COUNTROWS no lugar",
+    "Severity": 5,
+    "Scope": "Measure",
+    "Expression": "Model.Relationships.Where( ToCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + ToTable.Name + \"\\[\" + ToColumn.Name  )  ).Count() > 0\r\nor\r\nModel.Relationships.Where( FromCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + FromTable.Name + \"\\[\" + FromColumn.Name  )  ).Count() > 0",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "MARCAR_TABELA_DATA",
     "Name": "[Opções/Configurações] Marcar a dCalendario Como Tabela de Data",
     "Category": "06.Opções/Configurações",

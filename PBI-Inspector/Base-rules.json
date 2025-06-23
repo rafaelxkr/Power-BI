@@ -8,201 +8,151 @@
       "codepage": 1200,
       "rules": [
         {
-          "name": "17.Utilizou medidas ao invés de colunas calculadas nos visuais?",
-          "description": "Utilize medida(medida explicita) ao invés de colunas agregadas(medidas implicitas)",
-          "logType": "error",
+          "id": "FILTRO_VISUAL_SEM_USO",
+          "name": "[DADOS RESIDUAIS] Remova filtros sem uso dos visuais",
+          "description": "Ao remover filtro sem uso nos visuais, conferir novamente as colunas sem utilização",
+          "logType": "warning",
           "disabled": false,
           "forEachPath": "$.sections[*]",
           "forEachPathName": "$.name",
           "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*].config",
+          "path": "$.visualContainers[*]",
           "pathErrorWhenNoMatch": false,
           "test": [
-            {
-              "map": [
-                {
-                  "filter": [
-                    {
-                      "var": "q"
-                    },
-                    {
-                      "some" : [ 
-                        {"var": "singleVisual.prototypeQuery.Select"},
-                        {"var": "Aggregation"}
-                      ]
-                        
-                    }
-
+              {
+                  "map": [
+                      {
+                          "filter": [
+                              {
+                                  "var": "visualContainer"
+                              },
+                              {
+                                  "some": [
+                                      {
+                                          "drillvar": "filters>"
+                                      },
+                                      {
+                                          "and": [
+                                              {
+                                                  "==": [
+                                                      {
+                                                          "var": "howCreated"
+                                                      },
+                                                      1
+                                                  ]
+                                              },
+                                              {
+                                                  "==": [
+                                                      {"var": "filter"}, null
+                                                  ]
+                                              }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "drillvar": "config>name"
+                      }
                   ]
-                },
-                {
-                  "var": "name"
-                }
-              ]
-            },
-            {
-              "q": "."
-            },
-            []
+              },
+              {
+                  "visualContainer": "."
+              },
+              []
           ]
         },
         {
-          "name": "30.Possui Guia de Apoio com perfil de atualização?",
-          "description": "O relatório precisa ter guia de apoio",
+          "id": "FILTRO_PAGINA_SEM_USO",
+          "name": "[DADOS RESIDUAIS] Remova filtros a nível de página sem uso",
+          "description": "Ao remover filtro sem uso na página, conferir novamente as colunas sem utilização",
           "disabled": false,
           "logType": "warning",
           "path": "$.sections[*]",
           "pathErrorWhenNoMatch": false,
           "test": [
-            {
-              "!!":[
-                {
-                  "filter": [
-                    {
-                      "var": "q"
-                    },
-                    {
-                      "strcontains": [
-                        {"var": "displayName"},
-                        "(?i)(?:apoio|guia|gloss.*rio)"
-                      ]
-                    }
+              {
+                  "map": [
+                      {
+                          "filter": [
+                              {
+                                  "var": "section"
+                              },
+                              {
+                                  "some": [
+                                      {
+                                          "drillvar": "filters>"
+                                      },
+                                      {
+                                          "and": [
+                                              {
+                                                  "==": [
+                                                      {
+                                                          "var": "howCreated"
+                                                      },
+                                                      1
+                                                  ]
+                                              },
+                                              {
+                                                  "==": [
+                                                      {"var": "filter"}, null
+                                                  ]
+                                              }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "var": "displayName"
+                      }
                   ]
-                }
-              ]
-            },
-            {
-              "q": "."
-            },
-            true
+                },
+              {
+                  "section": "."
+              },
+              []
           ]
         },
         {
-          "name": "31.Utilizou o visual 'Cartão (Novo)' ao invés do visual 'Cartão'?",
-          "description": "Sempre utilize o visual de cartão novo e a opção de multiplos cartões desse visual",
-          "logType": "error",
+          "id": "FILTRO_RELATORIO_SEM_USO",
+          "name": "[DADOS RESIDUAIS] Remova filtros a nível de relatório sem uso",
+          "description": "Ao remover filtro sem uso a nivel de relatório, conferir novamente as colunas sem utilização",
+          "logType": "warning",
           "disabled": false,
-          "forEachPath": "$.sections[*]",
-          "forEachPathName": "$.name",
-          "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*].config",
-          "pathErrorWhenNoMatch": false,
+          "path": "$.filters",
+          "pathErrorWhenNoMatch": true,
           "test": [
             {
               "map": [
                 {
                   "filter": [
                     {
-                      "var": "q"
+                      "var": "f.0"
                     },
                     {
                       "==": [
-                          {
-                              "var": "singleVisual.visualType"
-                          },
-                          "card"
+                          {"var": "filter"}, null
                       ]
                     }
                   ]
                 },
                 {
-                  "var": "name"
+                    "var": "name"
                 }
               ]
             },
             {
-              "q": "."
+                "f": "."
             },
             []
           ]
         },
         {
-          "name": "[Extras] Evite a opção 'Mostrar Itens em Branco' em Visuais de Tabela ou Matrix",
-          "description": "Essa configuração faz a redenrização da Tabela ou Matrix ficar mais pesada, quanto mais colunas e linha esses visuais tiverem mais pesado ficará a renderização deles",
-          "logType": "warning",
-          "disabled": false,
-          "forEachPath": "$.sections[*]",
-          "forEachPathName": "$.name",
-          "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*].config",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-            {
-              "map": [
-                {
-                  "filter": [
-                    {
-                      "var": "q"
-                    },
-                    {
-                      "and":[
-                        {"!!": [{"var": "singleVisual.showAllRoles"}]},
-                        {"in": [{"var": "singleVisual.visualType" },["tableEx","pivotTable"]]}
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "var": "name"
-                }
-              ]
-            },
-            {
-              "q": "."
-            },
-            []
-          ]
-        },
-        {
-          "name": "[Extras] Adicionar o nome para a página",
-          "description": "As páginas visiveis precisam de um nome ao invés do padrão 'Pagina x'",
-          "disabled": false,
-          "logType": "warning",
-          "path": "$.sections[*]",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-            {
-              "map": [
-                {
-                  "filter": [
-                    {
-                      "var": "pageArray"
-                    },
-                    {
-                      "and": [
-                        {
-                          "strcontains": [
-                            {
-                              "var": "displayName"
-                            },
-                            "(?:^Page [1-9]+$|^Página [1-9]+$)"
-                          ]
-                        },
-                        {
-                          "!=": [
-                            {
-                              "drillvar": "config>visibility"
-                            },
-                            1
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "var": "displayName"
-                }
-              ]
-            },
-            {
-              "pageArray": "."
-            },
-            []
-          ]
-        },
-        {
-          "name": "[Extras] Filtro no relatório ao invés de filtrar no Power Query",
+          "id": "FILTRAR_CONSULTA_DE_DADOS",
+          "name": "[RELATÓRIO] Filtro no relatório ao invés de filtrar no Power Query",
           "description": "Ao invés de aplicar filtros a nível do relatório, faça os filtros no Power Query para reduzir o tamanho do modelo",
           "logType": "warning",
           "disabled": false,
@@ -237,7 +187,7 @@
         },
         {
           "id": "REMOVE_UNUSED_CUSTOM_VISUALS",
-          "name": "[Extras] Remova visuais personalizados que não são usados ​​no relatório",
+          "name": "[RELATÓRIO] Remova visuais personalizados que não são usados no relatório",
           "description": "Retorna uma matriz de nomes visuais personalizados a serem removidos, se houver",
           "logType": "warning",
           "disabled": false,
@@ -297,7 +247,229 @@
           ]
         },
         {
-          "name": "[Extras] Reduza número de visuais por página",
+          "id": "USAR_MEDIDAS_EXPLICITAS",
+          "name": "[VISUAL] Utilizar medidas ao invés de colunas calculadas nos visuais",
+          "description": "Utilize medida(medida explicita) ao invés de colunas agregadas(medidas implicitas)",
+          "logType": "error",
+          "disabled": false,
+          "forEachPath": "$.sections[*]",
+          "forEachPathName": "$.name",
+          "forEachPathDisplayName": "$.displayName",
+          "path": "$.visualContainers[*].config",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+            {
+              "map": [
+                {
+                  "filter": [
+                    {
+                      "var": "q"
+                    },
+                    {
+                      "some" : [ 
+                        {"var": "singleVisual.prototypeQuery.Select"},
+                        {"var": "Aggregation"}
+                      ]
+                        
+                    }
+
+                  ]
+                },
+                {
+                  "var": "name"
+                }
+              ]
+            },
+            {
+              "q": "."
+            },
+            []
+          ]
+        },
+        {
+          "id": "UTILIZAR_CARTAO_NOVO",
+          "name": "[VISUAL] Utilizar visual 'Cartão (Novo)' ao invés do visual 'Cartão'",
+          "description": "Sempre utilize o visual de cartão novo e a opção de multiplos cartões desse visual",
+          "logType": "error",
+          "disabled": false,
+          "forEachPath": "$.sections[*]",
+          "forEachPathName": "$.name",
+          "forEachPathDisplayName": "$.displayName",
+          "path": "$.visualContainers[*].config",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+            {
+              "map": [
+                {
+                  "filter": [
+                    {
+                      "var": "q"
+                    },
+                    {
+                      "==": [
+                          {
+                              "var": "singleVisual.visualType"
+                          },
+                          "card"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "var": "name"
+                }
+              ]
+            },
+            {
+              "q": "."
+            },
+            []
+          ]
+        },
+        {
+          "id": "SLICER_SEARCH_INPUT_SHOULD_BE_EMPTY",
+          "name": "[VISUAL] A entrada de pesquisa do Slicer deve estar vazia",
+          "description": "A entrada de pesquisa do Slicer deve estar vazia para evitar filtragem incorreta.",
+          "disabled": false,
+          "logType": "error",
+          "forEachPath": "$.sections[*]",
+          "forEachPathName": "$.name",
+          "forEachPathDisplayName": "$.displayName",
+          "path": "$.visualContainers[*].config",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+              {
+                  "map": [
+                      {
+                          "filter": [
+                              {
+                                  "var": "visualsConfigArray"
+                              },
+                              {
+                                  "and": [
+                                      {
+                                          "in": [
+                                              {
+                                                  "var": "singleVisual.visualType"
+                                              },
+                                              [
+                                                  "slicer"
+                                              ]
+                                          ]
+                                      },
+                                      {
+                                          "!!": [{
+                                              "var": "singleVisual.objects.general.0.properties.selfFilter.filter.Where.0.Condition.Contains.Right.Literal.Value"
+                                          }]
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "var": "name"
+                      }
+                  ]
+              },
+              {
+                  "visualsConfigArray": "."
+              },
+              []
+          ]
+        },
+        {
+          "id": "FILTRO_VISUAL_CONTEM",
+          "name": "[VISUAL] Evite Filtros a Nivel Visual do Tipo Contém ou Não Contém",
+          "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
+          "logType": "warning",
+          "disabled": false,
+          "forEachPath": "$.sections[*]",
+          "forEachPathName": "$.name",
+          "forEachPathDisplayName": "$.displayName",
+          "path": "$.visualContainers[*]",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+              {
+                  "map": [
+                      {
+                          "filter": [
+                              {
+                                  "var": "visualContainer"
+                              },
+                              {
+                                  "some": [
+                                      {
+                                          "drillvar": "filters>"
+                                      },
+                                      {
+                                          "some": [
+                                            {
+                                              "var": "filter.Where"
+                                            },
+                                            {
+                                              "or": [
+                                                {"var": "Condition.StartsWith"},
+                                                {"var": "Condition.Contains"}
+                                              ]
+                                            }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "drillvar": "config>name"
+                      }
+                  ]
+              },
+              {
+                  "visualContainer": "."
+              },
+              []
+          ]
+        },
+        {
+          "id": "EVITE_MOSTRAR_ITENS_EM_BRANCO",
+          "name": "[VISUAL] Evite a opção 'Mostrar Itens em Branco' em Visuais de Tabela ou Matrix",
+          "description": "Essa configuração faz a redenrização da Tabela ou Matrix ficar mais pesada, quanto mais colunas e linha esses visuais tiverem mais pesado ficará a renderização deles",
+          "logType": "warning",
+          "disabled": false,
+          "forEachPath": "$.sections[*]",
+          "forEachPathName": "$.name",
+          "forEachPathDisplayName": "$.displayName",
+          "path": "$.visualContainers[*].config",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+            {
+              "map": [
+                {
+                  "filter": [
+                    {
+                      "var": "q"
+                    },
+                    {
+                      "and":[
+                        {"!!": [{"var": "singleVisual.showAllRoles"}]},
+                        {"in": [{"var": "singleVisual.visualType" },["tableEx","pivotTable"]]}
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "var": "name"
+                }
+              ]
+            },
+            {
+              "q": "."
+            },
+            []
+          ]
+        },
+        {
+          "id": "REDUZIR_VISUAIS_POR_PAGINA",
+          "name": "[VISUAL] Reduza número de visuais por página",
           "description": "Essa página contém mais de 20 gráficos ou cards visiveis, divida em páginas os visuais, identifique oportunidades de reduzir número de visuais como por exemplo o card novo com a opção de multiplos visuais ou utilizar o bookmark para reduzir o número visuais visiveis",
           "logType": "warning",
           "disabled": false,
@@ -365,8 +537,138 @@
           ]
         },
         {
+          "id": "FILTRO_PAGINA_CONTEM",
+          "name": "[PÁGINA] Evite Filtros a Nivel Página do Tipo Contém ou Não Contém",
+          "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
+          "disabled": false,
+          "logType": "warning",
+          "path": "$.sections[*]",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+              {
+                  "map": [
+                      {
+                          "filter": [
+                              {
+                                  "var": "section"
+                              },
+                              {
+                                  "some": [
+                                      {
+                                          "drillvar": "filters>"
+                                      },
+                                      {
+                                          "some": [
+                                            {
+                                              "var": "filter.Where"
+                                            },
+                                            {
+                                              "or": [
+                                                {"var": "Condition.StartsWith"},
+                                                {"var": "Condition.Contains"}
+                                              ]
+                                            }
+                                          ]
+                                      }
+                                  ]
+                              }
+                          ]
+                      },
+                      {
+                          "var": "displayName"
+                      }
+                  ]
+              },
+              {
+                  "section": "."
+              },
+              []
+          ]
+        },
+        {
+          "id": "ADICIONAR_NOME_PARA_PAGINA",
+          "name": "[PÁGINA] Adicionar o nome para a página",
+          "description": "As páginas visiveis precisam de um nome ao invés do padrão 'Pagina x'",
+          "disabled": false,
+          "logType": "warning",
+          "path": "$.sections[*]",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+            {
+              "map": [
+                {
+                  "filter": [
+                    {
+                      "var": "pageArray"
+                    },
+                    {
+                      "and": [
+                        {
+                          "strcontains": [
+                            {
+                              "var": "displayName"
+                            },
+                            "(?:^Page [1-9]+$|^Página [1-9]+$)"
+                          ]
+                        },
+                        {
+                          "!=": [
+                            {
+                              "drillvar": "config>visibility"
+                            },
+                            1
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "var": "displayName"
+                }
+              ]
+            },
+            {
+              "pageArray": "."
+            },
+            []
+          ]
+        },
+        {
+          "id": "ADICIONAR_GUIA_DE_APOIO",
+          "name": "[PÁGINA] Falta Página de Guia de Apoio com perfil de atualização",
+          "description": "O relatório precisa ter uma página de guia de apoio, informando sobre as atualizações do relatórios um resumo principais indicadores ",
+          "disabled": true,
+          "logType": "warning",
+          "path": "$.sections[*]",
+          "pathErrorWhenNoMatch": false,
+          "test": [
+            {
+              "!!":[
+                {
+                  "filter": [
+                    {
+                      "var": "q"
+                    },
+                    {
+                      "strcontains": [
+                        {"var": "displayName"},
+                        "(?i)(?:apoio|guia|gloss.*rio)"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "q": "."
+            },
+            true
+          ]
+        },
+        {
           "id": "HIDE_TOOLTIP_DRILLTROUGH_PAGES",
-          "name": "[Extras] Páginas de Tooltip ou Drillthrough devem estar ocultas",
+          "name": "[PÁGINA] Páginas de Tooltip ou Drillthrough devem estar ocultas",
           "description": "Oculte as páginas usadas como Tooltip ou Drillthrough",
           "logType": "warning",
           "disabled": false,
@@ -413,296 +715,48 @@
           ]
         },
         {
-          "id": "SLICER_SEARCH_INPUT_SHOULD_BE_EMPTY",
-          "name": "A entrada de pesquisa do Slicer deve estar vazia",
-          "description": "A entrada de pesquisa do Slicer deve estar vazia para evitar filtragem incorreta.",
-          "disabled": false,
-          "logType": "error",
-          "forEachPath": "$.sections[*]",
-          "forEachPathName": "$.name",
-          "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*].config",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-              {
-                  "map": [
-                      {
-                          "filter": [
-                              {
-                                  "var": "visualsConfigArray"
-                              },
-                              {
-                                  "and": [
-                                      {
-                                          "in": [
-                                              {
-                                                  "var": "singleVisual.visualType"
-                                              },
-                                              [
-                                                  "slicer"
-                                              ]
-                                          ]
-                                      },
-                                      {
-                                          "!!": [{
-                                              "var": "singleVisual.objects.general.0.properties.selfFilter.filter.Where.0.Condition.Contains.Right.Literal.Value"
-                                          }]
-                                      }
-                                  ]
-                              }
-                          ]
-                      },
-                      {
-                          "var": "name"
-                      }
-                  ]
-              },
-              {
-                  "visualsConfigArray": "."
-              },
-              []
-          ]
-        },
-        {
-          "name": "Remova filtros sem uso dos visuais",
-          "description": "Ao remover filtro sem uso nos visuais, conferir novamente as colunas sem utilização",
+          "id": "DESATIVAR_LENTAS_CONFIGURACOES",
+          "name": "[Configurações] Desabilitar configurações de fonte de dados lenta local",
+          "description": "Verifique se todas as configurações de fonte de dados lenta do relatório estão desabilitadas.",
+          "disabled": true,
           "logType": "warning",
-          "disabled": false,
-          "forEachPath": "$.sections[*]",
-          "forEachPathName": "$.name",
-          "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*]",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-              {
-                  "map": [
-                      {
-                          "filter": [
-                              {
-                                  "var": "visualContainer"
-                              },
-                              {
-                                  "some": [
-                                      {
-                                          "drillvar": "filters>"
-                                      },
-                                      {
-                                          "and": [
-                                              {
-                                                  "==": [
-                                                      {
-                                                          "var": "howCreated"
-                                                      },
-                                                      1
-                                                  ]
-                                              },
-                                              {
-                                                  "==": [
-                                                      {"var": "filter"}, null
-                                                  ]
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      },
-                      {
-                          "drillvar": "config>name"
-                      }
-                  ]
-              },
-              {
-                  "visualContainer": "."
-              },
-              []
-          ]
-        },
-        {
-          "name": "Evite Filtros a Nivel Visual do Tipo Contém ou Não Contém",
-          "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
-          "logType": "warning",
-          "disabled": false,
-          "forEachPath": "$.sections[*]",
-          "forEachPathName": "$.name",
-          "forEachPathDisplayName": "$.displayName",
-          "path": "$.visualContainers[*]",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-              {
-                  "map": [
-                      {
-                          "filter": [
-                              {
-                                  "var": "visualContainer"
-                              },
-                              {
-                                  "some": [
-                                      {
-                                          "drillvar": "filters>"
-                                      },
-                                      {
-                                          "some": [
-                                            {
-                                              "var": "filter.Where"
-                                            },
-                                            {
-                                              "or": [
-                                                {"var": "Condition.StartsWith"},
-                                                {"var": "Condition.Contains"}
-                                              ]
-                                            }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      },
-                      {
-                          "drillvar": "config>name"
-                      }
-                  ]
-              },
-              {
-                  "visualContainer": "."
-              },
-              []
-          ]
-        },
-        {
-          "name": "Evite Filtros a Nivel Página do Tipo Contém ou Não Contém",
-          "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
-          "disabled": false,
-          "logType": "warning",
-          "path": "$.sections[*]",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-              {
-                  "map": [
-                      {
-                          "filter": [
-                              {
-                                  "var": "section"
-                              },
-                              {
-                                  "some": [
-                                      {
-                                          "drillvar": "filters>"
-                                      },
-                                      {
-                                          "some": [
-                                            {
-                                              "var": "filter.Where"
-                                            },
-                                            {
-                                              "or": [
-                                                {"var": "Condition.StartsWith"},
-                                                {"var": "Condition.Contains"}
-                                              ]
-                                            }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      },
-                      {
-                          "var": "displayName"
-                      }
-                  ]
-              },
-              {
-                  "section": "."
-              },
-              []
-          ]
-        },
-        {
-          "name": "Remova filtros a nível de página sem uso",
-          "description": "Ao remover filtro sem uso na página, conferir novamente as colunas sem utilização",
-          "disabled": false,
-          "logType": "warning",
-          "path": "$.sections[*]",
-          "pathErrorWhenNoMatch": false,
-          "test": [
-              {
-                  "map": [
-                      {
-                          "filter": [
-                              {
-                                  "var": "section"
-                              },
-                              {
-                                  "some": [
-                                      {
-                                          "drillvar": "filters>"
-                                      },
-                                      {
-                                          "and": [
-                                              {
-                                                  "==": [
-                                                      {
-                                                          "var": "howCreated"
-                                                      },
-                                                      1
-                                                  ]
-                                              },
-                                              {
-                                                  "==": [
-                                                      {"var": "filter"}, null
-                                                  ]
-                                              }
-                                          ]
-                                      }
-                                  ]
-                              }
-                          ]
-                      },
-                      {
-                          "var": "displayName"
-                      }
-                  ]
-                },
-              {
-                  "section": "."
-              },
-              []
-          ]
-        },
-        {
-          "name": "Remova filtros a nível de relatório sem uso",
-          "description": "Ao remover filtro sem uso a nivel de relatório, conferir novamente as colunas sem utilização",
-          "logType": "warning",
-          "disabled": false,
-          "path": "$.filters",
+          "path": "$.config",
           "pathErrorWhenNoMatch": true,
           "test": [
-            {
-              "map": [
-                {
-                  "filter": [
-                    {
-                      "var": "f.0"
-                    },
-                    {
-                      "==": [
-                          {"var": "filter"}, null
-                      ]
-                    }
+              {
+                  "!": [
+                      {
+                          "or": [
+                              {
+                                  "var": "isCrossHighlightingDisabled"
+                              },
+                              {
+                                  "var": "isSlicerSelectionsButtonEnabled"
+                              },
+                              {
+                                  "var": "isFilterSelectionsButtonEnabled"
+                              },
+                              {
+                                  "var": "isFieldWellButtonEnabled"
+                              },
+                              {
+                                  "var": "isApplyAllButtonEnabled"
+                              }
+                          ]
+                      }
                   ]
-                },
-                {
-                    "var": "name"
-                }
-              ]
-            },
-            {
-                "f": "."
-            },
-            []
+              },
+              {
+                  "isCrossHighlightingDisabled": "/slowDataSourceSettings/isCrossHighlightingDisabled",
+                  "isSlicerSelectionsButtonEnabled": "/slowDataSourceSettings/isSlicerSelectionsButtonEnabled",
+                  "isFilterSelectionsButtonEnabled": "/slowDataSourceSettings/isFilterSelectionsButtonEnabled",
+                  "isFieldWellButtonEnabled": "/slowDataSourceSettings/isFieldWellButtonEnabled",
+                  "isApplyAllButtonEnabled": "/slowDataSourceSettings/isApplyAllButtonEnabled"
+              },
+              true
           ]
         }
       ]
-    }
+    }    
   ]
 }

@@ -40,13 +40,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "TABELA_NAO_ESTA_NO_MODO_IMPORT",
-    "Name": "[Atualização] Tabela Não Está no Modo Import",
+    "ID": "EVITE_MODO_DIRECT_QUERY",
+    "Name": "[Atualização] Evite Tabelas no Modo Direct Query",
     "Category": "01.Atualização",
-    "Description": "Evite deixar as tabelas no modo que não seja \"import\"",
+    "Description": "Evite deixar as tabelas no modo \"Direct Query\"",
     "Severity": 5,
     "Scope": "Partition",
-    "Expression": "Mode != \"Import\"",
+    "Expression": "Mode == \"DirectQuery\"",
     "CompatibilityLevel": 1200
   },
   {
@@ -116,7 +116,17 @@
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "CalculatedColumn",
-    "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
+    "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.HasAnnotation(\"__PBI_LocalDateTable\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "REDUZIR_USO_DE_TABELAS_CALCULADAS",
+    "Name": "[Consulta SQL] Evite Tabelas Calculadas",
+    "Category": "02.Consulta SQL",
+    "Description": "Migre a lógica da tabela calculada para o seu data warehouse ou crie uma consulta SQL para retornar o mesmo resultado",
+    "Severity": 2,
+    "Scope": "CalculatedTable",
+    "Expression": "!Regex.IsMatch(Expression,\"(?i)(NAMEOF|GENERATESERIES)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -167,16 +177,6 @@
     "Severity": 5,
     "Scope": "Relationship",
     "Expression": "FromTable.Name.StartsWith(\"f\") and ToTable.Name.StartsWith(\"f\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "RELACIONAMENTO_MUITOS_MUITOS",
-    "Name": "[Relacionamentos] Possui Relacionamentos Muitos para Muitos",
-    "Category": "04.Relacionamentos",
-    "Description": "Evite relacionamentos de muitos para muitos",
-    "Severity": 3,
-    "Scope": "Relationship",
-    "Expression": "FromCardinality == \"Many\"\n and ToCardinality == \"Many\"",
     "CompatibilityLevel": 1200
   },
   {
@@ -241,10 +241,30 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_DIMENSOES_DE_ATRIBUTO_UNICO",
+    "Name": "[Relacionamentos] Evite dimensões de atributo único que não sejam compartilhadas por vários fatos",
+    "Category": "04.Relacionamentos",
+    "Description": "Em geral, a normalização excessiva deve ser evitada. Se uma dimensão contiver apenas um atributo e não for compartilhada por vários fatos, considere mover o atributo para a tabela de fatos.",
+    "Severity": 2,
+    "Scope": "Table",
+    "Expression": "Columns.Count(IsVisible and not UsedInRelationships.Any()) = 1 and\nModel.Relationships.Count(ToTable = outerIt) = 1",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RELACIONAMENTO_MUITOS_MUITOS",
+    "Name": "[Relacionamentos] Possui Relacionamentos Muitos para Muitos",
+    "Category": "04.Relacionamentos",
+    "Description": "Evite relacionamentos de muitos para muitos",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "FromCardinality == \"Many\"\n and ToCardinality == \"Many\"",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "EVITE_MEDIDA_DUPLICADA",
     "Name": "[Medidas] Medidas com mesmo DAX",
     "Category": "05.Medidas",
-    "Description": "Encontrado medidas com o nome diferente, mas que possuem a mesma expresão DAX",
+    "Description": "Encontrado medidas com o nome diferente, mas que possuem a mesma expressão DAX",
     "Severity": 1,
     "Scope": "Measure",
     "Expression": "Model.AllMeasures.Any(Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") = outerIt.Expression.Replace(\" \",\"\").Replace(\"\\n\",\"\").Replace(\"\\r\",\"\").Replace(\"\\t\",\"\") and it <> outerIt)",
@@ -324,10 +344,10 @@
     "ID": "DIVIDE",
     "Name": "[Medidas] DIVIDE ao invés de \"/\"",
     "Category": "05.Medidas",
-    "Description": "Utilizar a função DIVIDE ao invés da \"/\"\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
+    "Description": "Colunas, medidas ou tabelas calculadas não devem usar o símbolo de divisão em suas expressões (/), a menos que o denominador seja um valor constante. Em vez disso, é recomendável sempre usar a função DIVIDE\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-divide-function-operator",
     "Severity": 2,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(RegEx.Replace(Expression,\"(\\/\\*|\\*\\/|\\/\\/|\"\".*?\"\"|\\s*)\",\"\"),\"(\\)|\\])\\s*\\/[^0-9]\")\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
+    "Expression": "Tokenize().Any(\r\n    Type = DIV and\r\n    Next.Type <> INTEGER_LITERAL and\r\n    Next.Type <> REAL_LITERAL\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -492,7 +512,7 @@
   },
   {
     "ID": "MEDIDAS_EVITE_FUNCOES_TEXTO",
-    "Name": "[Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
+    "Name": " [Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
     "Category": "05.Medidas",
     "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER, SUBSTITUTE",
     "Severity": 5,
@@ -547,7 +567,7 @@
     "Description": "Deve ser marcado a tabela de calendario utilizada no modelo como tabela de data",
     "Severity": 2,
     "Scope": "Table, CalculatedTable",
-    "Expression": "\r\n!Name.StartsWith(\"f\")\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Name.StartsWith(\"LocalDateTable_\")",
+    "Expression": "\r\n!Name.StartsWith(\"f\")\r\nand\r\n(\r\nDataCategory <> \"Time\"\r\nor\r\nColumns.Any(IsKey == true and DataType == \"DateTime\") == false\r\n)\r\nand\r\n(\r\nUsedInRelationships.Any(FromColumn.DataType.ToString() == \"DateTime\" and current.Name == FromTable.Name and FromCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\r\nor\r\n\n\n\nUsedInRelationships.Any(ToColumn.DataType.ToString() == \"DateTime\" and current.Name == ToTable.Name and ToCardinality == \"One\" and CrossFilteringBehavior == CrossFilteringBehavior.OneDirection)\n\r\n)\r\nand\r\n!HasAnnotation(\"__PBI_LocalDateTable\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -556,8 +576,8 @@
     "Category": "06.Opções/Configurações",
     "Description": "Deve ser desabilitado a função Data/Hora Aultomática no Power BI",
     "Severity": 4,
-    "Scope": "Table, CalculatedTable",
-    "Expression": "ObjectTypeName == \"Calculated Table\"\n\r\nand\r\n(\r\n\n(\nName.StartsWith(\"DateTableTemplate_\") \n\nor \n\nName.StartsWith(\"LocalDateTable_\")\n)\r\nor\r\nHasAnnotation(\"__PBI_LocalDateTable\")\r\n)",
+    "Scope": "Model",
+    "Expression": "Tables.Any(HasAnnotation(\"__PBI_LocalDateTable\"))",
     "CompatibilityLevel": 1200
   },
   {
@@ -600,6 +620,16 @@
     "Severity": 5,
     "Scope": "TablePermission",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|SUBSTITUTE|MID|UPPER|LOWER)\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
+    "Name": "[Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
+    "Category": "09.Performance",
+    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
+    "Severity": 2,
+    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
+    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
     "CompatibilityLevel": 1200
   }
 ]

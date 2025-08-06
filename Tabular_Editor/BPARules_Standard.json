@@ -80,16 +80,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "EVITE_CONSULTA_ARQUIVO_LOCAL",
-    "Name": "[Atualização] Evite Consultas de Arquivos no Computador Local",
-    "Category": "01.Atualização",
-    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
-    "Severity": 5,
-    "Scope": "Table",
-    "Expression": "EnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)C\\:\\\\Users\\\\\")\r\n)",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "ORDER_BY_CONSULTA_SQL",
     "Name": "[Consulta SQL] Evite ORDER BY da Consulta SQL",
     "Category": "02.Consulta SQL",
@@ -157,6 +147,56 @@
     "Severity": 5,
     "Scope": "Relationship",
     "Expression": "FromColumn.DataType != ToColumn.DataType",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
+    "Name": "[Power Query] Remover colunas redundantes em tabelas relacionadas",
+    "Category": "03.Power Query",
+    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
+    "Severity": 2,
+    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
+    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_FONTE_DADOS_PC",
+    "Name": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
+    "Category": "03.Power Query",
+    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "Regex.IsMatch(Expression,\"(?i)C:\\\\Users\\\\\")\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_FONTE_DADOS_ONEDRIVE",
+    "Name": "[Power Query] Evite Fonte de Dados do OneDrive",
+    "Category": "03.Power Query",
+    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "COLUNA_REDUNDANTE",
+    "Name": "[Power Query] Remover colunas redundantes em tabelas relacionadas",
+    "Category": "03.Power Query",
+    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
+    "Severity": 2,
+    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
+    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
+    "Name": "[Power Query] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
+    "Category": "03.Power Query",
+    "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
+    "Severity": 4,
+    "Scope": "Model",
+    "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
     "CompatibilityLevel": 1200
   },
   {

@@ -1,0 +1,22 @@
+[
+  {
+    "ID": "SEM_ATUALIZACAO_INCREMENTAL",
+    "Name": "[Atualização] Atualização Incremental Desativada",
+    "Category": "01.Atualização",
+    "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!RegEx.IsMatch(Name,\"^[dD]\")\r\n\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "CORRIGIR_PARAMETRO_INCREMENTAL",
+    "Name": "[Atualização] Corrigir Parametro da Atualização Incremental",
+    "Category": "01.Atualização",
+    "Description": "Os parametros foram digitados de forma correta \"RangeStart\" e \"RangeEnd\"",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "(\r\n!Name.Contains(\"RangeStart\") and\r\nName.IndexOf(\"RangeStart\", StringComparison.OrdinalIgnoreCase) >=0\r\n)\r\nor\r\n(\r\n!Name.Contains(\"RangeEnd\") and\r\nName.IndexOf(\"RangeEnd\", StringComparison.OrdinalIgnoreCase) >=0\r\n)",
+    "CompatibilityLevel": 1200
+  }
+]

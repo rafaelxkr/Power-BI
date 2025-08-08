@@ -1,5 +1,15 @@
 [
   {
+    "ID": "MEDIDA_NA_TABELA_MEDIDA",
+    "Name": "03.Medidas Devem Estar na Tabela de Medidas",
+    "Category": "02.Cálculos e Medidas",
+    "Description": "Mover as medidas para o local correto",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "Table.GetAnnotation(\"PBI_ResultType\") <> \"Text\"",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "DIVIDE",
     "Name": "05.DIVIDE ao invés de \"/\"",
     "Category": "02.Cálculos e Medidas",

@@ -236,7 +236,7 @@
     "Description": "Não utilize a função USERELATIONSHIP em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
     "Severity": 5,
     "Scope": "Table, CalculatedTable",
-    "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\ + current.Name + \\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
+    "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(RegEx.Replace(Expression,\"\\*\",\"\"),\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\\" + RegEx.Replace(current.Name,\"\\*\",\"\") + \"\\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {
@@ -581,13 +581,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "EVITE_USERRELATIONSHIP_EM_TABELAS_COM_RLS",
+    "ID": "EVITE_USERELATIONSHIP_EM_TABELAS_COM_RLS",
     "Name": "[Medidas] Evite a função USERELATIONSHIP e RLS na mesma tabela",
     "Category": "05.Medidas",
     "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também aproveite a segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como RLS.\r\n\r\nReference: https://blog.crossjoin.co.uk/2013/05/10/userelationship-and-tabular-row-security/",
     "Severity": 3,
     "Scope": "Table, CalculatedTable",
-    "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(Expression,\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + current.Name + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
+    "Expression": "Model.AllMeasures.Any(RegEx.IsMatch(RegEx.Replace(Expression,\"\\*\",\"\"),\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\" + RegEx.Replace(current.Name,\"\\*\", \"\") + \"'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {

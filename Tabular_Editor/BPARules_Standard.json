@@ -250,7 +250,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "[EXTRA]_EVITE_MODELAGEM_SNOW_FLAKE",
+    "ID": "EVITE_MODELAGEM_SNOW_FLAKE",
     "Name": "[Relacionamentos] Evite Modelagem Snow Flake",
     "Category": "04.Relacionamentos",
     "Description": "Utilize preferenciamente a modelagem Star Schema\r\nReferência: https://docs.microsoft.com/power-bi/guidance/star-schema",

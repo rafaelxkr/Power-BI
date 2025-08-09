@@ -236,7 +236,7 @@
     "Description": "Não utilize a função USERELATIONSHIP em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
     "Severity": 5,
     "Scope": "Table, CalculatedTable",
-    "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(RegEx.Replace(Expression,\"\\*\",\"\"),\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?(?=])\\]\\s*,\\s*'*\\\" + RegEx.Replace(current.Name,\"\\*\",\"\") + \"\\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
+    "Expression": "\r\nModel.AllMeasures.Any(RegEx.IsMatch(RegEx.Replace(Expression,\"\\*\",\"\"),\"(?i)USERELATIONSHIP\\s*\\(\\s*.+?\\'*\" + RegEx.Replace(current.Name,\"\\*\",\"\") + \"\\'*\\[\"))\r\nand\r\nRowLevelSecurity.Any(it <> null)",
     "CompatibilityLevel": 1200
   },
   {

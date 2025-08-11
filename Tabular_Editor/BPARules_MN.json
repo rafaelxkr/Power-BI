@@ -1,5 +1,65 @@
 [
   {
+    "ID": "BANCO_DADOS_AUTORIZACAO",
+    "Name": "01.1.Fonte de Dados não oficial do SQL Server ou Synapse",
+    "Category": "01.Fonte de Dados",
+    "Description": "Esses bancos de dados não são autorizados serem utilizados",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "!RegEx.IsMatch(Query,\"(?i)(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "LOKI_AUTORIZACAO",
+    "Name": "01.2.Banco de Dados LOKI Precisa de Autorização da Diretoria",
+    "Category": "01.Fonte de Dados",
+    "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "RegEx.IsMatch(Query,\"(?i)(LOKI)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "WES_AUTORIZACAO",
+    "Name": "01.3.Banco de Dados WES Precisa de Autorização da Engenharia",
+    "Category": "01.Fonte de Dados",
+    "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
+    "Severity": 5,
+    "Scope": "Partition",
+    "Expression": "RegEx.IsMatch(Query,\"(?i)(WES)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "BANCO_DADOS_AUTORIZACAO_2",
+    "Name": "01.4.Fonte de Dados não oficial do SQL Server ou Synapse",
+    "Category": "01.Fonte de Dados",
+    "Description": "Esses bancos de dados não são autorizados serem utilizados",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "!RegEx.IsMatch(Expression,\"(?i)(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "LOKI_AUTORIZACAO_2",
+    "Name": "01.5.Banco de Dados LOKI Precisa de Autorização da Diretoria",
+    "Category": "01.Fonte de Dados",
+    "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(LOKI)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "WES_AUTORIZACAO_2",
+    "Name": "01.6.Banco de Dados WES Precisa de Autorização da Engenharia",
+    "Category": "01.Fonte de Dados",
+    "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(WES)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "MEDIDA_NA_TABELA_MEDIDA",
     "Name": "03.Medidas Devem Estar na Tabela de Medidas",
     "Category": "02.Cálculos e Medidas",
@@ -378,6 +438,26 @@
     "Severity": 4,
     "Scope": "Model",
     "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SHAREPOINT_SEM_GARANTIA",
+    "Name": "[Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
+    "Category": "06.Extras",
+    "Description": "Fonte de dados Sharepoint é aprovada, porém a engenharia de dados não garante manutenção e nem governança.",
+    "Severity": 1,
+    "Scope": "Partition",
+    "Expression": "SourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(SharePoint)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SHAREPOINT_SEM_GARANTIA_2",
+    "Name": "[Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
+    "Category": "06.Extras",
+    "Description": "Fonte de dados Sharepoint é aprovada, porém a engenharia de dados não garante manutenção e nem governança.",
+    "Severity": 1,
+    "Scope": "NamedExpression",
+    "Expression": "Kind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(SharePoint)\")",
     "CompatibilityLevel": 1200
   },
   {

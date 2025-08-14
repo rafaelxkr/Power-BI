@@ -120,16 +120,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "TABELA_MAIS_30_COLUNAS",
-    "Name": "[Consulta SQL] Tabela com Mais de 30 Colunas. Está Normalizada?",
-    "Category": "02.Consulta SQL",
-    "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
-    "Severity": 4,
-    "Scope": "Table",
-    "Expression": "Columns.Count() > 30",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "ETAPAS_REDUNDANTES",
     "Name": "[Power Query] Etapas Redundantes",
     "Category": "03.Power Query",
@@ -150,16 +140,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
-    "Name": "[Power Query] Remover colunas redundantes em tabelas relacionadas",
-    "Category": "03.Power Query",
-    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
-    "Severity": 2,
-    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
-    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "EVITE_FONTE_DADOS_PC",
     "Name": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
     "Category": "03.Power Query",
@@ -177,26 +157,6 @@
     "Severity": 3,
     "Scope": "Partition",
     "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "COLUNA_REDUNDANTE",
-    "Name": "[Power Query] Remover colunas redundantes em tabelas relacionadas",
-    "Category": "03.Power Query",
-    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
-    "Severity": 2,
-    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
-    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
-    "Name": "[Power Query] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
-    "Category": "03.Power Query",
-    "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
-    "Severity": 4,
-    "Scope": "Model",
-    "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
     "CompatibilityLevel": 1200
   },
   {
@@ -665,11 +625,31 @@
   {
     "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
     "Name": "[Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
-    "Category": "09.Performance",
+    "Category": "09.Dados Residuais",
     "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
     "Severity": 2,
     "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
     "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_MAIS_30_COLUNAS",
+    "Name": "[Dados Residuais] Tabela com Mais de 30 Colunas. Está Normalizada?",
+    "Category": "09.Dados Residuais",
+    "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "Columns.Count() > 30",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
+    "Name": "[Dados Residuais] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
+    "Category": "09.Dados Residuais",
+    "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
+    "Severity": 4,
+    "Scope": "Model",
+    "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
     "CompatibilityLevel": 1200
   }
 ]

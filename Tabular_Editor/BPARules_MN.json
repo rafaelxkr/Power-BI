@@ -16,7 +16,7 @@
     "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
     "Severity": 5,
     "Scope": "Partition",
-    "Expression": "RegEx.IsMatch(Query,\"(?i)(LOKI)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "Expression": "RegEx.IsMatch(Query,\"(?i)(\"\"LOKI\"\")\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -26,7 +26,7 @@
     "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
     "Severity": 5,
     "Scope": "Partition",
-    "Expression": "RegEx.IsMatch(Query,\"(?i)(WES)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "Expression": "RegEx.IsMatch(Query,\"(?i)(\"\"WES\"\")\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -36,7 +36,7 @@
     "Description": "Esses bancos de dados não são autorizados serem utilizados",
     "Severity": 5,
     "Scope": "NamedExpression",
-    "Expression": "!RegEx.IsMatch(Expression,\"(?i)(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "Expression": "!RegEx.IsMatch(Expression,\"(?i)\"\"(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\"\"\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -46,7 +46,7 @@
     "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
     "Severity": 5,
     "Scope": "NamedExpression",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(LOKI)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(\"\"LOKI\"\")\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -56,7 +56,7 @@
     "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
     "Severity": 5,
     "Scope": "NamedExpression",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(WES)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)(\"\"WES\"\")\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -66,7 +66,7 @@
     "Description": "Mover as medidas para o local correto",
     "Severity": 2,
     "Scope": "Measure",
-    "Expression": "Table.GetAnnotation(\"PBI_ResultType\") <> \"Text\"",
+    "Expression": "Table.GetAnnotation(\"PBI_ResultType\") <> \"Text\" && Table.Columns.Count() > 1",
     "CompatibilityLevel": 1200
   },
   {
@@ -391,16 +391,6 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "TABELA_MAIS_30_COLUNAS",
-    "Name": "[Consulta SQL] Tabela com Mais de 30 Colunas. Está Normalizada?",
-    "Category": "06.Extras",
-    "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
-    "Severity": 4,
-    "Scope": "Table",
-    "Expression": "Columns.Count() > 30",
-    "CompatibilityLevel": 1200
-  },
-  {
     "ID": "EVITE_FONTE_DADOS_PC",
     "Name": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
     "Category": "06.Extras",
@@ -418,26 +408,6 @@
     "Severity": 3,
     "Scope": "Partition",
     "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "COLUNA_REDUNDANTE",
-    "Name": "[Power Query] Remover colunas redundantes em tabelas relacionadas",
-    "Category": "06.Extras",
-    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
-    "Severity": 2,
-    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
-    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
-    "Name": "[Power Query] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
-    "Category": "06.Extras",
-    "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
-    "Severity": 4,
-    "Scope": "Model",
-    "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
     "CompatibilityLevel": 1200
   },
   {
@@ -750,6 +720,36 @@
     "Severity": 5,
     "Scope": "TablePermission",
     "Expression": "RegEx.IsMatch(Expression,\"(?i)(?:LEFT|RIGHT|FIND|SEARCH|CONTAINSSTRING|CONTAINSSTRINGEXACT|SUBSTITUTE|MID|UPPER|LOWER)\\s*\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
+    "Name": "[Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
+    "Category": "06.Extras",
+    "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
+    "Severity": 2,
+    "Scope": "DataColumn, CalculatedColumn, CalculatedTableColumn",
+    "Expression": "UsedInRelationships.Any() == false \r\nand\r\nModel.AllColumns.Any(Name == current.Name and Table.Name != current.Table.Name and Table.UsedInRelationships.Any(FromTable.Name == current.Table.Name))",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_MAIS_30_COLUNAS",
+    "Name": "[Dados Residuais] Tabela com Mais de 30 Colunas. Está Normalizada?",
+    "Category": "06.Extras",
+    "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "Columns.Count() > 30",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
+    "Name": "[Dados Residuais] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
+    "Category": "06.Extras",
+    "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
+    "Severity": 4,
+    "Scope": "Model",
+    "Expression": "decimal.Parse(Regex.Replace(Database.EstimatedSize,\" MB\", \"\")) > 1000\r\nand\r\nModel.Tables.Any( EnableRefreshPolicy == false )",
     "CompatibilityLevel": 1200
   }
 ]

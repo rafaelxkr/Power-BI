@@ -150,13 +150,13 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "TABELA_CRIADA_SEM_SQL",
-    "Name": "13.1.Tabela Criada sem SQL",
+    "ID": "TABELA_BANCO_DADOS_SEM_SQL",
+    "Name": "13.1.Tabela Conectada em Banco de Dados sem Usar SQL",
     "Category": "03.Desempenho",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
-    "Severity": 5,
+    "Severity": 4,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nSourceExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nColumns.Count() > 1\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nColumns.Count() > 1\r\nand\r\n\r\nPartitions.Any(\r\nExpression.Replace(\".Select\",\"\").IndexOf(\"SELECT\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"Table.FromRows(Json.Document(Binary.Decompress(\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"NAMEOF\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\nExpression.IndexOf(\"GENERATESERIES\", StringComparison.OrdinalIgnoreCase) = -1\r\nand\r\n!Name.StartsWith(\"DateTableTemplate_\") \r\nand\r\n!Name.StartsWith(\"LocalDateTable_\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)Sql\\.Database|PostgreSQL\\.Database|Databricks|BigQuery|Snowflake\\.Database\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(?i)Sql\\.Database|PostgreSQL\\.Database|Databricks|BigQuery|Snowflake\\.Database\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

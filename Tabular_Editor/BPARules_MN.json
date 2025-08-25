@@ -70,6 +70,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "MEDIDA_ERRO",
+    "Name": "04.Medida com Erro",
+    "Category": "02.Cálculos e Medidas",
+    "Description": "Realize a correção das medidas com erro ou exclua se não é utilizada",
+    "Severity": 5,
+    "Scope": "Measure",
+    "Expression": "ErrorMessage <> \"\"",
+    "CompatibilityLevel": 1200
+  }
+  {
     "ID": "DIVIDE",
     "Name": "05.DIVIDE ao invés de \"/\"",
     "Category": "02.Cálculos e Medidas",
@@ -106,7 +116,7 @@
     "Description": "Evite utilizar iteradora para rodar o calculo em cima da tabela inteira, isso deixa a execução da medida mais pesada",
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)SUMX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)AVERAGEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)COUNTAX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MAXX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MINX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PRODUCTX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.EXC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)PERCENTILEX.INC\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)CONCATENATEX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)MEDIANX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)RANKX\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")\r\n\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\")\r\nor\r\nRegEx.IsMatch(Expression,\"(?i)ADDCOLUMNS\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*\\'*[A-Za-z0-9À-ÿ _]\")",
+    "Expression": "RegEx.IsMatch(\r\nRegEx.Replace(Expression,\"(?i)\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*\\)\",\"\")\r\n\r\n,\"(?i)(SUMX|AVERAGEX|COUNTX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX\\.INC|PERCENTILEX\\.EXC|CONCATENATEX|MEDIANX|RANKX|ADDCOLUMNS)\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*([^\\]]+\\])\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -302,7 +312,7 @@
   },
   {
     "ID": "CORRIGIR_PARAMETRO_INCREMENTAL",
-    "Name": "[Atualização] Corrigir Parametro da Atualização Incremental",
+    "Name": "[Extra Atualização] Corrigir Parametro da Atualização Incremental",
     "Category": "06.Extras",
     "Description": "Os parametros foram digitados de forma correta \"RangeStart\" e \"RangeEnd\"",
     "Severity": 5,
@@ -312,7 +322,7 @@
   },
   {
     "ID": "CORRIGIR_FILTRO_INCREMENTAL",
-    "Name": "[Atualização] Corrigir Filtro da Atualização Incremental",
+    "Name": "[Extra Atualização] Corrigir Filtro da Atualização Incremental",
     "Category": "06.Extras",
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
@@ -322,7 +332,7 @@
   },
   {
     "ID": "HISTORICO_TRIMESTRE",
-    "Name": "[Atualização] Histórico da atualização incremental utilizar Trimestre ao invés de Ano",
+    "Name": "[Extra Atualização] Histórico da atualização incremental utilizar Trimestre ao invés de Ano",
     "Category": "06.Extras",
     "Description": "Configurar o histórico como trimestre ao invés de ano, com isso reduz o volume de dados históricos.",
     "Severity": 4,
@@ -332,7 +342,7 @@
   },
   {
     "ID": "EVITE_MODO_DIRECT_QUERY",
-    "Name": "[Atualização] Evite Tabelas no Modo Direct Query",
+    "Name": "[Extra Atualização] Evite Tabelas no Modo Direct Query",
     "Category": "06.Extras",
     "Description": "Evite deixar as tabelas no modo \"Direct Query\"",
     "Severity": 5,
@@ -342,7 +352,7 @@
   },
   {
     "ID": "INCREMENTAL_DIA_MES",
-    "Name": "[Atualização] Avaliar Incremental de Dia para Mês",
+    "Name": "[Extra Atualização] Avaliar Incremental de Dia para Mês",
     "Category": "06.Extras",
     "Description": "Avaliar se é mais performatico atualização incremental por mês ao invés de fazer do dia",
     "Severity": 4,
@@ -352,7 +362,7 @@
   },
   {
     "ID": "INCREMENTAL_HISTORICO",
-    "Name": "[Atualização] Historico da Incremental Maior que 5 Anos",
+    "Name": "[Extra Atualização] Historico da Incremental Maior que 5 Anos",
     "Category": "06.Extras",
     "Description": "Verificar se realmente é necessário manter um histórico maior que 5 anos de dados",
     "Severity": 4,
@@ -362,7 +372,7 @@
   },
   {
     "ID": "EVITE_INCREMENTAL_MES_TRIMESTRE",
-    "Name": "[Atualização] Evite Incremental de 1 Mês ou 1 Trimestre",
+    "Name": "[Extra Atualização] Evite Incremental de 1 Mês ou 1 Trimestre",
     "Category": "06.Extras",
     "Description": "O comportamento da incremental 1 mês não é de atualizar os ultimos 30 dias e sim atualizar somente o mês atual\r\nExemplo para o dia 01/04/2024\r\nIncremental de 1 Mês atualiza o periodo     = 01/04/2024 - 30/04/2024 (não considera mês anterior)\r\nIncremental de 2 Meses atualiza o periodo = 01/03/2024 - 30/04/2024 (considera mês anterior)\r\n\r\nO mesmo se aplicada para o trimestre, caso precise que seus dados atualizem os ultimos 3 meses, utilize a opção de meses ao invés de trimestre",
     "Severity": 4,
@@ -372,7 +382,7 @@
   },
   {
     "ID": "ORDER_BY_CONSULTA_SQL",
-    "Name": "[Consulta SQL] Evite ORDER BY da Consulta SQL",
+    "Name": "[Extra Consulta SQL] Evite ORDER BY da Consulta SQL",
     "Category": "06.Extras",
     "Description": "A função de ORDER BY deixa a consulta SQL muito pesada é recomendavel não utilizar essa função em tabelas principamente em tabelas fatos",
     "Severity": 5,
@@ -382,7 +392,7 @@
   },
   {
     "ID": "INCREMENTAL_FOLDING_DESATIVADO",
-    "Name": "[Consulta SQL] Incremental com Query Folding Desativado",
+    "Name": "[Extra Consulta SQL] Incremental com Query Folding Desativado",
     "Category": "06.Extras",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 3,
@@ -392,7 +402,7 @@
   },
   {
     "ID": "EVITE_FONTE_DADOS_PC",
-    "Name": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
+    "Name": "[Extra Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
     "Category": "06.Extras",
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 5,
@@ -402,7 +412,7 @@
   },
   {
     "ID": "EVITE_FONTE_DADOS_ONEDRIVE",
-    "Name": "[Power Query] Evite Fonte de Dados do OneDrive",
+    "Name": "[Extra Power Query] Evite Fonte de Dados do OneDrive",
     "Category": "06.Extras",
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 3,
@@ -412,7 +422,7 @@
   },
   {
     "ID": "SHAREPOINT_SEM_GARANTIA",
-    "Name": "[Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
+    "Name": "[Extra Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
     "Category": "06.Extras",
     "Description": "Fonte de dados Sharepoint é aprovada, porém a engenharia de dados não garante manutenção e nem governança.",
     "Severity": 1,
@@ -422,7 +432,7 @@
   },
   {
     "ID": "SHAREPOINT_SEM_GARANTIA_2",
-    "Name": "[Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
+    "Name": "[Extra Power Query] Fonte de Dados Sharepoint Sem Garantia de Manutenção",
     "Category": "06.Extras",
     "Description": "Fonte de dados Sharepoint é aprovada, porém a engenharia de dados não garante manutenção e nem governança.",
     "Severity": 1,
@@ -432,7 +442,7 @@
   },
   {
     "ID": "RELACIONAMENTO_FATO_FATO",
-    "Name": "[Relacionamentos] Relacionamento de Fato para Fato",
+    "Name": "[Extra Relacionamentos] Relacionamento de Fato para Fato",
     "Category": "06.Extras",
     "Description": "Evite relacionamento entre fato utilize as tabelas dimensões para isso para isso",
     "Severity": 5,
@@ -442,7 +452,7 @@
   },
   {
     "ID": "USERELATIONSHIP_TABELA_COM_RLS",
-    "Name": "[Relacionamentos] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
+    "Name": "[Extra Relacionamentos] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
     "Category": "06.Extras",
     "Description": "Não utilize a função USERELATIONSHIP em tabelas com RLS aplicado, pois não funcionam como esperado.\r\n",
     "Severity": 5,
@@ -452,7 +462,7 @@
   },
   {
     "ID": "VERIFICAR_UTILIZACAO_TABELA",
-    "Name": "[Relacionamentos] Verificar Utilização de Tabela 1 Relacionamento e Coluna",
+    "Name": "[Extra Relacionamentos] Verificar Utilização de Tabela 1 Relacionamento e Coluna",
     "Category": "06.Extras",
     "Description": "Tabela que possui uma unica coluna relacionando com outra tabela, tem grande chance de não estar sendo utilizada. Verifique no Measure Killer aonde ela está sendo utilizada",
     "Severity": 3,
@@ -462,7 +472,7 @@
   },
   {
     "ID": "EVITE_DIMENSOES_DE_ATRIBUTO_UNICO",
-    "Name": "[Relacionamentos] Evite dimensões de atributo único que não sejam compartilhadas por vários fatos",
+    "Name": "[Extra Relacionamentos] Evite dimensões de atributo único que não sejam compartilhadas por vários fatos",
     "Category": "06.Extras",
     "Description": "Em geral, a normalização excessiva deve ser evitada. Se uma dimensão contiver apenas um atributo e não for compartilhada por vários fatos, considere mover o atributo para a tabela de fatos.",
     "Severity": 2,
@@ -472,7 +482,7 @@
   },
   {
     "ID": "DISTINCTCOUNT_SUMX_VALUES",
-    "Name": "[Medidas] DISTINCTCOUNT ao invés de SUMX(VALUES(tabela[Coluna]),1)",
+    "Name": "[Extra Medidas] DISTINCTCOUNT ao invés de SUMX(VALUES(tabela[Coluna]),1)",
     "Category": "06.Extras",
     "Description": "Para contar valores distintos utilize a função DISTINCTCOUNT \r\n\r\nRecomendado:\r\nDISTINCTCOUNT(TABELA[Coluna])\r\n\r\nEvitar:\r\nSUMX(VALUES(tabela[Coluna]),1)",
     "Severity": 3,
@@ -482,7 +492,7 @@
   },
   {
     "ID": "DISTINCTCOUNTNOBLANK_DISTINCTCOUNT_BLANK",
-    "Name": "[Medidas] DISTINCTCOUNTNOBLANK ao invés de DISTINCTCOUNT <> Blank()",
+    "Name": "[Extra Medidas] DISTINCTCOUNTNOBLANK ao invés de DISTINCTCOUNT <> Blank()",
     "Category": "06.Extras",
     "Description": "Para contar valores distintos desconsiderando linhas em branco utilize a função DISTINCTCOUNT \r\n\r\nRecomendado:\r\nDISTINCTCOUNTNOBLANK(TABELA[Coluna])\r\n\r\nEvitar:\r\nCALCULATE(\r\n         DISTINCTCOUNT(Tabela[Coluna]),\r\n         Tabela[Coluna] <> Blank()\r\n)\r\n\r\nou \r\n\r\nCALCULATE(\r\n         DISTINCTCOUNT(Tabela[Coluna]),\r\n         Tabela[Coluna] <> 0\r\n)",
     "Severity": 3,
@@ -492,7 +502,7 @@
   },
   {
     "ID": "EVITAR_IFERROR_ISERROR",
-    "Name": "[Medidas] Evitar a função IFERROR e ISERROR",
+    "Name": "[Extra Medidas] Evitar a função IFERROR e ISERROR",
     "Category": "06.Extras",
     "Description": "Não utilize as funções IFERROR e ISERROR, ao invés disso deve ser feito a correção do DAX para a função não retornar erro.\r\n\r\nhttps://learn.microsoft.com/pt-br/dax/best-practices/dax-error-functions#recommendations",
     "Severity": 3,
@@ -502,7 +512,7 @@
   },
   {
     "ID": "REFERENCIOU_A_MESMA_MEDIDA",
-    "Name": "[Medidas] Referenciou Mesma Medida ao Invés de usar Variável",
+    "Name": "[Extra Medidas] Referenciou Mesma Medida ao Invés de usar Variável",
     "Category": "06.Extras",
     "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
     "Severity": 4,
@@ -512,7 +522,7 @@
   },
   {
     "ID": "VARIAVEL_AVERAGE",
-    "Name": "[Medidas] Utilizar Várivel para o AVERAGE",
+    "Name": "[Extra Medidas] Utilizar Várivel para o AVERAGE",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com AVERAGE",
     "Severity": 3,
@@ -522,7 +532,7 @@
   },
   {
     "ID": "VARIAVEL_COUNTA",
-    "Name": "[Medidas] Utilizar Várivel para o COUNTA",
+    "Name": "[Extra Medidas] Utilizar Várivel para o COUNTA",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com COUNTA",
     "Severity": 3,
@@ -532,7 +542,7 @@
   },
   {
     "ID": "VARIAVEL_COUNTROWS",
-    "Name": "[Medidas] Utilizar Várivel para o COUNTROWS",
+    "Name": "[Extra Medidas] Utilizar Várivel para o COUNTROWS",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com COUNTROWS",
     "Severity": 3,
@@ -542,7 +552,7 @@
   },
   {
     "ID": "VARIAVEL_DISTINCT",
-    "Name": "[Medidas] Utilizar Várivel para o DISTINCT",
+    "Name": "[Extra Medidas] Utilizar Várivel para o DISTINCT",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com DISTINCT",
     "Severity": 3,
@@ -552,7 +562,7 @@
   },
   {
     "ID": "VARIAVEL_MAX",
-    "Name": "[Medidas] Utilizar Várivel para o MAX",
+    "Name": "[Extra Medidas] Utilizar Várivel para o MAX",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com MAX",
     "Severity": 3,
@@ -562,7 +572,7 @@
   },
   {
     "ID": "VARIAVEL_MAXA",
-    "Name": "[Medidas] Utilizar Várivel para o MAXA",
+    "Name": "[Extra Medidas] Utilizar Várivel para o MAXA",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com MAXA",
     "Severity": 3,
@@ -572,7 +582,7 @@
   },
   {
     "ID": "VARIAVEL_MIN",
-    "Name": "[Medidas] Utilizar Várivel para o MIN",
+    "Name": "[Extra Medidas] Utilizar Várivel para o MIN",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com MIN",
     "Severity": 3,
@@ -582,7 +592,7 @@
   },
   {
     "ID": "VARIAVEL_MINA",
-    "Name": "[Medidas] Utilizar Várivel para o MINA",
+    "Name": "[Extra Medidas] Utilizar Várivel para o MINA",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com MINA",
     "Severity": 3,
@@ -592,7 +602,7 @@
   },
   {
     "ID": "VARIAVEL_COUNT",
-    "Name": "[Medidas] Utilizar Várivel para o COUNT",
+    "Name": "[Extra Medidas] Utilizar Várivel para o COUNT",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com COUNT",
     "Severity": 3,
@@ -602,7 +612,7 @@
   },
   {
     "ID": "VARIAVEL_SUM",
-    "Name": "[Medidas] Utilizar Várivel para o SUM",
+    "Name": "[Extra Medidas] Utilizar Várivel para o SUM",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com SUM",
     "Severity": 3,
@@ -612,7 +622,7 @@
   },
   {
     "ID": "VARIAVEL_VALUES",
-    "Name": "[Medidas] Utilizar Várivel para o VALUES",
+    "Name": "[Extra Medidas] Utilizar Várivel para o VALUES",
     "Category": "06.Extras",
     "Description": "Referenciado o mesmo calculo com VALUES",
     "Severity": 3,
@@ -622,7 +632,7 @@
   },
   {
     "ID": "EVITE_'(X/Y)-1'",
-    "Name": "[Medidas] '(X/Y)-1' ao inves (X-Y)/Y",
+    "Name": "[Extra Medidas] '(X/Y)-1' ao inves (X-Y)/Y",
     "Category": "06.Extras",
     "Description": "Evite: SUM ( 'Sales'[CostAmount] ) / SUM( 'Sales'[SalesAmount] ) - 1\r\nMelhor:\r\nVAR SALES = SUM ( 'Sales'[SalesAmount] ) \r\nDIVIDE ( SALES - SUM ( 'Sales'[CostAmount] ), SALES  )",
     "Severity": 2,
@@ -632,7 +642,7 @@
   },
   {
     "ID": "TREATAS_INVES_VALUES_DISTINCT",
-    "Name": "[Medidas] TREATAS ao invés de Tabela[Coluna] IN VALUES ou DISTINCT",
+    "Name": "[Extra Medidas] TREATAS ao invés de Tabela[Coluna] IN VALUES ou DISTINCT",
     "Category": "06.Extras",
     "Description": "Utilize a função TREATAS ao invés de utilizar o IN VALUES ou IN DISTINCT\r\n\r\nEvitar:\r\nTabela1[Coluna1] IN VALUES(Tabela2[Coluna2])\r\nTabela1[Coluna1] IN DISTINCT(Tabela2[Coluna2])\r\n\r\nCorreto:\r\nTREATAS(VALUES(Tabela2[Coluna2]),Tabela1[Coluna1])\r\nTREATAS(DISTINCT(Tabela2[Coluna2]),Tabela1[Coluna1])",
     "Severity": 3,
@@ -642,7 +652,7 @@
   },
   {
     "ID": "MEDIDAS_EVITE_FUNCOES_TEXTO",
-    "Name": " [Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
+    "Name": " [Extra Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
     "Category": "06.Extras",
     "Description": "Evite funções de texto na regra de como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER, SUBSTITUTE",
     "Severity": 5,
@@ -652,7 +662,7 @@
   },
   {
     "ID": "MEDIDAS_COUNTROWS_SUMMARIZE",
-    "Name": "[Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
+    "Name": "[Extra Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
     "Category": "06.Extras",
     "Description": "Para contar quantidade de linhas de uma seleção de colunas utilize COUNTROWS + SUMMARIZE",
     "Severity": 4,
@@ -662,7 +672,7 @@
   },
   {
     "ID": "EVALUATEANDLOG_Nao_Usar_Modelos_Produtivos",
-    "Name": "[Medidas] A função EVALUATEANDLOG não deve ser usada em modelos de produção",
+    "Name": "[Extra Medidas] A função EVALUATEANDLOG não deve ser usada em modelos de produção",
     "Category": "06.Extras",
     "Description": "A função EVALUATEANDLOG deve ser usada apenas em ambientes de desenvolvimento/teste e não deve ser usada em modelos de produção.\r\n\r\nReference: https://pbidax.wordpress.com/2022/08/16/introduce-the-dax-evaluateandlog-function/",
     "Severity": 1,
@@ -672,7 +682,7 @@
   },
   {
     "ID": "EVITE_USERRELATIONSHIP_EM_TABELAS_COM_RLS",
-    "Name": "[Medidas] Evite a função USERELATIONSHIP e RLS na mesma tabela",
+    "Name": "[Extra Medidas] Evite a função USERELATIONSHIP e RLS na mesma tabela",
     "Category": "06.Extras",
     "Description": "A função USERELATIONSHIP não pode ser usada em uma tabela que também aproveite a segurança em nível de linha (RLS). Isso gerará um erro ao usar a medida específica em um visual. Esta regra destacará a tabela que é usada na função USERELATIONSHIP de uma medida, bem como RLS.\r\n\r\nReference: https://blog.crossjoin.co.uk/2013/05/10/userelationship-and-tabular-row-security/",
     "Severity": 3,
@@ -682,7 +692,7 @@
   },
   {
     "ID": "EVITE_DISTINCTCOUNT_COLUNA_RELACIONAMENTO_DE_DADOS_UNICOS",
-    "Name": "[Medidas] Evite DISTINCTCOUNT em Coluna de Relacionamento com Dados Unicos",
+    "Name": "[Extra Medidas] Evite DISTINCTCOUNT em Coluna de Relacionamento com Dados Unicos",
     "Category": "06.Extras",
     "Description": "Colunas de relacionamento com dados unicos não precisa de contagem distinta, pode se utilizar a função COUNTROWS no lugar",
     "Severity": 5,
@@ -692,7 +702,7 @@
   },
   {
     "ID": "PERSPECTIVA_SEM_OBJETOS",
-    "Name": "[Opções/Configurações] Perspectivas sem objetos",
+    "Name": "[Extra Opções/Configurações] Perspectivas sem objetos",
     "Category": "06.Extras",
     "Description": "Perspectivas que não contêm objetos (tabelas) provavelmente não são necessárias. Nesta regra, é necessário apenas verificar tabelas, pois adicionar uma coluna/medida/hierarquia a uma perspectiva também adiciona a tabela à perspectiva. Além disso, tabelas em geral abrangem tabelas calculadas e grupos de cálculo também.",
     "Severity": 1,
@@ -703,7 +713,7 @@
   },
   {
     "ID": "GRUPO_DE_CALCULOS_SEM_ITENS_DE_CALCULO",
-    "Name": "[Opções/Configurações] Grupos de cálculo sem itens de cálculo",
+    "Name": "[Extra Opções/Configurações] Grupos de cálculo sem itens de cálculo",
     "Category": "06.Extras",
     "Description": "Grupos de cálculo não têm função a menos que tenham itens de cálculo.",
     "Severity": 2,
@@ -714,7 +724,7 @@
   },
   {
     "ID": "RLS_EVITE_FUNCOES_DE_TEXTO",
-    "Name": "[RLS] LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
+    "Name": "[Extra RLS] LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
     "Category": "06.Extras",
     "Description": "Evite funções de texto na regra de RLS como LEFT, RIGHT, FIND, SEARCH, CONTAINSSTRING, CONTAINSSTRINGEXACT, MID, UPPER, LOWER, SUBSTITUTE",
     "Severity": 5,
@@ -724,7 +734,7 @@
   },
   {
     "ID": "REMOVER_COLUNAS_REDUNDANTES_EM_TABELAS_RELACIONADAS",
-    "Name": "[Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
+    "Name": "[Extra Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
     "Category": "06.Extras",
     "Description": "A remoção de colunas desnecessárias reduz o tamanho do modelo e acelera o carregamento de dados.",
     "Severity": 2,
@@ -734,7 +744,7 @@
   },
   {
     "ID": "TABELA_MAIS_30_COLUNAS",
-    "Name": "[Dados Residuais] Tabela com Mais de 30 Colunas. Está Normalizada?",
+    "Name": "[Extra Dados Residuais] Tabela com Mais de 30 Colunas. Está Normalizada?",
     "Category": "06.Extras",
     "Description": "Verificar se todas colunas são realmente utilizadas ou se existe oportunidade de normalização",
     "Severity": 4,
@@ -744,7 +754,7 @@
   },
   {
     "ID": "MODELO_MAIOR_2G_SEM_INCREMENTAL",
-    "Name": "[Dados Residuais] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
+    "Name": "[Extra Dados Residuais] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
     "Category": "06.Extras",
     "Description": "modelo com mais de 2GB. Verificar se existem colunas não utilizadas, oportunidade de agregar mais os dados e configurar atualização incremental",
     "Severity": 4,

@@ -78,7 +78,7 @@
     "Scope": "Measure",
     "Expression": "ErrorMessage <> \"\"",
     "CompatibilityLevel": 1200
-  }
+  },
   {
     "ID": "DIVIDE",
     "Name": "05.DIVIDE ao invés de \"/\"",

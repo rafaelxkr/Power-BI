@@ -569,7 +569,7 @@
     "Scope": "Measure",
     "Expression": "ErrorMessage <> \"\"",
     "CompatibilityLevel": 1200
-  }
+  },
   {
     "ID": "MARCAR_TABELA_DATA",
     "Name": "[Opções/Configurações] Marcar a dCalendario Como Tabela de Data",

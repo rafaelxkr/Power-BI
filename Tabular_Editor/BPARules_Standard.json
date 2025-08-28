@@ -120,6 +120,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "TABELA_BANCO_DADOS_SEM_SQL",
+    "Name": "[Consulta SQL] Tabela Conectada em Banco de Dados sem Usar SQL",
+    "Category": "02.Consulta SQL",
+    "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
+    "Severity": 4,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ETAPAS_REDUNDANTES",
     "Name": "[Power Query] Etapas Redundantes",
     "Category": "03.Power Query",

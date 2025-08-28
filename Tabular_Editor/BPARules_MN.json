@@ -1,62 +1,22 @@
 [
   {
     "ID": "BANCO_DADOS_AUTORIZACAO",
-    "Name": "01.1.Fonte de Dados não oficial do SQL Server ou Synapse",
+    "Name": "01.1.Fonte de Dados não Aprovada",
     "Category": "01.Fonte de Dados",
-    "Description": "Esses bancos de dados não são autorizados serem utilizados",
+    "Description": "Essa fonte de dados precisa de autorização, verique a documentação de fonte de dados aprovadas",
     "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "!RegEx.IsMatch(Query,\"(?i)(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "LOKI_AUTORIZACAO",
-    "Name": "01.2.Banco de Dados LOKI Precisa de Autorização da Diretoria",
-    "Category": "01.Fonte de Dados",
-    "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
-    "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "RegEx.IsMatch(Query,\"(?i)(\"\"LOKI\"\")\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "WES_AUTORIZACAO",
-    "Name": "01.3.Banco de Dados WES Precisa de Autorização da Engenharia",
-    "Category": "01.Fonte de Dados",
-    "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
-    "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "RegEx.IsMatch(Query,\"(?i)(\"\"WES\"\")\")\r\nand \r\nSourceType == \"M\"\r\nand\r\nRegEx.IsMatch(Query,\"(?i)(Sql\\.Database)\")",
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!RegEx.IsMatch(SourceExpression,\"(?i)(\"\"https:\\/\\/powerbi-cloud-prod\\.alphaservesp\\.com\\/api\"\"|\"\"cpt-srvsqldw01\\\\dw\"\"|WMINCPTSQLDW01\\\\DW\"\"|WMINCPTCAS01\"\"|\"\"DATASTORE\"\"|\"\"192\\.168\\.26\\.10\\\\dwathena_uy\"\"|\"\"IKOL\"\"|\"\"(CPT-SRVSQLDW01\\\\DWMINERVA|WMINCPTSQLDW01\\\\DWMINERVA)\"\".*\"\"(dw|dw_refined)\"\"|\"\"172\\.25\\.2\\.178\"\".*\"\"dw_refined\"\"|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net\"\".*\"\"syn-serverless\"\")\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!RegEx.IsMatch(Expression,\"(?i)(\"\"https:\\/\\/powerbi-cloud-prod\\.alphaservesp\\.com\\/api\"\"|\"\"cpt-srvsqldw01\\\\dw\"\"|WMINCPTSQLDW01\\\\DW\"\"|WMINCPTCAS01\"\"|\"\"DATASTORE\"\"|\"\"192\\.168\\.26\\.10\\\\dwathena_uy\"\"|\"\"IKOL\"\"|\"\"(CPT-SRVSQLDW01\\\\DWMINERVA|WMINCPTSQLDW01\\\\DWMINERVA)\"\".*\"\"(dw|dw_refined)\"\"|\"\"172\\.25\\.2\\.178\"\".*\"\"dw_refined\"\"|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net\"\".*\"\"syn-serverless\"\")\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
     "ID": "BANCO_DADOS_AUTORIZACAO_2",
-    "Name": "01.4.Fonte de Dados não oficial do SQL Server ou Synapse",
+    "Name": "01.2.Fonte de Dados não Aprovada",
     "Category": "01.Fonte de Dados",
     "Description": "Esses bancos de dados não são autorizados serem utilizados",
     "Severity": 5,
     "Scope": "NamedExpression",
-    "Expression": "!RegEx.IsMatch(Expression,\"(?i)\"\"(cpt-srvsqldw01\\\\dwminerva|IKOL|MBS|LOKI|WES|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net)\"\"\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "LOKI_AUTORIZACAO_2",
-    "Name": "01.5.Banco de Dados LOKI Precisa de Autorização da Diretoria",
-    "Category": "01.Fonte de Dados",
-    "Description": "Banco de Dados LOKI Precisa de Autorização da Diretoria",
-    "Severity": 5,
-    "Scope": "NamedExpression",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(\"\"LOKI\"\")\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
-    "CompatibilityLevel": 1200
-  },
-  {
-    "ID": "WES_AUTORIZACAO_2",
-    "Name": "01.6.Banco de Dados WES Precisa de Autorização da Engenharia",
-    "Category": "01.Fonte de Dados",
-    "Description": "Banco de Dados WES Precisa de Autorização da Diretoria",
-    "Severity": 5,
-    "Scope": "NamedExpression",
-    "Expression": "RegEx.IsMatch(Expression,\"(?i)(\"\"WES\"\")\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database)\")",
+    "Expression": "!RegEx.IsMatch(Expression,\"(?i)(\"\"https:\\/\\/powerbi-cloud-prod\\.alphaservesp\\.com\\/api\"\"|\"\"cpt-srvsqldw01\\\\dw\"\"|WMINCPTSQLDW01\\\\DW\"\"|WMINCPTCAS01\"\"|\"\"DATASTORE\"\"|\"\"192\\.168\\.26\\.10\\\\dwathena_uy\"\"|\"\"IKOL\"\"|\"\"(CPT-SRVSQLDW01\\\\DWMINERVA|WMINCPTSQLDW01\\\\DWMINERVA)\"\".*\"\"(dw|dw_refined)\"\"|\"\"172\\.25\\.2\\.178\"\".*\"\"dw_refined\"\"|syn-stargate-ondemand\\.sql\\.azuresynapse\\.net\"\".*\"\"syn-serverless\"\")\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -166,7 +126,7 @@
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 4,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)Sql\\.Database|PostgreSQL\\.Database|Databricks|BigQuery|Snowflake\\.Database\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(?i)Sql\\.Database|PostgreSQL\\.Database|Databricks|BigQuery|Snowflake\\.Database\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?i)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

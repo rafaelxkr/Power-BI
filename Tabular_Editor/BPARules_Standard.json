@@ -230,7 +230,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "RELACIONAMENTO_INATIVO_SEM _USO",
+    "ID": "RELACIONAMENTO_INATIVO_SEM_USO",
     "Name": "[Relacionamentos] Relacionamento Inativo não é utilizado",
     "Category": "04.Relacionamentos",
     "Description": "Modelo possuem relacionamentos inativos, mas não possuem uma USERELATIONSHIP para ativar ele",

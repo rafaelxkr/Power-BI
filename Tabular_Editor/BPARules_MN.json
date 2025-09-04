@@ -20,6 +20,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "VERIFICAR_LINKED_SERVER",
+    "Name": "01.3.Verificar se Linked Server se é Autorizado",
+    "Category": "01.Fonte de Dados",
+    "Description": "Foi encontrado referência de Linked Server \"Servidor.Banco.Schema.Tabela\"\r\nExemplo  = LOKI.DW.DBO.VENDAS",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(RegEx.Replace(SourceExpression,\"\\.com|\\.azuresynapse\\.net|\\d+\\.\\d+\\.\\d+\\.\\d\",\"\"),\"[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(RegEx.Replace(Expression,\"\\.com|\\.azuresynapse\\.net|\\d+\\.\\d+\\.\\d+\\.\\d\",\"\"),\"[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\\.[A-z\\[\\]0-9]+\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "MEDIDA_NA_TABELA_MEDIDA",
     "Name": "03.Medidas Devem Estar na Tabela de Medidas",
     "Category": "02.Cálculos e Medidas",
@@ -191,7 +201,7 @@
   },
   {
     "ID": "SEM_ATUALIZACAO_INCREMENTAL",
-    "Name": "22.Atualização Incremental Desativada",
+    "Name": "22.1.Atualização Incremental Desativada",
     "Category": "03.Desempenho",
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
@@ -240,7 +250,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "RELACIONAMENTO_INATIVO_SEM_USO",
+    "ID": "RELACIONAMENTO_INATIVO_SEM _USO",
     "Name": "28.Relacionamento Inativo não é utilizado",
     "Category": "04.Transformação e modelagem Power Query",
     "Description": "Modelo possuem relacionamentos inativos, mas não possuem uma USERELATIONSHIP para ativar ele",
@@ -272,8 +282,8 @@
   },
   {
     "ID": "CORRIGIR_PARAMETRO_INCREMENTAL",
-    "Name": "[Extra Atualização] Corrigir Parametro da Atualização Incremental",
-    "Category": "06.Extras",
+    "Name": "22.3.Corrigir Parametro da Atualização Incremental",
+    "Category": "03.Desempenho",
     "Description": "Os parametros foram digitados de forma correta \"RangeStart\" e \"RangeEnd\"",
     "Severity": 5,
     "Scope": "NamedExpression",
@@ -282,8 +292,8 @@
   },
   {
     "ID": "CORRIGIR_FILTRO_INCREMENTAL",
-    "Name": "[Extra Atualização] Corrigir Filtro da Atualização Incremental",
-    "Category": "06.Extras",
+    "Name": "22.2.Corrigir Filtro da Atualização Incremental",
+    "Category": "03.Desempenho",
     "Description": "O filtro a atualização incremental deve ser Data >= \"RangeStart\" e Data < \"RangeEnd\"\r\nsempre para RangeStart deve ser maior ou igual\r\nsempre para RangeEnd deve ser somente menor",
     "Severity": 5,
     "Scope": "Table",
@@ -352,8 +362,8 @@
   },
   {
     "ID": "INCREMENTAL_FOLDING_DESATIVADO",
-    "Name": "[Extra Consulta SQL] Incremental com Query Folding Desativado",
-    "Category": "06.Extras",
+    "Name": "22.4.Incremental com Query Folding Desativado",
+    "Category": "03.Desempenho",
     "Description": "Verificar se o Query Folding dessas tabelas está ativo",
     "Severity": 3,
     "Scope": "Table",

@@ -21,7 +21,7 @@
   },
   {
     "ID": "VERIFICAR_LINKED_SERVER",
-    "Name": "01.3.Verificar se Linked Server se é Autorizado",
+    "Name": "01.3.Verificar se Linked Server se é Fonte de Dados Homologada",
     "Category": "01.Fonte de Dados",
     "Description": "Foi encontrado referência de Linked Server \"Servidor.Banco.Schema.Tabela\"\r\nExemplo  = LOKI.DW.DBO.VENDAS",
     "Severity": 5,

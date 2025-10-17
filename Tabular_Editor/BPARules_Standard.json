@@ -155,8 +155,8 @@
     "Category": "03.Power Query",
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 5,
-    "Scope": "Partition",
-    "Expression": "Regex.IsMatch(Expression,\"(?i)C:\\\\Users\\\\\")\r\n",
+    "Scope": "Table",
+    "Expression": "\r\n(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)C:\\\\Users\\\\\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)C:\\\\Users\\\\\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -165,8 +165,8 @@
     "Category": "03.Power Query",
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 3,
-    "Scope": "Partition",
-    "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n",
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {

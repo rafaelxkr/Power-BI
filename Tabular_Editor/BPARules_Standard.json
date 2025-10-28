@@ -106,7 +106,7 @@
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "CalculatedColumn",
-    "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.HasAnnotation(\"__PBI_LocalDateTable\")",
+    "Expression": "IsDataTypeInferred == true\r\nand\r\n(\r\n!Table.HasAnnotation(\"__PBI_LocalDateTable\")\r\nand\r\n!Table.HasAnnotation(\"__PBI_TemplateDateTable\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -116,7 +116,7 @@
     "Description": "Migre a lógica da tabela calculada para o seu data warehouse ou crie uma consulta SQL para retornar o mesmo resultado",
     "Severity": 2,
     "Scope": "CalculatedTable",
-    "Expression": "!Regex.IsMatch(Expression,\"(?i)(NAMEOF|GENERATESERIES)\")",
+    "Expression": "!Regex.IsMatch(Expression,\"(?i)(NAMEOF|GENERATESERIES)\")\r\nand\r\n(\r\n!HasAnnotation(\"__PBI_LocalDateTable\")\r\nand\r\n!HasAnnotation(\"__PBI_TemplateDateTable\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -130,10 +130,10 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "ETAPAS_REDUNDANTES",
-    "Name": "[Power Query] Etapas Redundantes",
+    "ID": "SQL_BANCO_DADOS",
+    "Name": "[Power Query] Consultar Banco de Dados com SQL",
     "Category": "03.Power Query",
-    "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
+    "Description": "Utilize comando SQL para consultar ou tratar dados que a fonte é um banco de dados",
     "Severity": 5,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?is)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?is)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",

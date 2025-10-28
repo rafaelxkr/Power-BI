@@ -166,7 +166,7 @@
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,
     "Scope": "CalculatedColumn",
-    "Expression": "IsDataTypeInferred == true\r\nand\r\n!Table.Name.StartsWith(\"DateTableTemplate_\") \n\r\nand\r\n\n\n!Table.Name.StartsWith(\"LocalDateTable_\")",
+    "Expression": "IsDataTypeInferred == true\r\nand\r\n(\r\n!Table.HasAnnotation(\"__PBI_LocalDateTable\")\r\nand\r\n!Table.HasAnnotation(\"__PBI_TemplateDateTable\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -176,7 +176,7 @@
     "Description": "Migre a lógica da tabela calculada para o seu data warehouse ou crie uma consulta SQL para retornar o mesmo resultado",
     "Severity": 2,
     "Scope": "CalculatedTable",
-    "Expression": "!Regex.IsMatch(Expression,\"(?i)(NAMEOF|GENERATESERIES)\")",
+    "Expression": "!Regex.IsMatch(Expression,\"(?i)(NAMEOF|GENERATESERIES)\")\r\nand\r\n(\r\n!HasAnnotation(\"__PBI_LocalDateTable\")\r\nand\r\n!HasAnnotation(\"__PBI_TemplateDateTable\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {

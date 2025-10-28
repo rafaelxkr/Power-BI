@@ -130,6 +130,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "ETAPAS_REDUNDANTES",
+    "Name": "[Power Query] Etapas Redundantes no Power Query",
+    "Category": "03.Power Query",
+    "Description": "Evite etapas desnecessárias no Power Query e para banco de dados fazer consulta SQL para reduzir a quantidade de etapas no Power Query",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n\r\n!(SourceExpression == null)\r\nand\r\n(\r\n   Regex.Matches(SourceExpression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(SourceExpression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(SourceExpression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.RenameColumns\").Count > 1\r\nor Regex.Matches(SourceExpression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(SourceExpression, \"Table.ReorderColumns\").Count > 0\r\n)\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\n!(Expression == null)\r\nand\r\n(\r\n   Regex.Matches(Expression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(Expression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(Expression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.RenameColumns\").Count > 1\r\nor Regex.Matches(Expression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(Expression, \"Table.ReorderColumns\").Count > 0\r\n)\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "SQL_BANCO_DADOS",
     "Name": "[Power Query] Consultar Banco de Dados com SQL",
     "Category": "03.Power Query",

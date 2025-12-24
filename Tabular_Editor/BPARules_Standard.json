@@ -6,7 +6,7 @@
     "Description": "As tabelas fato devem possuir atualização incremental, porém deve ser verificado se é possivel fazer com a coluna de data da tabela.",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!RegEx.IsMatch(Name,\"^[dD]\")\r\n\r\n",
+    "Expression": "\r\nEnableRefreshPolicy = false\r\n\r\nand\r\n(\r\nUsedInRelationships.Any(ToCardinality == \"One\" and FromCardinality == \"Many\" and current.Name == FromTable.Name)\r\nor\r\nUsedInRelationships.Any(ToCardinality == \"Many\" and FromCardinality == \"One\" and current.Name == ToTable.Name)\r\n)\r\n\r\nAnd\r\n!RegEx.IsMatch(Name,\"^[dD]\")\r\n\r\nAnd\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n",
     "CompatibilityLevel": 1200
   },
   {

@@ -1,9 +1,165 @@
 {
   "rules": [
     {
+      "id": "FILTRO_VISUAL_SEM_USO",
+      "name": "[DADOS RESIDUAIS] Remova filtros sem uso dos visuais",
+      "description": "Ao remover filtro sem uso nos visuais, conferir novamente as colunas sem utilização",
+      "logType": "warning",
+      "part": "Pages",
+      "disabled": false,
+      "test": [
+        {
+          "map": [
+            {
+                  "filter": [
+                    {
+                      "part": "Visuals"
+                    },
+                    {
+                      "some": [
+                        {
+                          "var": "filterConfig.filters"
+                        },
+                        {
+                          "==": [
+                            {
+                              "var": "type"
+                            },
+                            "Advanced"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "FILTRO_PAGINA_SEM_USO",
+      "name": "[DADOS RESIDUAIS] Remova filtros a nível de página sem uso",
+      "description": "Ao remover filtro sem uso na página, conferir novamente as colunas sem utilização",
+      "logType": "warning",
+      "disabled": false,
+      "test": [
+        {
+          "map": [
+            {
+                  "filter": [
+                    {
+                      "part": "Pages"
+                    },
+                    {
+                      "some": [
+                        {
+                          "var": "filterConfig.filters"
+                        },
+                        {
+                          "and": [
+                            {
+                                "==": [
+                                    {
+                                        "var": "howCreated"
+                                    },
+                                    "User"
+                                ]
+                            },
+                            {
+                                "==": [
+                                    {"var": "filter"}, null
+                                ]
+                            }
+                        ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+            {
+              "var": "displayName"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "FILTRO_RELATORIO_SEM_USO",
+      "name": "[DADOS RESIDUAIS] Remova filtros a nível de relatório sem uso",
+      "description": "Ao remover filtro sem uso a nivel de relatório, conferir novamente as colunas sem utilização",
+      "logType": "warning",
+      "part": "Report",
+      "disabled": false,
+      "test": [
+        {
+          "map":[
+            {
+                  "filter": [
+                    {
+                      "var": "filterConfig.filters"
+                    },
+                    {
+                        "==": [
+                            {"var": "filter"}, null
+                        ]
+                    }
+                  ]
+            },
+            {
+              "var": "field.Column.Property"
+            }
+          ]
+                
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "FILTRAR_CONSULTA_DE_DADOS",
+      "name": "[RELATÓRIO] Filtro no relatório ao invés de filtrar no Power Query",
+      "description": "Ao invés de aplicar filtros a nível do relatório, faça os filtros no Power Query para reduzir o tamanho do modelo",
+      "logType": "error",
+      "part": "Report",
+      "disabled": false,
+      "test": [
+        {
+          "map":[
+            {
+                  "filter": [
+                    {
+                      "var": "filterConfig.filters"
+                    },
+                    {
+                      "some" : [ 
+                        {"var": "filter.Where"},
+                        {"var": "Condition"}
+                      ]
+                    }
+                  ]
+            },
+            {
+              "var": "field.Column.Property"
+            }
+          ]
+                
+        },
+        {},
+        []
+      ]
+    },
+    {
       "id": "REMOVE_UNUSED_CUSTOM_VISUALS",
-      "name": "Remove custom visuals which are not used in the report.",
-      "description": "Returns an array of custom visual names to be removed if any. To disable this rule, mark it as disabled in the base rules file.",
+      "name": "[RELATÓRIO] Remova visuais personalizados que não são usados no relatório",
+      "description": "Retorna uma matriz de nomes visuais personalizados a serem removidos, se houver",
+      "logType": "error",
       "disabled": false,
       "part": "Report",
       "test": [
@@ -27,9 +183,214 @@
       ]
     },
     {
-      "id": "REDUCE_VISUALS_ON_PAGE",
-      "name": "Reduce the number of visible visuals on the page",
-      "description": "Reports a test fail if the rule's maximum number of visible visuals on the page is exceeded. By default the base rules file specifies 15 as the maximum, set the paramMaxVisualsPerPage parameter to change this. To disable this rule, mark it as disabled in the base rules file.",
+      "id": "USAR_MEDIDAS_EXPLICITAS",
+      "name": "[VISUAL] Utilizar medidas ao invés de colunas calculadas nos visuais",
+      "description": "Utilize medida(medida explicita) ao invés de colunas agregadas(medidas implicitas)",
+      "logType": "error",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  "or":[
+                    {
+                      "some": [
+                      {"var": "visual.query.queryState.Y.projections"},
+                      {"var": "field.Aggregation"}
+                      ]
+                    },
+                    {
+                      "some": [
+                      {"var": "visual.query.queryState.Values.projections"},
+                      {"var": "field.Aggregation"}
+                      ]
+                    }
+                  ]
+                  
+                }
+              ]
+            },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "UTILIZAR_CARTAO_NOVO",
+      "name": "[VISUAL] Utilizar visual 'Cartão (Novo)' ao invés do visual 'Cartão'",
+      "description": "Sempre utilize o visual de cartão novo e a opção de multiplos cartões desse visual",
+      "logType": "error",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  "==": [
+                      {
+                        "var": "visual.visualType"
+                      },
+                      "card"
+                  ]
+                }
+              ]
+            },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "SLICER_SEARCH_INPUT_SHOULD_BE_EMPTY",
+      "name": "[VISUAL] A entrada de pesquisa do Slicer deve estar vazia",
+      "description": "A entrada de pesquisa do Slicer deve estar vazia para evitar filtragem incorreta.",
+      "logType": "warning",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                  {
+                    "part": "Visuals"
+                  },
+                  {
+                      "and": [
+                          {
+                              "in": [
+                                  {"var": "visual.visualType"},
+                                  ["slicer"]
+                              ]
+                          },
+                          {
+                              "!!": [{
+                                  "var": "visual.objects.general.0.properties.selfFilter.filter.Where.0.Condition.Contains.Right.Literal.Value"
+                              }]
+                          }
+                      ]
+                  }
+              ]
+            },
+            { 
+              "var": "name"
+            }
+          ]
+          },
+          {},
+          []
+        ]
+    },
+    {
+      "id": "FILTRO_VISUAL_CONTEM",
+      "name": "[VISUAL] Evite Filtros a Nivel Visual do Tipo Contém ou Não Contém",
+      "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
+      "logType": "error",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+            "map": [
+                {
+                    "filter": [
+                        {
+                            "part": "Visuals"
+                        },
+                        {
+                            "some": [
+                                {
+                                    "var": "filterConfig.filters"
+                                },
+                                {
+                                    "some": [
+                                      {
+                                        "var": "filter.Where"
+                                      },
+                                      {
+                                        "or": [
+                                          {"var": "Condition.StartsWith"},
+                                          {"var": "Condition.Contains"},
+                                          {"var": "Condition.Not.Expression.StartsWith"},
+                                          {"var": "Condition.Not.Expression.Contains"}
+                                        ]
+                                      }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "var": "name"
+                }
+            ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "EVITE_MOSTRAR_ITENS_EM_BRANCO",
+      "name": "[VISUAL] Evite a opção 'Mostrar Itens em Branco' em Visuais de Tabela ou Matrix",
+      "description": "Essa configuração faz a redenrização da Tabela ou Matrix ficar mais pesada, quanto mais colunas e linha esses visuais tiverem mais pesado ficará a renderização deles",
+      "logType": "error",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  "and":[
+                    {
+                      "or":[
+                      {"!!": [{"var": "visual.query.queryState.Values.showAll"}]},
+                      {"!!": [{"var": "visual.query.queryState.Rows.showAll"}]},
+                      {"!!": [{"var": "visual.query.queryState.Columns.showAll"}]}
+                      ]
+                    },
+                    {"in": [{"var": "visual.visualType" },["tableEx","pivotTable"]]}
+                  ]
+                }
+              ]
+            },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "REDUZIR_VISUAIS_POR_PAGINA",
+      "name": "[VISUAL] Reduza número de visuais por página",
+      "description": "Essa página contém mais de 15 gráficos ou cards visiveis, divida em páginas os visuais, identifique oportunidades de reduzir número de visuais como por exemplo o card novo com a opção de multiplos visuais ou utilizar o bookmark para reduzir o número visuais visiveis",
+      "logType": "warning",
       "disabled": false,
       "part": "Pages",
       "test": [
@@ -60,9 +421,11 @@
                                 },
                                 [
                                   "shape",
-                                  "slicer",
                                   "actionButton",
-                                  "textbox"
+                                  "textbox",
+                                  "image",
+                                  "bookmarkNavigator",
+                                  "pageNavigator"
                                 ]
                               ]
                             }
@@ -86,148 +449,60 @@
       ]
     },
     {
-      "id": "REDUCE_TOPN_FILTERS",
-      "name": "Reduce usage of TopN filtering visuals by page",
-      "description": "Reports a test fail if the rule's maximum number of visuals using TopN filtering on a the page is exceeded. By default the base rules file specifies 4 as the maximum objects within a visual, set the paramMaxTopNFilteringPerPage to change this. To disable this rule, mark it as disabled in the base rules file.",
-      "part": "Pages",
+      "id": "FILTRO_PAGINA_CONTEM",
+      "name": "[PÁGINA] Evite Filtros a Nivel Página do Tipo Contém ou Não Contém",
+      "description": "O Filtro avançado contém utiliza a função SEARCH em DAX que é bem pesada",
+      "logType": "error",
       "disabled": false,
+      "part": "Pages",
       "test": [
         {
-          "<=": [
-            {
-              "count": [
+            "map": [
                 {
-                  "filter": [
-                    {
-                      "part": "Visuals"
-                    },
-                    {
-                      "some": [
+                    "filter": [
                         {
-                          "var": "filterConfig.filters"
+                          "part": "Pages"
                         },
                         {
-                          "==": [
-                            {
-                              "var": "type"
-                            },
-                            "TopN"
-                          ]
+                            "some": [
+                                {
+                                    "var": "filterConfig.filters"
+                                },
+                                {
+                                    "some": [
+                                      {
+                                        "var": "filter.Where"
+                                      },
+                                      {
+                                        "or": [
+                                          {"var": "Condition.StartsWith"},
+                                          {"var": "Condition.Contains"},
+                                          {"var": "Condition.Not.Expression.StartsWith"},
+                                          {"var": "Condition.Not.Expression.Contains"}
+                                        ]
+                                      }
+                                    ]
+                                }
+                            ]
                         }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "var": "paramMaxTopNFilteringPerPage"
-            }
-          ]
-        },
-        {
-          "paramMaxTopNFilteringPerPage": 4
-        },
-        true
-      ]
-    },
-    {
-      "id": "REDUCE_ADVANCED_FILTERS",
-      "name": "Reduce usage of Advanced filtering visuals by page",
-      "description": "Reports a test fail if the rule's maximum number of visuals using Advanced filtering on a the page is exceeded. By default, the base rules file specifies 4 as the maximum objects within a visual, set the paramMaxAdvancedFilteringVisualsPerPage parameter value to change this. To disable this rule, mark it as disabled in the base rules file",
-      "part": "Pages",
-      "disabled": false,
-      "test": [
-        {
-          "<=": [
-            {
-              "count": [
-                {
-                  "filter": [
-                    {
-                      "part": "Visuals"
-                    },
-                    {
-                      "some": [
-                        {
-                          "var": "filterConfig.filters"
-                        },
-                        {
-                          "==": [
-                            {
-                              "var": "type"
-                            },
-                            "Advanced"
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "var": "paramMaxAdvancedFilteringPerPage"
-            }
-          ]
-        },
-        {
-          "paramMaxAdvancedFilteringPerPage": 0
-        },
-        true
-      ]
-    },
-    {
-      "id": "EVITE_FILTRO_VISUAL_CONTEM",
-      "name": "Evite filtros a nivel visual do tipo contém ou não contém",
-      "description": "Filtros lateriais do tipo contém são pesados, crie uma coluna informando se contém ou não ou valor para simplificar o filtro",
-      "part": "Pages",
-      "disabled": false,
-      "test": [
-        {
-          "map": [
-            {
-              "filter": [
-                {
-                  "part": "Visuals"
+                    ]
                 },
                 {
-                  "some": [
-                    {
-                      "var": "filterConfig.filters"
-                    },
-                    {
-                      "some": [
-                        {
-                          "var": "filter.Where"
-                        },
-                        {
-                          "or": [
-                            {"var": "Condition.StartsWith"},
-                            {"var": "Condition.Contains"}
-                          ]
-                        }
-                      ]
-                    }
-                  ]
+                    "var": "name"
                 }
-              ]
-            },
-            {
-              "var": "name"
-            }
-          ]
+            ]
         },
         {},
         []
       ]
     },
     {
-      "id": "EVITE_FILTRO_PAGINA_CONTEM",
-      "name": "Evite filtros a nivel página do tipo contém ou não contém",
-      "description": "Filtros lateriais do tipo contém são pesados, crie uma coluna informando se contém ou não ou valor para simplificar o filtro",
-      "part": "Pages",
+      "id": "ADICIONAR_NOME_PARA_PAGINA",
+      "name": "[PÁGINA] Adicionar o nome para a página",
+      "description": "As páginas visiveis precisam de um nome ao invés do padrão 'Pagina x'",
+      "logType": "error",
       "disabled": false,
+      "part": "Pages",
       "test": [
         {
           "map": [
@@ -237,23 +512,11 @@
                   "part": "Pages"
                 },
                 {
-                  "some": [
+                  "strcontains": [
                     {
-                      "var": "filterConfig.filters"
+                      "var": "displayName"
                     },
-                    {
-                      "some": [
-                        {
-                          "var": "filter.Where"
-                        },
-                        {
-                          "or": [
-                            {"var": "Condition.StartsWith"},
-                            {"var": "Condition.Contains"}
-                          ]
-                        }
-                      ]
-                    }
+                    "(?:^Page [1-9]+$|^Página [1-9]+$)"
                   ]
                 }
               ]
@@ -268,92 +531,10 @@
       ]
     },
     {
-      "id": "EVITE_FILTRO_REPORT",
-      "name": "Evite filtros a nivel do relatório",
-      "description": "Ao invés de fazer filtros a nivel de relatório, adicione esse filtro na consulta da tabela",
-      "disabled": false,
-      "part": "Report",
-      "test": [
-        {
-          "map": [
-            {
-              "filter": [
-                {
-                  "part": "Report"
-                },
-                {
-                  "some": [
-                    {"var": "filterConfig.filters"},
-                    {"var": "filter.Where"}
-                  ]
-                }
-              ]
-            },
-            {
-              "var": "settings.useStylableVisualContainerHeader"
-            }
-          ]
-        },
-        {},
-        []
-      ]
-    },
-    {
-      "id": "EVITE_FILTRO_REPORT_CONTEM",
-      "name": "Evite filtros a nivel do relatório",
-      "description": "Ao invés de fazer filtros a nivel de relatório, adicione esse filtro na consulta da tabela",
-      "disabled": false,
-      "part": "Report",
-      "test": [
-        {
-          "map": [
-            {"part": "Report"},
-            {"var": "filterConfig.filters"}
-          ]
-        },
-        {},
-        []
-      ]
-    },
-    {
-      "id": "AVOID_SHOW_ITEMS_WITH_NO_DATA",
-      "name": "Avoid setting ‘Show items with no data’ on columns",
-      "description": "Returns an array of visual names which have the option ‘Show items with no data’ enabled on one or more columns. To disable this rule, mark it as disabled in the base rules file.",
-      "disabled": false,
-      "part": "Pages",
-      "test": [
-        {
-          "map": [
-            {
-              "filter": [
-                {
-                  "part": "Visuals"
-                },
-                {
-                  "==": [
-                    {
-                      "var": "visual.query.queryState.Category.showAll"
-                    },
-                    true
-                  ]
-                }
-              ]
-
-            },
-            {
-              "var": "name"
-            }
-          ]
-        },
-        {
-        },
-        []
-      ]
-    },
-    {
       "id": "HIDE_TOOLTIP_DRILLTROUGH_PAGES",
-      "name": "Tooltip and Drillthrough pages should be hidden",
-      "description": "Reports a test fail if a page of type Tooltip or Drillthrough is visible. To disable this rule, mark it as disabled in the base rules file.",
+      "name": "[PÁGINA] Páginas de Tooltip ou Drillthrough devem estar ocultas",
+      "description": "Oculte as páginas usadas como Tooltip ou Drillthrough",
+      "logType": "warning",
       "disabled": false,
       "test": [
         {
@@ -368,7 +549,7 @@
                     {
                       "in": [
                         {
-                          "var": "pageBinding.type"
+                          "var": "type"
                         },
                         [
                           "Tooltip",
@@ -397,6 +578,287 @@
       ]
     },
     {
+      "id": "VISUAL_BACKGROUND",
+      "name": "[VISUAL] Viuais que podem estar no background",
+      "description": "Visuais do tipo de imagem, formas e caixa de texto poderiam estar no background do visual",
+      "logType": "error",
+      "disabled": false,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  "in": [
+                    {
+                      "var": "visual.visualType"
+                    },
+                    [
+                      "image",
+                      "shape",
+                      "textbox"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]   
+    },
+    {
+      "id": "ADICIONAR_GUIA_DE_APOIO",
+      "name": "[PÁGINA] Falta Página de Guia de Apoio com perfil de atualização",
+      "description": "O relatório precisa ter uma página de guia de apoio, informando sobre as atualizações do relatórios um resumo principais indicadores ",
+      "logType": "error",
+      "disabled": true,
+      "part": "Report",
+      "test": [
+        {
+          "!!":[
+            {
+              "filter": [
+                {
+                  "part": "Pages"
+                },
+                {
+                  "strcontains": [
+                    {"var": "displayName"},
+                    "(?i)(?:apoio|guia|gloss.*rio)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {},
+        true
+      ]
+    },
+    {
+      "id": "REDUCE_OBJECTS_WITHIN_VISUALS",
+      "name": "Reduce the number of objects within visuals",
+      "description": "Reports a test fail if the rule's maximum number of objects within visuals on a page is exceeded. An object is a data field that is assigned to a visual. By default, the base rules file specifies 6 as the maximum objects within a visual. To disable this rule, mark it as disabled in the base rules file.",
+      "logType": "error",
+      "disabled": true,
+      "part": "Pages",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  ">": [
+                    {
+                      "count": [
+                        {
+                          "path": "$..projections[*]"
+                        }
+                      ]
+                    },
+                    6
+                  ]
+                }
+              ]
+            },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "PAGINA_TOOLTIP_SEM_USO",
+      "name": "[PÁGINA] Página oculta configurada como tooltip sem uso",
+      "description": "Retorna páginas configuradas como tooltip que está oculta e está sem uso",
+      "logType": "error",
+      "disabled": false,
+      "part": "Report",
+      "test": [
+        {
+          "map": [
+            {
+              "filter": [
+                { "part": "Pages" },
+                {
+                  "in":[
+                    {"cat": ["'", { "var": "name" },"'"]},
+                    {
+                    "diff": [
+                        {
+                          "map": [
+                            {
+                              "filter": [
+                                { "part": "Pages" },
+                                { "and": [
+                                    { "==": [{"var": "type"},"Tooltip"] },
+                                    { "==": [{"var": "visibility"},"HiddenInViewMode"] }
+                                  ] 
+                                }
+                              ]
+                            },
+                            
+                            {"cat": ["'", { "var": "name" },"'"]}
+                          ]
+                        },
+                        {
+                          "map": [
+                            {
+                              "filter": [
+                                { "part": "Visuals" },
+                                { "==": [{"var": "visual.visualContainerObjects.visualTooltip.0.properties.type.expr.Literal.Value"},"'Canvas'"] }
+                              ]
+                            },
+                            { "var": "visual.visualContainerObjects.visualTooltip.0.properties.section.expr.Literal.Value" }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                
+                }
+              ]
+            },
+            { "var": "displayName" }
+          ]
+          
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "PAGINA_OCULTA_SEM_NAVEGACAO",
+      "name": "[PÁGINA] Página oculta sem botão ou bookmark para acessar",
+      "description": "Retonar as páginas ocultas sem configuração de Tooltip ou Drillthrough e não são acessiveis por botão de navegação, funciona somente em relatórios sem painel de navegação",
+      "logType": "error",
+      "disabled": false,
+      "part": "Report",
+      "test": [
+        {
+          "if":[
+            {
+              "!":[
+                {
+                  "!!":[
+                    {
+                      "filter": [
+                        { "part": "Visuals" },
+                        {"==": [{"var": "visual.visualType"},"pageNavigator"]}
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "map": [
+                {
+                  "filter": [
+                    { "part": "Pages" },
+                    {
+                      "in":[
+                        {"cat": ["'", { "var": "name" },"'"]},
+                        {
+                          "diff": [
+                            {
+                              "map": [
+                                {
+                                  "filter": [
+                                    { "part": "Pages" },
+                                    { "and": [
+                                        { "==": [{"var": "type"},null] },
+                                        { "==": [{"var": "visibility"},"HiddenInViewMode"] }
+                                      ] 
+                                    }
+                                  ]
+                                },
+                                {"cat": ["'", { "var": "name" },"'"]}
+                              ]
+                            },
+                            {
+                              "map": [
+                                { "part": "Visuals" },
+                                { "and": [
+                                    { "var": "visual.visualContainerObjects.visualLink.0.properties.navigationSection.expr.Literal.Value" },
+                                    { "var": "visual.visualContainerObjects.visualLink.0.properties.bookmark.expr.Literal.Value" }
+                                  ] 
+                                }
+                                
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                { "var": "displayName" }
+              ]
+            },
+            []
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
+      "id": "teste",
+      "name": "teste",
+      "description": "teste",
+      "part": "Pages",
+      "disabled": true,
+      "test": [
+        {
+          "map": [
+            {
+                  "filter": [
+                    {
+                      "part": "Visuals"
+                    },
+                    {
+                      "some": [
+                        {
+                          "var": "filterConfig.filters"
+                        },
+                        {
+                          "==": [
+                            {
+                              "var": "type"
+                            },
+                            "Advanced"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+            {
+              "var": "name"
+            }
+          ]
+        },
+        {},
+        []
+      ]
+    },
+    {
       "id": "template",
       "name": "Rule Template",
       "description": "Rule template",
@@ -410,3 +872,5 @@
     }
   ]
 }
+  
+  

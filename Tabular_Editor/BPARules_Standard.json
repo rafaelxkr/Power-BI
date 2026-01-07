@@ -130,6 +130,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_PROCEDURES",
+    "Name": "[Consulta SQL] Evite uso de Procedures",
+    "Category": "02.Consulta SQL",
+    "Description": "Utiliza executa procedures ao invés fazer consulta SQL",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "ETAPAS_REDUNDANTES",
     "Name": "[Power Query] Etapas Redundantes no Power Query",
     "Category": "03.Power Query",

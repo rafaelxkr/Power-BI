@@ -10,8 +10,8 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "BANCO_DADOS_AUTORIZACAO_2",
-    "Name": "01.2.Fonte de Dados não Aprovada",
+    "ID": "BANCO_DADOS_AUTORIZACAO_SEM_CARGA",
+    "Name": "01.2.Fonte de Dados não Aprovada Tabela sem Carga",
     "Category": "01.Fonte de Dados",
     "Description": "Esses bancos de dados não são autorizados serem utilizados",
     "Severity": 5,
@@ -33,10 +33,20 @@
     "ID": "EVITE_PROCEDURES",
     "Name": "01.4.Evite uso de Procedures",
     "Category": "01.Fonte de Dados",
-    "Description": "Utiliza consulta SQL ao invés de procedures",
+    "Description": "Utiliza procedures ao invés de consulta SQL",
     "Severity": 5,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_PROCEDURES_SEM_CARGA",
+    "Name": "01.5.Evite uso de Procedures Tabela Sem Carga",
+    "Category": "01.Fonte de Dados",
+    "Description": "Utiliza procedures ao invés de consulta SQL",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s*)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {

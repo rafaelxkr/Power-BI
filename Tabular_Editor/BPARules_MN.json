@@ -50,6 +50,86 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "SQL_DROP_TABLE",
+    "Name": "01.6.Consulta SQL possui comando Drop Table",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL possui comando Drop Table, não utilize esse tipo de comando dentro da consulta do Power BI. Crie um fluxo de ingestão de dados ",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?is)drop\\s*table\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?is)drop\\s*table\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_DROP_TABELA_TABELA_SEM_CARGA",
+    "Name": "01.7.Consulta SQL possui comando Drop Table Tabela Sem Carga",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL possui comando Drop Table, não utilize esse tipo de comando dentro da consulta do Power BI. Crie um fluxo de ingestão de dados ",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?is)drop\\s*table\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_INTO",
+    "Name": "01.8.Consulta SQL possui comando INTO",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL possui comando INTO, não utilize esse tipo de comando dentro da consulta do Power BI. Crie um fluxo de ingestão de dados ",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?i)\\sinto\\s\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?i)\\sinto\\s\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_INTO_TABELA_SEM_CARGA",
+    "Name": "01.9.Consulta SQL possui comando INTO Tabela Sem Carga",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL possui comando INTO, não utilize esse tipo de comando dentro da consulta do Power BI. Crie um fluxo de ingestão de dados ",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)\\sinto\\s\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_TEMPDB",
+    "Name": "01.10.Consulta SQL utiliza tempdb",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL utiliza tempdb, utilize tabelas no ambiente produtivo e não tabelas temporárias",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?i)tempdb\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?i)tempdb\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_TEMPDB_TABELA_SEM_CARGA",
+    "Name": "01.11.Consulta SQL utiliza tempdb Tabela Sem Carga",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL utiliza tempdb, utilize tabelas no ambiente produtivo e não tabelas temporárias",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)tempdb\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_TABTEMP",
+    "Name": "01.12.Consulta SQL possui TabTemp (tabelas temporárias)",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL evite consultar tabelas temporárias, utilize somente tabelas em produção.",
+    "Severity": 5,
+    "Scope": "Table",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?i)TabTemp\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?i)TabTemp\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SQL_TABTEMP_TABELA_SEM_CARGA",
+    "Name": "01.13.Consulta SQL possui TabTemp (tabelas temporárias) Tabela Sem Carga",
+    "Category": "01.Fonte de Dados",
+    "Description": "Consulta SQL evite consultar tabelas temporárias, utilize somente tabelas em produção.",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "RegEx.IsMatch(Expression,\"(?i)TabTemp\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "MEDIDA_NA_TABELA_MEDIDA",
     "Name": "03.Medidas Devem Estar na Tabela de Medidas",
     "Category": "02.Cálculos e Medidas",
@@ -154,14 +234,24 @@
     "Name": "13.1.Tabela Conectada em Banco de Dados sem Usar SQL",
     "Category": "03.Desempenho",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
-    "Severity": 4,
+    "Severity": 5,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n!Regex.IsMatch(Regex.Replace(SourceExpression,\"(\\.Select|\\.From)\",\"\"),\"(?is)select.+from\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\n!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?is)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "SQL_BANCO_DADOS_TABELA_SEM_CARGA",
+    "Name": "13.2.Consultar Banco de Dados com SQL Tabela Sem Carga",
+    "Category": "03.Desempenho",
+    "Description": "Utilize comando SQL para consultar ou tratar dados que a fonte é um banco de dados",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "!Regex.IsMatch(Regex.Replace(Expression,\"(\\.Select|\\.From)\",\"\"),\"(?is)select.+from\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks\\.|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "COLUNAS_CALCULADAS_POWER_QUERY",
-    "Name": "13.2.Colunas Calculadas no Power Query",
+    "Name": "13.3.Colunas Calculadas no Power Query",
     "Category": "03.Desempenho",
     "Description": "Priorize a criação de colunas no SQL antes de criar no Power Query ou em DAX",
     "Severity": 4,

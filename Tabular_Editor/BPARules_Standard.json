@@ -151,7 +151,7 @@
   },
   {
     "ID": "SQL_BANCO_DADOS",
-    "Name": "[Consulta SQL] Consultar Banco de Dados com SQL",
+    "Name": "[Consulta SQL] Evite Consultar Banco de Dados sem SQL",
     "Category": "02.Consulta SQL",
     "Description": "Utilize comando SQL para consultar ou tratar dados que a fonte é um banco de dados",
     "Severity": 5,
@@ -161,7 +161,7 @@
   },
   {
     "ID": "SQL_BANCO_DADOS_TABELA_SEM_CARGA",
-    "Name": "[Consulta SQL] Consultar Banco de Dados com SQL Tabela Sem Carga",
+    "Name": "[Consulta SQL] Evite Consultar Banco de Dados sem SQL Tabela Sem Carga",
     "Category": "02.Consulta SQL",
     "Description": "Utilize comando SQL para consultar ou tratar dados que a fonte é um banco de dados",
     "Severity": 5,

@@ -241,7 +241,7 @@
   },
   {
     "ID": "TABELA_BANCO_DADOS_SEM_SQL",
-    "Name": "13.1.Tabela Conectada em Banco de Dados sem Usar SQL",
+    "Name": "13.1.Evite Consultar Banco de Dados sem SQL",
     "Category": "03.Desempenho",
     "Description": "As tabelas devem criadas utilizadando consulta SQL para reduzir a quantidade de etapas no Power Query",
     "Severity": 5,
@@ -251,7 +251,7 @@
   },
   {
     "ID": "SQL_BANCO_DADOS_TABELA_SEM_CARGA",
-    "Name": "13.2.Consultar Banco de Dados com SQL Tabela Sem Carga",
+    "Name": "13.2.Evite Consultar Banco de Dados sem SQL Tabela Sem Carga",
     "Category": "03.Desempenho",
     "Description": "Utilize comando SQL para consultar ou tratar dados que a fonte é um banco de dados",
     "Severity": 5,

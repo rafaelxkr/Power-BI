@@ -517,7 +517,7 @@
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 3,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)my\\.sharepoint\\.com\\personal\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com\\personal\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)my\\.sharepoint\\.com\\\\personal\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com\\\\personal\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -527,7 +527,7 @@
     "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
     "Severity": 3,
     "Scope": "NamedExpression",
-    "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com\\personal\")",
+    "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com\\\\personal\")",
     "CompatibilityLevel": 1200
   },
   {

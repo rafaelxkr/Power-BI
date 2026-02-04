@@ -136,7 +136,7 @@
     "Description": "Utiliza procedures ao invés de consulta SQL",
     "Severity": 5,
     "Scope": "Table",
-    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s*)\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database)\")\r\n)\r\n)",
+    "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegEx.IsMatch(SourceExpression,\"(?is)(exec\\s)\")\r\nand \r\nRegEx.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database)\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s)\")\r\nand \r\nRegEx.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database)\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
   },
   {
@@ -146,7 +146,7 @@
     "Description": "Utiliza procedures ao invés de consulta SQL",
     "Severity": 5,
     "Scope": "NamedExpression",
-    "Expression": "\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s*)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database|AnalysisServices\\.Database|OData\\.Feed|PostgreSQL\\.Database)\")",
+    "Expression": "\r\nRegEx.IsMatch(Expression,\"(?is)(exec\\s)\")\r\nand \r\nKind == \"M\"\r\nand\r\nRegEx.IsMatch(Expression,\"(?i)(Sql\\.Database|AnalysisServices\\.Database|PostgreSQL\\.Database)\")",
     "CompatibilityLevel": 1200
   },
   {
@@ -257,6 +257,16 @@
     "Severity": 5,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n\r\n!(SourceExpression == null)\r\nand\r\n(\r\n   Regex.Matches(SourceExpression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(SourceExpression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(SourceExpression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(SourceExpression, \"Table.RenameColumns\").Count > 1\r\nor Regex.Matches(SourceExpression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(SourceExpression, \"Table.ReorderColumns\").Count > 0\r\n)\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\n!(Expression == null)\r\nand\r\n(\r\n   Regex.Matches(Expression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(Expression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(Expression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.RenameColumns\").Count > 1\r\nor Regex.Matches(Expression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(Expression, \"Table.ReorderColumns\").Count > 0\r\n)\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "ETAPAS_REDUNDANTES_TABELA_SEM_CARGA",
+    "Name": "[Power Query] Etapas Redundantes no Power Query Tabela sem Carga",
+    "Category": "03.Power Query",
+    "Description": "Evite etapas desnecessárias no Power Query e para banco de dados fazer consulta SQL para reduzir a quantidade de etapas no Power Query",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "\r\n\r\n\r\n!(Expression == null)\r\nand\r\n(\r\n   Regex.Matches(Expression, \"Table.SelectRows\").Count > 1            \r\nor Regex.Matches(Expression, \"Table.TransformColumnTypes\").Count > 1  \r\nor Regex.Matches(Expression, \"Table.RemoveColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.SelectColumns\").Count > 1         \r\nor Regex.Matches(Expression, \"Table.RenameColumns\").Count > 1\r\nor Regex.Matches(Expression, \"Table.Sort\").Count > 0\r\nor Regex.Matches(Expression, \"Table.ReorderColumns\").Count > 0\r\n)\r\n\r\n",
     "CompatibilityLevel": 1200
   },
   {

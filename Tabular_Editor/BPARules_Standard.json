@@ -250,7 +250,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "ETAPAS_REDUNDANTES",
+    "ID": "c",
     "Name": "[Power Query] Etapas Redundantes no Power Query",
     "Category": "03.Power Query",
     "Description": "Evite etapas desnecessárias no Power Query e para banco de dados fazer consulta SQL para reduzir a quantidade de etapas no Power Query",
@@ -290,6 +290,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "EVITE_FONTE_DADOS_PC_TABELA_SEM_CARGA",
+    "Name": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\" Tabela Sem Carga",
+    "Category": "03.Power Query",
+    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
+    "Severity": 5,
+    "Scope": "NamedExpression",
+    "Expression": "Regex.IsMatch(Expression,\"(?i)C:\\\\Users\\\\\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "EVITE_FONTE_DADOS_ONEDRIVE",
     "Name": "[Power Query] Evite Fonte de Dados do OneDrive",
     "Category": "03.Power Query",
@@ -297,6 +307,16 @@
     "Severity": 3,
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\nRegex.IsMatch(SourceExpression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n)\r\n\r\nor\r\n\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\nPartitions.Any(\r\nRegex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")\r\n)\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "EVITE_FONTE_DADOS_ONEDRIVE_TABELA_SEM_CARGA",
+    "Name": "[Power Query] Evite Fonte de Dados do OneDrive Tabela Sem Carga",
+    "Category": "03.Power Query",
+    "Description": "Ao invés de carregar arquivos localizados no seu computador, utilize o Sharepoint para armazenar esses arquivos.",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Regex.IsMatch(Expression,\"(?i)my\\.sharepoint\\.com/personal\")",
     "CompatibilityLevel": 1200
   },
   {

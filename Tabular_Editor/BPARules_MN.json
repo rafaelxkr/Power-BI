@@ -807,7 +807,7 @@
     "Description": "Colunas de relacionamento com dados unicos não precisa de contagem distinta, pode se utilizar a função COUNTROWS no lugar",
     "Severity": 5,
     "Scope": "Measure",
-    "Expression": "Model.Relationships.Where( ToCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + ToTable.Name + \"\\[\" + ToColumn.Name  )  ).Count() > 0\r\nor\r\nModel.Relationships.Where( FromCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + FromTable.Name + \"\\[\" + FromColumn.Name  )  ).Count() > 0",
+    "Expression": "Model.Relationships.Where( ToCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + ToTable.Name + \"\\[\" + ToColumn.Name + \"\\]\" )  ).Count() > 0\r\nor\r\nModel.Relationships.Where( FromCardinality.ToString() == \"One\" ).Where( Regex.IsMatch(Regex.Replace(current.Expression,\"'\",\"\"), \"(?i)DISTINCTCOUNT\\s*\\(\\s*\" + FromTable.Name + \"\\[\" + FromColumn.Name + \"\\]\" )  ).Count() > 0",
     "CompatibilityLevel": 1200
   },
   {

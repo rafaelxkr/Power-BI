@@ -248,7 +248,7 @@
     "Scope": "Table",
     "Expression": "(\r\nEnableRefreshPolicy = true\r\nand\r\n\r\n!(SourceExpression == null)\r\nand\r\nRegex.IsMatch(SourceExpression, \"(Table|List|Record)\\.[^\\s]+\")\r\nand\r\nRegex.IsMatch(SourceExpression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n\r\nor\r\n(\r\nEnableRefreshPolicy = false\r\nand\r\n\r\nPartitions.Any(\r\n!(Expression == null)\r\nand\r\nRegex.IsMatch(Expression, \"(Table|List|Record)\\.[^\\s]+\")\r\nand\r\nRegex.IsMatch(Expression,\"(Sql\\.Database|PostgreSQL\\.Database|Databricks|GoogleBigQuery\\.Database|Snowflake\\.Database|AmazonRedshift\\.Database|AmazonRdsForSqlServer\\.Database|AmazonAthena\\.Databases|MySQL\\.Database|Oracle\\.Database|SapHana\\.Database)\")\r\n)\r\n)",
     "CompatibilityLevel": 1200
-  }
+  },
   {
     "ID": "TABELA_BANCO_DADOS_SEM_SQL",
     "Name": "13.1.Evite Consultar Banco de Dados sem SQL",
@@ -347,6 +347,16 @@
     "Severity": 4,
     "Scope": "Table, CalculatedTable",
     "Expression": "ObjectTypeName == \"Calculated Table\"\n\r\nand\r\n(\r\n\n(\nName.StartsWith(\"DateTableTemplate_\") \n\nor \n\nName.StartsWith(\"LocalDateTable_\")\n)\r\nor\r\nHasAnnotation(\"__PBI_LocalDateTable\")\r\n)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABELA_SEM_RELACIONAMENTO",
+    "Name": "25.Tabela sem Relacionamento e Medidas",
+    "Category": "04.Transformação e modelagem Power Query",
+    "Description": "Verifique as tabelas sem relacionamento estão corretas",
+    "Severity": 1,
+    "Scope": "Table",
+    "Expression": "UsedInRelationships.Count()=0\r\nand\r\n!RegEx.IsMatch(Name,\"(?i)Medida\")\r\nand\r\n!Model.AllMeasures.Any(\r\nRegEx.IsMatch(RegEx.Replace(Expression,\"'\",\"\"),\r\n\"(?i)\" + current.Name + \"\\[\")\r\n)",
     "CompatibilityLevel": 1200
   },
   {

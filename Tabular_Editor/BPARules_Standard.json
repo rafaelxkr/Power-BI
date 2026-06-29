@@ -260,7 +260,7 @@
     "CompatibilityLevel": 1200
   },
   {
-    "ID": "c",
+    "ID": "ETAPAS_REDUNDANTES_TABELA",
     "Name": "[Power Query] Etapas Redundantes no Power Query",
     "Category": "03.Power Query",
     "Description": "Evite etapas desnecessárias no Power Query e para banco de dados fazer consulta SQL para reduzir a quantidade de etapas no Power Query",
@@ -488,7 +488,7 @@
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
     "Expression": "Model.Tables.Where(\r\nRegex.IsMatch(\r\nCurrent.Expression,\r\n\"(?i)(SUMX|AVERAGEX|COUNTX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX\\.INC|PERCENTILEX\\.EXC|CONCATENATEX|MEDIANX|RANKX|ADDCOLUMNS)\\s*\\(\\s*'*\"+ Name +\"'*,\"\r\n)\r\n).Any()",
-    "CompatibilityLevel": 1200,
+    "CompatibilityLevel": 1200
   },
   {
     "ID": "FILTER_SINTAX_INADEQUADA",

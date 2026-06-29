@@ -487,8 +487,8 @@
     "Description": "Evite utilizar iteradora para rodar o calculo em cima da tabela inteira, isso deixa a execução da medida mais pesada",
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculationItem",
-    "Expression": "RegEx.IsMatch(\r\nRegEx.Replace(Expression,\"(?i)\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+'*\\s*,\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*\\[[A-Za-z0-9À-ÿ _]+\\]\\s*\\)\",\"\")\r\n\r\n,\"(?i)(SUMX|AVERAGEX|COUNTX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX\\.INC|PERCENTILEX\\.EXC|CONCATENATEX|MEDIANX|RANKX|ADDCOLUMNS)\\s*\\(\\s*\\'*[A-Za-z0-9À-ÿ _]+\\'*,\\s*([^\\]]+\\])\")",
-    "CompatibilityLevel": 1200
+    "Expression": "Model.Tables.Where(\r\nRegex.IsMatch(\r\nCurrent.Expression,\r\n\"(?i)(SUMX|AVERAGEX|COUNTX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX\\.INC|PERCENTILEX\\.EXC|CONCATENATEX|MEDIANX|RANKX|ADDCOLUMNS)\\s*\\(\\s*'*\"+ Name +\"'*,\"\r\n)\r\n).Any()",
+    "CompatibilityLevel": 1200,
   },
   {
     "ID": "FILTER_SINTAX_INADEQUADA",

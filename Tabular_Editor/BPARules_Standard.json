@@ -544,7 +544,7 @@
     "ID": "REFERENCIOU_A_MESMA_MEDIDA",
     "Name": "[Medidas] Referenciou Mesma Medida ao Invés de usar Variável",
     "Category": "05.Medidas",
-    "Description": "As colunas usadas em um relacionamento devem ser do mesmo tipo de dados",
+    "Description": "Utilizar variáveis (VAR) para otimizar a medida evitando recalcular o mesmo item",
     "Severity": 4,
     "Scope": "Measure",
     "Expression": "RegEx.IsMatch(Regex.Replace(Regex.Replace(Expression, \"\\r\\n?|\\n\", \" \"),\"CALCULATE\\s*\\(\\s*\\[(?:(?!\\,).)*,\", \"\"), \"(?i)[^A-Za-z0-9À-ÿ']\\[([^\\]]+)\\].*?[^A-Za-z0-9À-ÿ']\\[\\1\\]\")\r\nand\r\n!RegEx.IsMatch(Expression,\"(?i)(:?SUMX|COUNTX|TOPN|AVERAGEX|COUNTAX|MAXX|MINX|PRODUCTX|PERCENTILEX.EXC|PERCENTILEX.INC|CONCATENATEX|MEDIANX|TOPN|RANKX|ADDCOLUMNS)\")",

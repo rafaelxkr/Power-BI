@@ -340,6 +340,16 @@
     "CompatibilityLevel": 1200
   },
   {
+    "ID": "TIPAR_PARAMETROS",
+    "Name": "[Power Query] Tipar os Parâmetros",
+    "Category": "03.Power Query",
+    "Description": "Configure o tipo de dados do parâmetro para ser possivel alterar ele no relatório publicado",
+    "Severity": 1,
+    "Scope": "NamedExpression",
+    "Expression": "Regex.IsMatch(Expression,\"meta \\[IsParameterQuery=true, Type=\"\"Any\"\",\")",
+    "CompatibilityLevel": 1200
+  },
+  {
     "ID": "RELACIONAMENTO_FATO_FATO",
     "Name": "[Relacionamentos] Relacionamento de Fato para Fato",
     "Category": "04.Relacionamentos",

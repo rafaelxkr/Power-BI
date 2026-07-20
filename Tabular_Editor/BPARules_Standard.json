@@ -732,12 +732,12 @@
   },
   {
     "ID": "Medida_Erro",
-    "Name": "[Medidas] Medida com Erro",
+    "Name": "[Medidas] Medida, Coluna ou Tabela DAX com Erro",
     "Category": "05.Medidas",
     "Description": "Realize a correção das medidas com erro ou exclua-as se não estiverem sendo utilizadas.",
     "Severity": 3,
-    "Scope": "Measure",
-    "Expression": "ErrorMessage <> \"\"",
+    "Scope": "Measure, CalculatedColumn, CalculatedTable, CalculatedTableColumn, CalculationGroup, CalculationItem",
+    "Expression": "ErrorMessage <> \"\" and ErrorMessage <> null",
     "CompatibilityLevel": 1200
   },
   {

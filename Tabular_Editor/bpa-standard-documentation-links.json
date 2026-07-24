@@ -2,422 +2,427 @@
   "schemaVersion": "1.0",
   "type": "bpa-documentation-links",
   "source": "standard",
-  "exportedAt": "2026-07-13T09:40:40-03:00",
+  "exportedAt": "2026-07-23T15:48:14-03:00",
   "items": [
     {
       "ruleName": "[Atualização] Atualização Incremental Desativada",
-      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5741/Prompts-para-IA",
-      "documentationRegisteredAt": "2026-07-13T12:40:29.081Z"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=01.-tabelas-fato-possuem-atualiza%C3%A7%C3%A3o-incremental%3F",
+      "documentationRegisteredAt": "2026-07-23T18:03:53.736Z"
     },
     {
       "ruleName": "[Atualização] Avaliar Incremental de Dia para Mês",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=02.-hist%C3%B3rico-da-atualiza%C3%A7%C3%A3o-incremental-utilizou-trimestre-ao-inv%C3%A9s-de-ano%3F",
+      "documentationRegisteredAt": "2026-07-23T18:06:20.352Z"
     },
     {
       "ruleName": "[Atualização] Corrigir Filtro da Atualização Incremental",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=01.-tabelas-fato-possuem-atualiza%C3%A7%C3%A3o-incremental%3F",
+      "documentationRegisteredAt": "2026-07-23T18:05:25.543Z"
     },
     {
       "ruleName": "[Atualização] Corrigir Parametro da Atualização Incremental",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=01.-tabelas-fato-possuem-atualiza%C3%A7%C3%A3o-incremental%3F",
+      "documentationRegisteredAt": "2026-07-23T18:05:06.850Z"
     },
     {
       "ruleName": "[Atualização] Evite Incremental de 1 Mês ou 1 Trimestre",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=02.-hist%C3%B3rico-da-atualiza%C3%A7%C3%A3o-incremental-utilizou-trimestre-ao-inv%C3%A9s-de-ano%3F",
+      "documentationRegisteredAt": "2026-07-23T18:07:38.626Z"
     },
     {
       "ruleName": "[Atualização] Evite Tabelas no Modo Direct Query",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Atualização] Histórico da atualização incremental utilizar Trimestre ao invés de Ano",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=02.-hist%C3%B3rico-da-atualiza%C3%A7%C3%A3o-incremental-utilizou-trimestre-ao-inv%C3%A9s-de-ano%3F",
+      "documentationRegisteredAt": "2026-07-23T18:05:53.883Z"
     },
     {
       "ruleName": "[Atualização] Historico da Incremental Maior que 5 Anos",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=02.-hist%C3%B3rico-da-atualiza%C3%A7%C3%A3o-incremental-utilizou-trimestre-ao-inv%C3%A9s-de-ano%3F",
+      "documentationRegisteredAt": "2026-07-23T18:07:32.897Z"
     },
     {
       "ruleName": "[Consulta SQL] Colunas Calculadas no DAX",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=05.-criou-colunas-calculadas-na-consulta-sql%2C-ao-inv%C3%A9s-de-criar-no-power-query-ou-dax%3F",
+      "documentationRegisteredAt": "2026-07-23T18:09:41.842Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui comando Drop Table",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=6.--utilizar-%60drop%60%2C-como-%60drop-table%60%2C-%60drop-view%60%2C-%60drop-procedure%60-ou-comandos-similares%2C-dentro-de-queries-usadas-pelo-power-bi-%C3%A9-altamente-arriscado-e-n%C3%A3o-recomendado.",
+      "documentationRegisteredAt": "2026-07-23T18:13:30.874Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui comando Drop Table Tabela Sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=6.--utilizar-%60drop%60%2C-como-%60drop-table%60%2C-%60drop-view%60%2C-%60drop-procedure%60-ou-comandos-similares%2C-dentro-de-queries-usadas-pelo-power-bi-%C3%A9-altamente-arriscado-e-n%C3%A3o-recomendado.",
+      "documentationRegisteredAt": "2026-07-23T18:13:37.678Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui comando INTO",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:15.045Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui comando INTO Tabela Sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:19.894Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui TabTemp (tabelas temporárias)",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:37.545Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL possui TabTemp (tabelas temporárias) Tabela Sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:43.211Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL utiliza tempdb",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:26.323Z"
     },
     {
       "ruleName": "[Consulta SQL] Consulta SQL utiliza tempdb Tabela Sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=7.--o-uso-de-%60tempdb%60-no-sql-server-n%C3%A3o-%C3%A9-proibido%2C-mas-em-queries-do-power-bi-deve-ser-tratado-com-muita-cautela.",
+      "documentationRegisteredAt": "2026-07-23T18:14:31.077Z"
     },
     {
       "ruleName": "[Consulta SQL] Evite Consultar Banco de Dados sem SQL",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Consulta SQL] Evite Consultar Banco de Dados sem SQL Tabela Sem Carga",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Consulta SQL] Evite ORDER BY da Consulta SQL",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Consulta SQL] Evite ORDER BY da Consulta SQL Tabela Sem Carga",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Consulta SQL] Evite Tabelas Calculadas",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=04.-as-tabelas-s%C3%A3o-criadas-a-partir-de-consultas-sql%3F",
+      "documentationRegisteredAt": "2026-07-23T18:11:44.158Z"
     },
     {
       "ruleName": "[Consulta SQL] Evite Transformações do Power Query em Consultas SQL",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=03.-o-query-folding-est%C3%A1-ativo%3F",
+      "documentationRegisteredAt": "2026-07-23T18:16:23.640Z"
     },
     {
       "ruleName": "[Consulta SQL] Evite uso de Procedures",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=6.--utilizar-%60drop%60%2C-como-%60drop-table%60%2C-%60drop-view%60%2C-%60drop-procedure%60-ou-comandos-similares%2C-dentro-de-queries-usadas-pelo-power-bi-%C3%A9-altamente-arriscado-e-n%C3%A3o-recomendado.",
+      "documentationRegisteredAt": "2026-07-23T18:12:46.822Z"
     },
     {
       "ruleName": "[Consulta SQL] Evite uso de Procedures Tabela Sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=6.--utilizar-%60drop%60%2C-como-%60drop-table%60%2C-%60drop-view%60%2C-%60drop-procedure%60-ou-comandos-similares%2C-dentro-de-queries-usadas-pelo-power-bi-%C3%A9-altamente-arriscado-e-n%C3%A3o-recomendado.",
+      "documentationRegisteredAt": "2026-07-23T18:12:57.933Z"
     },
     {
       "ruleName": "[Consulta SQL] Incremental com Query Folding Desativado",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=03.-o-query-folding-est%C3%A1-ativo%3F",
+      "documentationRegisteredAt": "2026-07-23T18:08:53.014Z"
     },
     {
       "ruleName": "[Dados Residuais] Evite Modelos com Mais de 2GB de Dados e Sem Incremental",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=01.-tabelas-fato-possuem-atualiza%C3%A7%C3%A3o-incremental%3F",
+      "documentationRegisteredAt": "2026-07-23T18:45:36.612Z"
     },
     {
       "ruleName": "[Dados Residuais] Remover colunas redundantes em tabelas relacionadas",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Dados Residuais] Tabela com Mais de 30 Colunas. Está Normalizada?",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=06.-tabela-fato-est%C3%A1-normalizada%3F-(evitar-tabel%C3%A3o)",
+      "documentationRegisteredAt": "2026-07-23T18:45:10.340Z"
     },
     {
       "ruleName": "[Medidas] '(X/Y)-1' ao inves (X-Y)/Y",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=21.-nas-medidas-de-divis%C3%A3o%2C-utilizou-o-padr%C3%A3o-(x-y)/y-ao-inv%C3%A9s-de-x/y-1%3F",
+      "documentationRegisteredAt": "2026-07-23T18:37:23.845Z"
     },
     {
       "ruleName": "[Medidas] A função EVALUATEANDLOG não deve ser usada em modelos de produção",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] COUNTROWS ao invés de COUNT, COUNTA or COUNTBLANK",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=19.-as-medidas-usam-a-fun%C3%A7%C3%A3o-countrows-ao-inv%C3%A9s-de-count%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:57.857Z"
     },
     {
       "ruleName": "[Medidas] DISTINCTCOUNT ao invés de SUMX(VALUES(tabela[Coluna]),1)",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] DISTINCTCOUNTNOBLANK ao invés de DISTINCTCOUNT <> Blank()",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] DIVIDE ao invés de \"/\"",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=17.-divis%C3%A3o-somente-com-divide-ao-inv%C3%A9s-de-%22/%22%3F",
+      "documentationRegisteredAt": "2026-07-23T18:37:07.632Z"
     },
     {
       "ruleName": "[Medidas] Evitar a função IFERROR e ISERROR",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=18.-as-medidas-n%C3%A3o-utilizam-a-fun%C3%A7%C3%A3o-iferror%3F",
+      "documentationRegisteredAt": "2026-07-23T18:37:03.429Z"
     },
     {
       "ruleName": "[Medidas] Evite a função USERELATIONSHIP e RLS na mesma tabela",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Evite CALCULATE() sem Filtro ou Modificador de Contexto",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Evite CALCULATE([Medida])",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Evite DISTINCTCOUNT em Coluna de Relacionamento com Dados Unicos",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Evite Funções de Texto LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Evite VALUES ou DISTINCT da Tabela Inteira",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] FILTER com Sintaxe Inadequada",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
-    },
-    {
-      "ruleName": "[Medidas] Medida com Erro",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Medida Iteradora Rodando na Tabela Inteira",
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=16.-fun%C3%A7%C3%B5es-iteradoras-n%C3%A3o-rodam-em-cima-da-fato-ou-dimens%C3%A3o-inteira%3F",
+      "documentationRegisteredAt": "2026-07-23T18:32:35.932Z"
+    },
+    {
+      "ruleName": "[Medidas] Medida, Coluna ou Tabela DAX com Erro",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Medidas com mesmo DAX",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Referenciou Mesma Medida ao Invés de usar Variável",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:52.164Z"
     },
     {
       "ruleName": "[Medidas] TREATAS ao invés de Tabela[Coluna] IN VALUES ou DISTINCT",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Utilizar COUNTROWS e SUMMARIZE ao invés de SUMX, SUMMARIZE e COUNT",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o AVERAGE",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:49.344Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o COUNT",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:24.328Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o COUNTA",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:45.448Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o COUNTROWS",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:42.974Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o DISTINCT",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:39.950Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o MAX",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:36.425Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o MAXA",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:33.093Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o MIN",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:29.463Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o MINA",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:26.112Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o SUM",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:36:22.615Z"
     },
     {
       "ruleName": "[Medidas] Utilizar Várivel para o VALUES",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=20.-utilizou-vari%C3%A1vel-ao-inv%C3%A9s-de-referenciar-a-mesma-medida-v%C3%A1rias-vezes%3F",
+      "documentationRegisteredAt": "2026-07-23T18:37:17.547Z"
     },
     {
       "ruleName": "[Nomenclatura] Tabelas Devem ter Prefixo \"d\" para Dimensões e \"f\" fara Fatos",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=25.-tabelas-est%C3%A3o-com-prefixo-%22d%22-para-dimens%C3%B5es-e-%22f%22-fara-fatos%3F",
+      "documentationRegisteredAt": "2026-07-23T18:44:35.781Z"
     },
     {
       "ruleName": "[Opções/Configurações] Desativar Data/Hora Automática",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=24.-desabilitou-%22data/hora-autom%C3%A1tica%22-nas-configura%C3%A7%C3%B5es%3F",
+      "documentationRegisteredAt": "2026-07-23T18:38:43.319Z"
     },
     {
       "ruleName": "[Opções/Configurações] Grupos de cálculo sem itens de cálculo",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Opções/Configurações] Marcar a dCalendario Como Tabela de Data",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=23.-marcou-a-dcalendario-como-tabela-de-data%3F",
+      "documentationRegisteredAt": "2026-07-23T18:38:21.424Z"
     },
     {
       "ruleName": "[Opções/Configurações] Perspectivas sem objetos",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Power Query] Corrigir tipagem dos dados, colunas do relacionamentos devem ter o mesmo tipo",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=09.-colunas-est%C3%A3o-com-a-tipagem-de-dados-correta%3F",
+      "documentationRegisteredAt": "2026-07-23T18:17:05.109Z"
     },
     {
       "ruleName": "[Power Query] Desativar Atualização de Tabela Manual",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=10.-desmarcou-%22incluir-na-atualiza%C3%A7%C3%A3o-do-relat%C3%B3rio%22-tabelas-criadas-manualmente%3F",
+      "documentationRegisteredAt": "2026-07-23T18:17:42.284Z"
     },
     {
       "ruleName": "[Power Query] Etapas Redundantes no Power Query",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=07.-evitou-etapas-redundantes-(ex%3A-v%C3%A1rias-etapas-de-colunas-renomeadas)%3F",
+      "documentationRegisteredAt": "2026-07-23T18:15:44.522Z"
     },
     {
       "ruleName": "[Power Query] Etapas Redundantes no Power Query Tabela sem Carga",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=07.-evitou-etapas-redundantes-(ex%3A-v%C3%A1rias-etapas-de-colunas-renomeadas)%3F",
+      "documentationRegisteredAt": "2026-07-23T18:16:40.021Z"
     },
     {
       "ruleName": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\"",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Power Query] Evite Fonte de Dados do Computador \"C:\\Users\" Tabela Sem Carga",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Power Query] Evite Fonte de Dados do OneDrive",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Power Query] Evite Fonte de Dados do OneDrive Tabela Sem Carga",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
+    },
+    {
+      "ruleName": "[Power Query] Tipar os Parâmetros",
+      "documentationLink": "",
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Evite dimensões de atributo único que não sejam compartilhadas por vários Fatos",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Evite Modelagem Snow Flake",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Evite USERELATIONSHIP em Tabelas com Filtro de RLS",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Possui Relacionamentos Muitos para Muitos",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=13.-n%C3%A3o-possui-relacionamentos-muitos-para-muitos-(n%3An)%3F",
+      "documentationRegisteredAt": "2026-07-23T18:31:08.855Z"
     },
     {
       "ruleName": "[Relacionamentos] Relacionamento 1:1 entre Fato e Dimensão está Correto?",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Relacionamento Bi-Direcional",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=14.-n%C3%A3o-possui-relacionamentos-bi-direcionais%3F",
+      "documentationRegisteredAt": "2026-07-23T18:28:49.735Z"
     },
     {
       "ruleName": "[Relacionamentos] Relacionamento de Fato para Fato",
-      "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationLink": "https://dev.azure.com/dataside/Advanced%20Analytics/_wiki/wikis/Advanced-Analytics.wiki/5313/Check-List-de-Boas-Pr%C3%A1ticas?anchor=12.-n%C3%A3o-possui-relacionamentos-de-tabela-fato-para-fato%3F",
+      "documentationRegisteredAt": "2026-07-23T18:28:51.085Z"
     },
     {
       "ruleName": "[Relacionamentos] Relacionamento Inativo não é utilizado",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[Relacionamentos] Verificar Utilização de Tabela 1 Relacionamento e Coluna",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     },
     {
       "ruleName": "[RLS] LEFT,FIND,SEARCH,UPPER,SUBSTITUTE, CONTAINSSTRING, ...",
       "documentationLink": "",
-      "documentationRegisteredAt": "2026-07-13T09:40:40-03:00"
+      "documentationRegisteredAt": "2026-07-23T15:48:14-03:00"
     }
   ]
 }

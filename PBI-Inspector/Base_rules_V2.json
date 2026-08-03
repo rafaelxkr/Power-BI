@@ -11,27 +11,36 @@
         {
           "map": [
             {
-                  "filter": [
+              "filter": [
+                {
+                  "part": "Visuals"
+                },
+                {
+                  "some": [
                     {
-                      "part": "Visuals"
+                      "var": "filterConfig.filters"
                     },
                     {
-                      "some": [
+                      "and": [
                         {
-                          "var": "filterConfig.filters"
+                            "==": [
+                                {
+                                    "var": "howCreated"
+                                },
+                                "User"
+                            ]
                         },
                         {
-                          "==": [
-                            {
-                              "var": "type"
-                            },
-                            "Advanced"
-                          ]
+                            "==": [
+                                {"var": "filter"}, null
+                            ]
                         }
-                      ]
+                    ]
                     }
                   ]
-                },
+                }
+              ]
+            },
             {
               "var": "name"
             }
@@ -51,36 +60,36 @@
         {
           "map": [
             {
-                  "filter": [
+              "filter": [
+                {
+                  "part": "Pages"
+                },
+                {
+                  "some": [
                     {
-                      "part": "Pages"
+                      "var": "filterConfig.filters"
                     },
                     {
-                      "some": [
+                      "and": [
                         {
-                          "var": "filterConfig.filters"
+                            "==": [
+                                {
+                                    "var": "howCreated"
+                                },
+                                "User"
+                            ]
                         },
                         {
-                          "and": [
-                            {
-                                "==": [
-                                    {
-                                        "var": "howCreated"
-                                    },
-                                    "User"
-                                ]
-                            },
-                            {
-                                "==": [
-                                    {"var": "filter"}, null
-                                ]
-                            }
-                        ]
+                            "==": [
+                                {"var": "filter"}, null
+                            ]
                         }
-                      ]
+                    ]
                     }
                   ]
-                },
+                }
+              ]
+            },
             {
               "var": "displayName"
             }
@@ -747,7 +756,7 @@
       "name": "[PÁGINA] Página oculta sem botão ou bookmark para acessar",
       "description": "Retonar as páginas ocultas sem configuração de Tooltip ou Drillthrough e não são acessiveis por botão de navegação, funciona somente em relatórios sem painel de navegação",
       "logType": "error",
-      "disabled": false,
+      "disabled": true,
       "part": "Report",
       "test": [
         {

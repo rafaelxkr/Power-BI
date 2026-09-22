@@ -147,6 +147,7 @@
     "Severity": 5,
     "Scope": "Measure, CalculatedColumn, CalculatedTable, CalculatedTableColumn, CalculationGroup, CalculationItem",
     "Expression": "ErrorMessage <> \"\" and ErrorMessage <> null",
+    "FixExpression": "Delete()",
     "CompatibilityLevel": 1200
   },
   {

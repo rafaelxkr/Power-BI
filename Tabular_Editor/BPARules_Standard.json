@@ -427,7 +427,7 @@
     "Description": "Em geral, a normalização excessiva deve ser evitada. Se uma Dimensão contiver apenas um atributo e não for compartilhada por vários Fatos, considere mover o atributo para a tabela de Fatos.",
     "Severity": 2,
     "Scope": "Table",
-    "Expression": "Columns.Count(IsVisible and not UsedInRelationships.Any()) = 1 and\nModel.Relationships.Count(ToTable = outerIt) = 1",
+    "Expression": "Columns.Count(IsVisible and not UsedInRelationships.Any()) = 1 \r\nand \r\n\nModel.Relationships.Count(ToTable = outerIt and (FromColumn.DataType = \"String\" or ToColumn.DataType =  \"String\")) = 1",
     "CompatibilityLevel": 1200
   },
   {
